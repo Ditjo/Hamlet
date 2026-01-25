@@ -18,3 +18,7 @@ func remove_gold(gold: int) -> bool:
 
 func _on_gold_changed(amount: int) -> void:
 	gold_changed.emit(amount)
+
+
+#When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 
+#The TileMapLayer script will then sub to that and add/delete it.
