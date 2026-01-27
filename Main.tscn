@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=3 format=3 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://behf6xng8galw" path="res://UI/MainMenu/left_drawer.gd" id="2_uu6xs"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -33,7 +34,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.8539213, 0.1551916, 0.20570329, 1)
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="MainMenu" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,42 +45,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="HBoxContainer" parent="UI"]
+[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+script = ExtResource("2_uu6xs")
+
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/LeftDrawer"]
+layout_mode = 2
+color = Color(0.19665563, 0.54633474, 0.685607, 1)
+
+[node name="RightDrawer" type="PanelContainer" parent="UI/MainMenu"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
 
-[node name="MainMenu" type="Panel" parent="UI/Menu"]
+[node name="CheatMenu" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="HBoxContainer" parent="CheatMenu"]
+offset_right = 306.0
+offset_bottom = 40.0
+
+[node name="LeftDrawBtn" type="Button" parent="CheatMenu/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+text = "Open Left Drawer"
 
-[node name="ColorRectGREEN" type="ColorRect" parent="UI/Menu/MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.597072, 0.31784886, 1)
-
-[node name="Middle" type="Panel" parent="UI/Menu"]
+[node name="RightDrawBtn" type="Button" parent="CheatMenu/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SecondMenu" type="Panel" parent="UI/Menu"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ColorRectBLUE" type="ColorRect" parent="UI/Menu/SecondMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0.53227013, 0.7780058, 1)
+text = "Open Right Drawer"
