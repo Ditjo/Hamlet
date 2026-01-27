@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=5 format=3 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://behf6xng8galw" path="res://UI/MainMenu/left_drawer.gd" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://ds2vek783fe77" path="res://UI/MainMenu/right_drawer.gd" id="3_cm0pq"]
+[ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -60,14 +62,21 @@ color = Color(0.19665563, 0.54633474, 0.685607, 1)
 [node name="RightDrawer" type="PanelContainer" parent="UI/MainMenu"]
 layout_direction = 2
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -300.0
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("3_cm0pq")
+
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/RightDrawer"]
+layout_mode = 2
+color = Color(0.19665563, 0.54633474, 0.685607, 1)
 
 [node name="CheatMenu" type="CanvasLayer" parent="."]
+script = ExtResource("3_r0du0")
 
 [node name="PanelContainer" type="HBoxContainer" parent="CheatMenu"]
 offset_right = 306.0
