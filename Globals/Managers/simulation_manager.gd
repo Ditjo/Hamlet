@@ -4,23 +4,28 @@ extends Node
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 
 func sim_main() -> void:
-	event_func()
-	harvest_func()
-	production_func()
-	sale_func()
-	people_func()
+	var new_event: Event = 	event_func()
+	harvest_func(new_event)
+	production_func(new_event)
+	sale_func(new_event)
+	people_func(new_event)
 
-func event_func() -> void:
+func event_func() -> Event:
+	
+	return null
+
+func harvest_func(new_event: Event) -> void:
+	if new_event != null && new_event.type.EventTypes.HARVEST:
+		pass
+	else:
+		pass
 	pass
 
-func harvest_func() -> void:
+func production_func(new_event: Event) -> void:
 	pass
 
-func production_func() -> void:
+func sale_func(new_event: Event) -> void:
 	pass
 
-func sale_func() -> void:
-	pass
-
-func people_func() -> void:
+func people_func(new_event: Event) -> void:
 	pass
