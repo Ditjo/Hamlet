@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=8 format=3 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://c4wga8p3io7vi" path="res://UI/HUD/Topbar/MainMenuBtn.tscn" id="2_fos0i"]
 [ext_resource type="Script" uid="uid://behf6xng8galw" path="res://UI/MainMenu/left_drawer.gd" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://ds2vek783fe77" path="res://UI/MainMenu/right_drawer.gd" id="3_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -28,18 +31,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="Control" parent="HUD/Control/VBoxContainer"]
+[node name="TopBar" type="HBoxContainer" parent="HUD/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="HUD/Control/VBoxContainer/TopBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 1, 1, 1)
+[node name="MainMenuBtn" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("2_fos0i")]
+layout_mode = 2
+
+[node name="ResourceOverview" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("3_lgr22")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="TimeControl" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("4_trn2v")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 2.0
 
 [node name="GameView" type="Control" parent="HUD/Control/VBoxContainer"]
 layout_mode = 2
@@ -110,7 +117,6 @@ layout_mode = 2
 color = Color(0.19665563, 0.54633474, 0.685607, 1)
 
 [node name="CheatMenu" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("3_r0du0")
 
 [node name="PanelContainer" type="HBoxContainer" parent="CheatMenu"]
@@ -124,3 +130,15 @@ text = "Open Left Drawer"
 [node name="RightDrawBtn" type="Button" parent="CheatMenu/PanelContainer"]
 layout_mode = 2
 text = "Open Right Drawer"
+
+[node name="AddGold" type="Button" parent="CheatMenu/PanelContainer"]
+layout_mode = 2
+text = "Add 1 Gold"
+
+[node name="AddPerson" type="Button" parent="CheatMenu/PanelContainer"]
+layout_mode = 2
+text = "Add Person"
+
+[node name="+1 Seasons" type="Button" parent="CheatMenu/PanelContainer"]
+layout_mode = 2
+text = "+1 Seasons"

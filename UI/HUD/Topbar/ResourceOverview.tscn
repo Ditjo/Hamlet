@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ga2f7bisyoup"]
+
+[ext_resource type="Script" uid="uid://duog55bm0t01s" path="res://UI/HUD/Topbar/resource_overview.gd" id="1_ixe7y"]
+[ext_resource type="PackedScene" uid="uid://cx0gmiubte21m" path="res://UI/Shared/BasicInfoPanel.tscn" id="2_p4n8p"]
+
+[node name="ResourceOverview" type="PanelContainer"]
+offset_right = 110.0
+offset_bottom = 23.0
+script = ExtResource("1_ixe7y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="GoldInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
+layout_mode = 2
+InfoLabel = "Gold: "
+
+[node name="PeopleInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
+layout_mode = 2
+InfoLabel = "People: "

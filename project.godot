@@ -22,3 +22,8 @@ GameManager="*res://Globals/Managers/game_manager.gd"
 SimulationManager="*res://Globals/Managers/simulation_manager.gd"
 Enums="*res://Globals/Enums/enums.gd"
 CheatManager="*res://Globals/Managers/cheat_manager.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720

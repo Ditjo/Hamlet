@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cykkrdr0q6i83"]
+
+[ext_resource type="Script" uid="uid://dcu8irdg723ly" path="res://UI/HUD/Topbar/time_control.gd" id="1_yu6mx"]
+[ext_resource type="PackedScene" uid="uid://cx0gmiubte21m" path="res://UI/Shared/BasicInfoPanel.tscn" id="2_ss3bh"]
+
+[node name="TimeControl" type="PanelContainer"]
+offset_right = 141.0
+offset_bottom = 23.0
+script = ExtResource("1_yu6mx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SeasonCount" parent="HBoxContainer" instance=ExtResource("2_ss3bh")]
+layout_mode = 2
+InfoLabel = "Seasons: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Pause" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "II"
+
+[node name="Play" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="FastForward" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">>"
