@@ -1,4 +1,4 @@
-class_name JobStructures
+@abstract class_name JobStructures
 
 extends Structures
 
@@ -6,9 +6,6 @@ var max_workers: int
 var currentWorkers: Array = []
 var production_per_worker: int
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 func add_worker(person: Person) -> bool:
 	if currentWorkers.size() < max_workers:
