@@ -7,8 +7,12 @@ signal seasons_changed(value: int)
 var town_name: String
 var _gold: int
 var _seasons: int
-var _map_objects: Dictionary = {}
-var _structures: Dictionary = {}
+var _map_objects: Dictionary = {
+	#Enums.MapObjectTypes.TREES: Array[MapObjects],
+	#Enums.MapObjectTypes.MOUNTAINS: Array[MapObjects]
+} #{key=enum: Array=[MapObjects]} 
+#Come back to this!
+var _structures: Array[Structures] = []
 var _population: Array[Person] = []
 var _event_flags: Dictionary = {}
 
@@ -56,6 +60,44 @@ func get_current_population() -> int:
 func _on_population_changed() -> void:
 	population_changed.emit(_population.size())
 
+#endregion
+
+#region Map Objects
+func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
+	var o = _map_objects.get(type)
+	#if o != null:
+		
+#add
+#remove
+#endregion
+
+#region Structures
+func add_structure(s: Structures) -> void:
+	_structures.append(s)
+	# update UI here?
+
+func remove_structure(s: Structures) -> void:
+	_structures.erase(s)
+	# update UI here?
+
+func get_current_housing() -> int:
+	var current_pop: int = 0
+	for s in _structures:
+		if s is HousingStructures:
+			current_pop += s._people.size()
+	return current_pop
+
+func get_max_housing() -> int:
+	var max_pop: int = 0
+	for s in _structures:
+		if s is HousingStructures:
+			max_pop += s.max_people
+	return max_pop
+
+func get_structures_by_type(type: Enums.StructureTypes) -> Array[Structures]:
+	return _structures.filter(func(s: Structures) -> bool:
+		return s.structure_type == type
+	)
 #endregion
 
 #When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 

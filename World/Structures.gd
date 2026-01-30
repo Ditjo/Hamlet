@@ -2,4 +2,4 @@
 
 extends MapObjects
 
-var structure_type: Enums
+var structure_type: Enums.StructureTypes
