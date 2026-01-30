@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=9 format=3 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://c4wga8p3io7vi" path="res://UI/HUD/Topbar/MainMenuBtn.tscn" id="2_fos0i"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
+[ext_resource type="Script" uid="uid://bs17xlrolhpy6" path="res://main_menu.gd" id="5_trn2v"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -77,10 +78,9 @@ grow_vertical = 2
 color = Color(0, 1, 0, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
-[node name="MainMenu" type="Control" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,7 +88,52 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu"]
+[node name="MainMenu" type="HBoxContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_trn2v")
+
+[node name="LeftDrawer" type="PanelContainer" parent="UI/Control/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/MainMenu/LeftDrawer"]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="NewGame" type="Button" parent="UI/Control/MainMenu/LeftDrawer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Middle" type="PanelContainer" parent="UI/Control/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="RightDrawer" type="PanelContainer" parent="UI/Control/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/MainMenu/RightDrawer"]
+visible = false
+layout_mode = 2
+color = Color(0, 1, 0, 1)
+
+[node name="MainMenu1" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu1"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -96,11 +141,11 @@ offset_right = 300.0
 grow_vertical = 2
 script = ExtResource("2_uu6xs")
 
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/LeftDrawer"]
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenu1/LeftDrawer"]
 layout_mode = 2
 color = Color(0.19665563, 0.54633474, 0.685607, 1)
 
-[node name="RightDrawer" type="PanelContainer" parent="UI/MainMenu"]
+[node name="RightDrawer" type="PanelContainer" parent="UI/MainMenu1"]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = -1
@@ -112,7 +157,7 @@ grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("3_cm0pq")
 
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/RightDrawer"]
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenu1/RightDrawer"]
 layout_mode = 2
 color = Color(0.19665563, 0.54633474, 0.685607, 1)
 
