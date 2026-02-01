@@ -8,9 +8,10 @@ var drawer_width_ratio: float = 0.25
 
 func _ready() -> void:
 	CheatManager.toggle_right_drawer.connect(toggle)
-	get_viewport().size_changed.connect(_on_window_resized)
+	get_window().size_changed.connect(_on_window_resized)
 	_on_window_resized()
 
+#region DrawerControl
 func get_drawer_width() -> float:
 	return get_window().size.x * drawer_width_ratio
 
@@ -36,3 +37,4 @@ func toggle():
 	tween.tween_property(drawer, "position:x", width, animation_time)\
 	.set_trans(Tween.TRANS_QUAD)\
 	.set_ease(Tween.EASE_OUT)
+#endregion

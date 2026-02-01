@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://c4wga8p3io7vi" path="res://UI/HUD/Topbar/MainMenuBtn.tscn" id="2_fos0i"]
 [ext_resource type="Script" uid="uid://behf6xng8galw" path="res://UI/MainMenu/left_drawer.gd" id="2_uu6xs"]
-[ext_resource type="Script" uid="uid://ds2vek783fe77" path="res://UI/MainMenu/right_drawer.gd" id="3_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
-[ext_resource type="Script" uid="uid://bs17xlrolhpy6" path="res://main_menu.gd" id="5_trn2v"]
+[ext_resource type="Script" uid="uid://cswfj23guntde" path="res://UI/MainMenu/main_menu.gd" id="6_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/RightDrawer.tscn" id="9_20pc6"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -80,91 +80,118 @@ color = Color(0, 1, 0, 1)
 [node name="UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="Control" type="Control" parent="UI"]
-visible = false
+[node name="MainMenu" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_wkp8b")
 
-[node name="MainMenu" type="HBoxContainer" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_trn2v")
-
-[node name="LeftDrawer" type="PanelContainer" parent="UI/Control/MainMenu"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="UI/Control/MainMenu/LeftDrawer"]
-visible = false
-layout_mode = 2
-color = Color(0, 0, 1, 1)
-
-[node name="NewGame" type="Button" parent="UI/Control/MainMenu/LeftDrawer"]
-layout_mode = 2
-text = "New Game"
-
-[node name="Middle" type="PanelContainer" parent="UI/Control/MainMenu"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="RightDrawer" type="PanelContainer" parent="UI/Control/MainMenu"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ColorRect" type="ColorRect" parent="UI/Control/MainMenu/RightDrawer"]
-visible = false
-layout_mode = 2
-color = Color(0, 1, 0, 1)
-
-[node name="MainMenu1" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu1"]
+[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 300.0
 grow_vertical = 2
 script = ExtResource("2_uu6xs")
-drawer_width_ratio = 0.5
 
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu1/LeftDrawer"]
+[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/LeftDrawer"]
 layout_mode = 2
-color = Color(0.19665563, 0.54633474, 0.685607, 1)
+color = Color(0.5014065, 0.50140655, 0.50140643, 0.5019608)
 
-[node name="NewGameBtn" type="Button" parent="UI/MainMenu1/LeftDrawer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/MainMenu/LeftDrawer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NewGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 
-[node name="RightDrawer" type="PanelContainer" parent="UI/MainMenu1"]
-layout_direction = 2
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -300.0
-grow_horizontal = 0
-grow_vertical = 2
-script = ExtResource("3_cm0pq")
-
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu1/RightDrawer"]
+[node name="SaveGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-color = Color(0.19665563, 0.54633474, 0.685607, 1)
+text = "Save game"
+
+[node name="LoadGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Game"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionsBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Option"
+
+[node name="QuitBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Quit"
+
+[node name="RightDrawerNewGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerNewGame"]
+layout_mode = 2
+text = "New Game"
+
+[node name="RightDrawerSaveGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerSaveGame"]
+layout_mode = 2
+text = "SaveGame"
+
+[node name="RightDrawerLoadGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerLoadGame"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="RightDrawerOptions" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerOptions"]
+layout_mode = 2
+text = "Options"
 
 [node name="CheatMenu" type="CanvasLayer" parent="."]
 script = ExtResource("3_r0du0")
