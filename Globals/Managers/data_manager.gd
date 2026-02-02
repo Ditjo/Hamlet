@@ -56,6 +56,11 @@ func remove_person(p: Person) -> void:
 
 func get_current_population() -> int:
 	return _population.size()
+	
+func get_homeless_population() -> Array[Person]:
+	return _population.filter(func(p: Person) -> bool:
+		return p.home == null
+		)
 
 func _on_population_changed() -> void:
 	population_changed.emit(_population.size())
