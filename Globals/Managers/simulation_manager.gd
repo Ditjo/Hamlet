@@ -111,6 +111,20 @@ func people_func(new_event: Event) -> void:
 		foreach house: while house.current < house.max && homeless.size > 0, append homeless person
 		if homeless > 0, foreach person: chance to remove
 		"""
+		var homeless: Array = DataManager.get_homeless_list()
+		if population_overview["current_population"] < population_overview["max_population"]:
+			var houses: Array = DataManager.get_structures_by_type(Enums.StructureTypes.HOUSE)
+			for house in houses:
+				var space: int = house.available_space()
+				#maybe for i=?, i > min(space;homeless.size())
+				while space > 0 && not homeless.is_empty():
+					house.add_person(homeless.pop_front())
+					space -= 1
+				
+				if homeless.is_empty():
+					break
+		#chance ppl leave if still ppl
+		
 		pass #house homeless then maybe any remaining homeless leave
 	elif population_overview["current_population"] < population_overview["max_population"]:
 		#&& new_event.can_event_trigger(
