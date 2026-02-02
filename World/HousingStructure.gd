@@ -14,6 +14,6 @@ func remove_person(p: Person) -> void:
 func get_current_house_population() -> int:
 	return _people.size()
 
-func is_there_more_room() -> bool:
-	return _people.size() < max_people
+func available_housing() -> int:
+	return max_people - _people.size()
 	#Is this needed?

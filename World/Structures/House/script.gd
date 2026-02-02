@@ -1,0 +1,2 @@
+extends HousingStructures
+class_name House
