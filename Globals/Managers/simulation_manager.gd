@@ -120,17 +120,25 @@ func people_func(new_event: Event) -> void:
 				while space > 0 && not homeless.is_empty():
 					house.add_person(homeless.pop_front())
 					space -= 1
-				
 				if homeless.is_empty():
 					break
 		#chance ppl leave if still ppl
-		
+		for person in homeless:
+			if rng.randi_range(1,100) < min(90,30+10*homeless.size()):
+				DataManager.remove_person(person)
+				homeless.erase(person)
 		pass #house homeless then maybe any remaining homeless leave
 	elif population_overview["current_population"] < population_overview["max_population"]:
 		#&& new_event.can_event_trigger(
 		#do chance
 		if rng.randi_range(1,100) <= pop_growth_chance:
-			var new_people = rng.randi_range(1,4) + event_factor[0]
+			var available_housing = population_overview["max_population"] - population_overview["current_population"]
+			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_factor[0])
+			for n in new_people_count:
+				"""
+				generate person
+				add_person_to_population(person)
+				"""
 			pop_growth_chance = 7
 		else:
 			pop_growth_chance += 2
