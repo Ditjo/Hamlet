@@ -3,6 +3,7 @@ extends Node
 #Skal indholde simulationen af spillet. Game Loop. 
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 var rng = RandomNumberGenerator.new()
+var event_chance: int = 7
 var pop_growth_chance: int = 7
 
 func sim_main() -> void:
@@ -14,14 +15,32 @@ func sim_main() -> void:
 
 #region events
 func event_func() -> Event:
-	
-	return null
+	if rng.randi_range(1,100) < event_chance:
+		#create list of valid events
+		var valid_events: Array = []
+		var events: Array = [] #get all events here, or get global?
+		"""
+		some way to get all events
+		"""
+		for event in events:
+			if event.can_event_trigger():
+				valid_events.append(event)
+		event_chance = 7
+		var chosen_event = valid_events.pick_random()
+		if chosen_event.type == Enums.EventTypes.EVENT:
+			"""do event stuff"""
+			return null
+		else:
+			return chosen_event
+	else:
+		event_chance += 2
+		return null
 #endregion
 
 #region harvest
 func harvest_func(new_event: Event) -> Dictionary:
 	var grain: int = 0
-	var event_factor:= []
+	var event_factor:= [0]
 	if new_event != null && new_event.type.EventTypes.HARVEST:
 		#event_factor = new_event.event_response("enum") 
 		pass
@@ -30,13 +49,6 @@ func harvest_func(new_event: Event) -> Dictionary:
 		grain += struct.production_per_worker * struct.get_current_worker_count() * event_factor[0]
 	#can be inline in foreach if single-use
 	#maybe pass array of types? 
-	#var grain_structs := [
-		#Enums.StructureTypes.FIELD
-	#]
-	#for struct in grain_structs:
-		#if struct.type in grain_structs:
-			#grain += struct.production_per_worker * struct.get_current_worker_count() * event_factor[0]
-			#can be struct.do_math_for_value
 	return {
 		"grain": grain
 	}
@@ -56,14 +68,6 @@ func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
 		var output = min(work_power, grain)
 		grain -= output
 		flour += output
-	#var flour_structs := [
-		#Enums.StructureTypes.WINDMILL
-	#]
-	#TODO: prevent overdraw of grain
-	#for struct in DataManager._structures:
-		#if struct.type in flour_structs:
-			#flour += struct.production_per_worker * struct.get_current_worker_count() * event_factor[0]
-	#grain -= flour
 	return {
 		"grain": grain,
 		"flour": flour
@@ -80,7 +84,6 @@ func sale_func(new_event: Event, production: Dictionary) -> void:
 	local_gold += production["grian"] * 2 * (event_factor[0] if event_factor[1] == 0 else 1)
 	local_gold += production["flour"] * 3 * (event_factor[0] if event_factor[1] == 1 else 1)
 	DataManager.add_gold(local_gold)
-	pass
 #endregion
 
 #region peaple
@@ -90,10 +93,6 @@ func people_func(new_event: Event) -> void:
 		"current_population" = DataManager.get_current_population(), #get_population -> size
 		"housed_population" = DataManager.get_current_housing()
 	}
-	#for struct in DataManager._structures:
-		#if struct.type == Enums.StructureTypes.HOUSE:
-			#population_overview["max_population"] += struct.max #fix to actual func/var
-			#population_overview["housed_population"] += struct.current #fix to actual func/var
 	##assume events have already been vetted for availability
 	var event_factor:= []
 	if new_event != null && new_event.type.EventTypes.POPULATION:
@@ -104,13 +103,6 @@ func people_func(new_event: Event) -> void:
 		"""
 		pass
 	if population_overview["current_population"] > population_overview["housed_population"]:
-		"""
-		get population array
-		foreach person: if person.home == null -> add to homeless
-		get house type structures as array
-		foreach house: while house.current < house.max && homeless.size > 0, append homeless person
-		if homeless > 0, foreach person: chance to remove
-		"""
 		var homeless: Array = DataManager.get_homeless_list()
 		if population_overview["current_population"] < population_overview["max_population"]:
 			var houses: Array = DataManager.get_structures_by_type(Enums.StructureTypes.HOUSE)
@@ -127,22 +119,17 @@ func people_func(new_event: Event) -> void:
 			if rng.randi_range(1,100) < min(90,30+10*homeless.size()):
 				DataManager.remove_person(person)
 				homeless.erase(person)
-		pass #house homeless then maybe any remaining homeless leave
 	elif population_overview["current_population"] < population_overview["max_population"]:
 		#&& new_event.can_event_trigger(
-		#do chance
 		if rng.randi_range(1,100) <= pop_growth_chance:
 			var available_housing = population_overview["max_population"] - population_overview["current_population"]
 			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_factor[0])
 			for n in new_people_count:
-				"""
-				generate person
-				add_person_to_population(person)
-				"""
+				var new_person = Person.new()
+				new_person.generate_person()
+				DataManager.add_person_to_population(new_person)
+				"""add person to house"""
 			pop_growth_chance = 7
 		else:
 			pop_growth_chance += 2
-		pass #do chance to add new ppl to village etc
-	
-	pass
 #endregion
