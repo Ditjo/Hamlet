@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=12 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
 [ext_resource type="PackedScene" uid="uid://c4wga8p3io7vi" path="res://UI/HUD/Topbar/MainMenuBtn.tscn" id="2_fos0i"]
-[ext_resource type="Script" uid="uid://behf6xng8galw" path="res://UI/MainMenu/left_drawer.gd" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://ciicipb7mqxt8" path="res://camera_2d.gd" id="3_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
 [ext_resource type="Script" uid="uid://cswfj23guntde" path="res://UI/MainMenu/main_menu.gd" id="6_wkp8b"]
-[ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/RightDrawer.tscn" id="9_20pc6"]
+[ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/Drawer.tscn" id="9_20pc6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wkp8b"]
 texture = ExtResource("2_03owx")
@@ -1278,65 +1277,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("6_wkp8b")
 
-[node name="LeftDrawer" type="PanelContainer" parent="UI/MainMenu"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 300.0
-grow_vertical = 2
-script = ExtResource("2_uu6xs")
+[node name="DrawerMainMenu" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+unique_name_in_owner = true
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+drawer_placement = 0
 
-[node name="ColorRect" type="ColorRect" parent="UI/MainMenu/LeftDrawer"]
+[node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerMainMenu"]
 layout_mode = 2
 color = Color(0.5014065, 0.50140655, 0.50140643, 0.5019608)
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/MainMenu/LeftDrawer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/MainMenu/DrawerMainMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NewGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="NewGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 
-[node name="SaveGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="SaveGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Save game"
 
-[node name="LoadGameBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="LoadGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Load Game"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="OptionsBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OptionsBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Option"
 
-[node name="QuitBtn" type="Button" parent="UI/MainMenu/LeftDrawer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
+tooltip_text = "WIP. Used to close the Main Menu for Now!"
 text = "Quit"
 
-[node name="RightDrawerNewGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+[node name="DrawerNewGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -1344,11 +1347,15 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerNewGame"]
+[node name="Label" type="Label" parent="UI/MainMenu/DrawerNewGame"]
 layout_mode = 2
 text = "New Game"
 
-[node name="RightDrawerSaveGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+[node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerNewGame"]
+layout_mode = 2
+color = Color(0.5019608, 0.5019608, 0.5019608, 0.5019608)
+
+[node name="DrawerSaveGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -1356,11 +1363,15 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerSaveGame"]
+[node name="Label" type="Label" parent="UI/MainMenu/DrawerSaveGame"]
 layout_mode = 2
 text = "SaveGame"
 
-[node name="RightDrawerLoadGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+[node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerSaveGame"]
+layout_mode = 2
+color = Color(0.5019608, 0.5019608, 0.5019608, 0.5019608)
+
+[node name="DrawerLoadGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -1368,23 +1379,36 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerLoadGame"]
+[node name="Label" type="Label" parent="UI/MainMenu/DrawerLoadGame"]
 layout_mode = 2
 text = "Load Game"
 
-[node name="RightDrawerOptions" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
+[node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerLoadGame"]
+layout_mode = 2
+color = Color(0.5019608, 0.5019608, 0.5019608, 0.5019608)
+
+[node name="DrawerOptions" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 162.0
+offset_top = -89.0
+offset_right = 224.0
+offset_bottom = -66.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" type="Label" parent="UI/MainMenu/RightDrawerOptions"]
+[node name="Label" type="Label" parent="UI/MainMenu/DrawerOptions"]
 layout_mode = 2
 text = "Options"
 
+[node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerOptions"]
+layout_mode = 2
+color = Color(0, 0.49546498, 0.93534493, 0.5019608)
+
 [node name="CheatMenu" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_r0du0")
 
 [node name="PanelContainer" type="HBoxContainer" parent="CheatMenu"]

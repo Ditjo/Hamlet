@@ -1,8 +1,10 @@
 extends PanelContainer
-class_name RightDrawer
+class_name Drawer
 
 @onready var drawer := self
-var is_open: bool = false
+
+##Is the Drawer open from the start.
+@export var is_open: bool = false
 
 ##Time for the animation to play.
 @export var animation_time: float = 0.25

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://l80mqyqnfmys"]
 
-[ext_resource type="Script" uid="uid://b1p7lf7grulf8" path="res://UI/Shared/right_drawer.gd" id="1_066pe"]
+[ext_resource type="Script" uid="uid://b1p7lf7grulf8" path="res://UI/Shared/drawer.gd" id="1_066pe"]
 
 [node name="RightDrawer" type="PanelContainer"]
 anchors_preset = 15
@@ -11,5 +11,6 @@ grow_vertical = 2
 script = ExtResource("1_066pe")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 2
 color = Color(0.5019608, 0.5019608, 0.5019608, 0.5019608)
