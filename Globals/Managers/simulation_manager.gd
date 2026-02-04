@@ -41,7 +41,7 @@ func event_func() -> Event:
 func harvest_func(new_event: Event) -> Dictionary:
 	var grain: int = 0
 	var event_factor:= [0]
-	if new_event != null && new_event.type.EventTypes.HARVEST:
+	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
 		#event_factor = new_event.event_response("enum") 
 		pass
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
@@ -59,7 +59,7 @@ func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
 	var grain = harvest["grain"]
 	var flour: int = 0
 	var event_factor:= []
-	if new_event != null && new_event.type.EventTypes.PRODUCTION:
+	if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
 		#event_factor = new_event.event_response("enum") 
 		pass
 	var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
@@ -78,7 +78,7 @@ func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
 func sale_func(new_event: Event, production: Dictionary) -> void:
 	var local_gold: int = 0
 	var event_factor:= []
-	if new_event != null && new_event.type.EventTypes.SALE:
+	if new_event != null && new_event.type == Enums.EventTypes.SALE:
 		#event_factor = new_event.event_response("enum") 
 		pass
 	local_gold += production["grian"] * 2 * (event_factor[0] if event_factor[1] == 0 else 1)
@@ -95,7 +95,7 @@ func people_func(new_event: Event) -> void:
 	}
 	##assume events have already been vetted for availability
 	var event_factor:= []
-	if new_event != null && new_event.type.EventTypes.POPULATION:
+	if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
 		#event execution based on its variables
 		"""
 		event_factor = event.trigger func etc

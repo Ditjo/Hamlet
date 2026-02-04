@@ -4,7 +4,7 @@ extends Resource
 
 var event_name: String
 var description: String
-var type: Enums
+var type: Enums.EventTypes
 var options: Array = []
 
 func _resolve_assets() -> void:
@@ -13,8 +13,8 @@ func _resolve_assets() -> void:
 func can_event_trigger() -> bool:
 	return true
 
-func trigger_event(optional = null) -> void:
-	pass
+func trigger_event(optional = null) -> Array[int]:
+	return []
 
 func event_response(response: Enums) -> void:
 	pass

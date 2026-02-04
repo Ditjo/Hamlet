@@ -4,3 +4,6 @@ extends Node
 
 func s() -> void:
 	pass
+
+func _ready():
+	GameManager.game_main()

@@ -19,8 +19,9 @@ func _pause_player_action() -> void:
 		pause_play_btn.text = "II"
 		pause_play_btn.tooltip_text = "The Game is Paused"
 		#Call Method In GameManager to Pause
+		GameManager.pause_game()
 	else:
 		pause_play_btn.text = ">"
-		pause_play_btn.tooltip_text = "The Game Playing"
+		pause_play_btn.tooltip_text = "The Game is Playing"
 		#Call Method In GameManager to UnPause
-		
+		GameManager.unpause_game()
