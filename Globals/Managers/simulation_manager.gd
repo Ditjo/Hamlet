@@ -40,13 +40,12 @@ func event_func() -> Event:
 #region harvest
 func harvest_func(new_event: Event) -> Dictionary:
 	var grain: int = 0
-	var event_factor:= [0]
+	var event_factor:= []
 	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
-		#event_factor = new_event.event_response("enum") 
-		pass
+		event_factor = new_event.trigger_event() 
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
 	for struct in grain_structs:
-		grain += struct.production_per_worker * struct.get_current_worker_count() * event_factor[0]
+		grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor[0] in [0,1] else 1))
 	#can be inline in foreach if single-use
 	#maybe pass array of types? 
 	return {
@@ -57,14 +56,14 @@ func harvest_func(new_event: Event) -> Dictionary:
 #region production
 func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
 	var grain = harvest["grain"]
+	#var limiter: int = ???
 	var flour: int = 0
 	var event_factor:= []
 	if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
-		#event_factor = new_event.event_response("enum") 
-		pass
+		event_factor = new_event.trigger_event() 
 	var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
 	for struct in flour_structs:
-		var work_power = struct.production_per_worker * struct.get_current_worker_count() * event_factor[0]
+		var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor[0] in [0,1] else 1))
 		var output = min(work_power, grain)
 		grain -= output
 		flour += output
@@ -79,10 +78,9 @@ func sale_func(new_event: Event, production: Dictionary) -> void:
 	var local_gold: int = 0
 	var event_factor:= []
 	if new_event != null && new_event.type == Enums.EventTypes.SALE:
-		#event_factor = new_event.event_response("enum") 
-		pass
-	local_gold += production["grian"] * 2 * (event_factor[0] if event_factor[1] == 0 else 1)
-	local_gold += production["flour"] * 3 * (event_factor[0] if event_factor[1] == 1 else 1)
+		event_factor = new_event.trigger_event() 
+	local_gold += int(production["grian"] * 2 * (event_factor[1] if event_factor[0] in [0,1] else 1))
+	local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor[0] in [0,2] else 1))
 	DataManager.add_gold(local_gold)
 #endregion
 
@@ -96,9 +94,9 @@ func people_func(new_event: Event) -> void:
 	##assume events have already been vetted for availability
 	var event_factor:= []
 	if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
-		#event execution based on its variables
+		event_factor = new_event.trigger_event() 
 		"""
-		event_factor = event.trigger func etc
+		if event => reduce population, trigger effect here maybe?
 		if old_current > new: flag to prevent new ppl?
 		"""
 		pass
@@ -123,7 +121,7 @@ func people_func(new_event: Event) -> void:
 		#&& new_event.can_event_trigger(
 		if rng.randi_range(1,100) <= pop_growth_chance:
 			var available_housing = population_overview["max_population"] - population_overview["current_population"]
-			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_factor[0])
+			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_factor[1])
 			for n in new_people_count:
 				var new_person = Person.new()
 				new_person.generate_person()
