@@ -838,6 +838,7 @@ texture = ExtResource("2_03owx")
 30:24/0 = 0
 31:24/0 = 0
 36:24/0 = 0
+36:24/0/custom_data_0 = 1
 37:24/0 = 0
 38:24/0 = 0
 39:24/0 = 0
@@ -1191,6 +1192,8 @@ texture = ExtResource("2_03owx")
 15:31/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_20pc6"]
+custom_data_layer_0/name = "type_id"
+custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_wkp8b")
 
 [node name="Main" type="Node"]
@@ -1208,7 +1211,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAACAAEAAAABAAAAAAADAAMAAAACAAAAAAACAAA
 tile_set = SubResource("TileSet_20pc6")
 
 [node name="NatureLayer" type="TileMapLayer" parent="GameWorld/TileMaps"]
-tile_map_data = PackedByteArray("AAAhABIAAAAIABUAAAAhABMAAAAIABYAAAAiABMAAAAJABYAAAAiABIAAAAJABUAAAA=")
+tile_map_data = PackedByteArray("AAAhABIAAAAIABUAAAAhABMAAAAIABYAAAAiABMAAAAJABYAAAAiABIAAAAJABUAAAAjABAAAAAkABgAAAAlAA8AAAAkABgAAAA=")
 tile_set = SubResource("TileSet_20pc6")
 
 [node name="StructureLayer" type="TileMapLayer" parent="GameWorld/TileMaps"]

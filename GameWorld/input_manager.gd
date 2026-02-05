@@ -38,7 +38,14 @@ func check_layer(coords: Vector2i) -> void:
 	if nature_layer.get_cell_source_id(coords) != -1:
 		#Handle Tile on natur_layer Layer
 		print("natur_layer: ", coords)
-		_open_tile_info_drawer("natur_layer" + str(coords))
+		
+		#Get data; Check if not null & has custom data called "name"; Get it; Show it.
+		var data:TileData = nature_layer.get_cell_tile_data(coords)
+		if data and data.has_custom_data("type_id"):
+			var d = data.get_custom_data("type_id")
+			print("nature_layer: " + str(d))
+			
+		_open_tile_info_drawer("nature_layer" + str(coords))
 		return
 		
 	print("background_layer: " + str(background_layer.get_cell_source_id(coords)))
