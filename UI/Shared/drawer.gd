@@ -109,7 +109,7 @@ func toggle() -> void:
 	
 	_move_drawer(_property, value)
 	
-##Close drawer no matter it's current position
+##Checks if the Drawer is open, if true it closes it.
 func close()-> void:
 	if is_open:
 		is_open = false

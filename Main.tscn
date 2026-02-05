@@ -1,14 +1,16 @@
-[gd_scene load_steps=14 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=16 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
 [ext_resource type="Script" uid="uid://c7tjs7ocpb7qt" path="res://GameWorld/input_manager.gd" id="2_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://c4wga8p3io7vi" path="res://UI/HUD/Topbar/MainMenuBtn.tscn" id="2_fos0i"]
+[ext_resource type="Script" uid="uid://cpg5cpk5j2qcy" path="res://GameWorld/build_controller.gd" id="3_c6i3y"]
 [ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://ciicipb7mqxt8" path="res://camera_2d.gd" id="3_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
 [ext_resource type="Script" uid="uid://cswfj23guntde" path="res://UI/MainMenu/main_menu.gd" id="6_wkp8b"]
+[ext_resource type="Script" uid="uid://bus8qkvnso6nu" path="res://UI/HUD/BuildMenu/build_menu.gd" id="8_5vvyt"]
 [ext_resource type="Script" uid="uid://br18yg602iwf" path="res://UI/HUD/TileInfoDrawer/TileInfoDrawer.gd" id="9_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/Drawer.tscn" id="9_20pc6"]
 
@@ -1204,6 +1206,9 @@ script = ExtResource("1_glv2v")
 [node name="InputManager" type="Node2D" parent="GameWorld"]
 script = ExtResource("2_5vvyt")
 
+[node name="BuildController" type="Node2D" parent="GameWorld"]
+script = ExtResource("3_c6i3y")
+
 [node name="TileMaps" type="Node2D" parent="GameWorld"]
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="GameWorld/TileMaps"]
@@ -1281,6 +1286,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="HUD/Control/VBoxContainer/BottomBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1288,6 +1294,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 1, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/VBoxContainer/BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuPicker" type="PanelContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/MenuPicker"]
+layout_mode = 2
+text = "Build Menu"
+
+[node name="BuildMenu" type="PanelContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("8_5vvyt")
+
+[node name="HScrollBar" type="HScrollBar" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HScrollBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HouseBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HScrollBar/HBoxContainer"]
+layout_mode = 2
+text = "House"
+
+[node name="FieldBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HScrollBar/HBoxContainer"]
+layout_mode = 2
+text = "Field"
+
+[node name="WindmillBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HScrollBar/HBoxContainer"]
+layout_mode = 2
+text = "Windmill"
 
 [node name="TileInfoDrawer" parent="HUD/Control" instance=ExtResource("9_20pc6")]
 unique_name_in_owner = true
