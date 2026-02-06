@@ -2,6 +2,7 @@ extends Node
 
 signal gold_changed(value: int)
 signal population_changed(value: int)
+signal max_housing_changed(value: int)
 signal seasons_changed(value: int)
 
 var town_name: String
@@ -79,11 +80,11 @@ func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
 #region Structures
 func add_structure(coords: Vector2i, s: Structures) -> void:
 	_structures[coords] = s
-	# update UI here?
+	_on_max_housing_changed()
 
 func remove_structure(coords: Vector2i) -> void:
 	_structures.erase(coords)
-	# update UI here?
+	_on_max_housing_changed()
 
 func get_current_housing() -> int:
 	var current_pop: int = 0
@@ -103,6 +104,9 @@ func get_structures_by_type(type: Enums.StructureTypes) -> Array[Structures]:
 	return _structures.values.filter(func(s: Structures) -> bool:
 		return s.structure_type == type
 	)
+	
+func _on_max_housing_changed() -> void:
+	max_housing_changed.emit(get_max_housing())
 #endregion
 
 #When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 

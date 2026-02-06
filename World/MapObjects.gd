@@ -12,13 +12,13 @@ func _init(
 	name_: String = "",
 	description_: String = "",
 	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
-	coords_: Vector2i = Vector2i.ZERO,
+	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {}
 ) -> void:
 	object_name = name_
 	description = description_
 	map_object_type = type_
-	coords = coords_
+	#coords = coords_
 	cost = cost_
 
 func _resolve_assets() -> void:

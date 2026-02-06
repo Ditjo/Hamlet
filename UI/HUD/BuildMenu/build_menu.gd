@@ -5,12 +5,12 @@ class_name Buildmenu
 @onready var field_btn: Button = $HScrollBar/HBoxContainer/FieldBtn
 @onready var windmill_btn: Button = $HScrollBar/HBoxContainer/WindmillBtn
 
-signal building_selected(type: String)
+signal building_selected(type: Enums.StructureTypes)
 
 func _ready() -> void:
-	house_btn.pressed.connect(_on_btn_pressed.bind("house"))
-	field_btn.pressed.connect(_on_btn_pressed.bind("field"))
-	windmill_btn.pressed.connect(_on_btn_pressed.bind("windmill"))
+	house_btn.pressed.connect(_on_btn_pressed.bind(Enums.StructureTypes.HOUSE))
+	field_btn.pressed.connect(_on_btn_pressed.bind(Enums.StructureTypes.FIELD))
+	windmill_btn.pressed.connect(_on_btn_pressed.bind(Enums.StructureTypes.WINDMILL))
 	
-func _on_btn_pressed(type: String) -> void:
+func _on_btn_pressed(type: Enums.StructureTypes) -> void:
 	building_selected.emit(type)

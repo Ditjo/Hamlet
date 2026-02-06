@@ -14,6 +14,7 @@ enum CostTypes {
 }
 
 enum StructureTypes {
+	ZERO,
 	HOUSE,
 	FIELD,
 	WINDMILL

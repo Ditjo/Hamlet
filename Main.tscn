@@ -1374,8 +1374,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 96.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1539,6 +1539,7 @@ layout_mode = 2
 color = Color(0, 0.49546498, 0.93534493, 0.5019608)
 
 [node name="CheatMenu" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_r0du0")
 
 [node name="PanelContainer" type="HBoxContainer" parent="CheatMenu"]

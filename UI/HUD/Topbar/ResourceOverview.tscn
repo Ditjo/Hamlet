@@ -18,3 +18,7 @@ InfoLabel = "Gold: "
 [node name="PeopleInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
 InfoLabel = "People: "
+
+[node name="HousingInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
+layout_mode = 2
+InfoLabel = "Housing: "
