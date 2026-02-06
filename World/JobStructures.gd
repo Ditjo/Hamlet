@@ -6,6 +6,20 @@ var max_workers: int
 var currentWorkers: Array = []
 var production_per_worker: int
 
+func _init(
+	name_: String = "",
+	description_: String = "",
+	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
+	#coords_: Vector2i = Vector2i.ZERO,
+	cost_: Dictionary = {},
+	max_workers_: int = 4,
+	currentWorkers_: Array[Person] = [],
+	production_per_worker_ = 1
+) -> void:
+	super._init(name_, description_, type_, cost_)
+	self.max_workers = max_workers_
+	self.currentWorkers = currentWorkers_
+	self.production_per_worker = production_per_worker_
 
 func add_worker(person: Person) -> bool:
 	if currentWorkers.size() < max_workers:
