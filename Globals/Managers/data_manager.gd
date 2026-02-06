@@ -12,7 +12,7 @@ var _map_objects: Dictionary = {
 	#Enums.MapObjectTypes.MOUNTAINS: Array[MapObjects]
 } #{key=enum: Array=[MapObjects]} 
 #Come back to this!
-var _structures: Array[Structures] = []
+var _structures: Dictionary = {}
 var _population: Array[Person] = []
 var _event_flags: Dictionary = {}
 
@@ -78,29 +78,29 @@ func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
 
 #region Structures
 func add_structure(s: Structures) -> void:
-	_structures.append(s)
+	_structures[s.coords] = s
 	# update UI here?
 
 func remove_structure(s: Structures) -> void:
-	_structures.erase(s)
+	_structures.erase(s.coords)
 	# update UI here?
 
 func get_current_housing() -> int:
 	var current_pop: int = 0
-	for s in _structures:
+	for s in _structures.values():
 		if s is HousingStructures:
 			current_pop += s._people.size()
 	return current_pop
 
 func get_max_housing() -> int:
 	var max_pop: int = 0
-	for s in _structures:
+	for s in _structures.values():
 		if s is HousingStructures:
 			max_pop += s.max_people
 	return max_pop
 
 func get_structures_by_type(type: Enums.StructureTypes) -> Array[Structures]:
-	return _structures.filter(func(s: Structures) -> bool:
+	return _structures.values.filter(func(s: Structures) -> bool:
 		return s.structure_type == type
 	)
 #endregion
