@@ -23,14 +23,16 @@ func _resolve_assets() -> void:
 """
 
 func can_event_trigger() -> bool:
+	print("can harvest trigger?")
+	return true
 	if DataManager.get_structures_by_type(Enums.StructureTypes.FIELD).size() > 0:
 		return true
 	else:
 		return false
 
-func trigger_event(optional = null) -> Array:
+func trigger_event(pop: EventPopup) -> Array:
 	#do "await" visual box w/ ok btn
-	#Event_Controller.call_event()
+	var temp = await pop.button_pressed
 	#potentially move harvest factor up to include in message?
 	#do functionality
 	var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)

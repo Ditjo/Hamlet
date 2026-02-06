@@ -13,7 +13,7 @@ func _resolve_assets() -> void:
 func can_event_trigger() -> bool:
 	return true
 
-func trigger_event(optional = null) -> Array:
+func trigger_event(pop: EventPopup) -> Array:
 	return []
 
 func event_response(response: Enums) -> void:

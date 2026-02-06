@@ -26,7 +26,7 @@ func run_game_loop():
 			#await wait_until_unpaused()
 		#evt small timeout el lign her for stagger mellem pause og gamefunctions
 		print("running")
-		#await SimulationManager.sim_main()
+		SimulationManager.sim_main()
 		#put season/ui stuff here?
 
 func logical_waiter(sec: float, buffer: float = 0.5):

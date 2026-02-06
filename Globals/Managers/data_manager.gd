@@ -100,8 +100,8 @@ func get_max_housing() -> int:
 			max_pop += s.max_people
 	return max_pop
 
-func get_structures_by_type(type: Enums.StructureTypes) -> Array[Structures]:
-	return _structures.values.filter(func(s: Structures) -> bool:
+func get_structures_by_type(type: Enums.StructureTypes) -> Array:
+	return _structures.values().filter(func(s: Structures) -> bool:
 		return s.structure_type == type
 	)
 	
