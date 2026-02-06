@@ -8,3 +8,4 @@ func on_left_draw_pressed() -> void:
 
 func on_right_draw_pressed() -> void:
 	toggle_right_drawer.emit()
+	
