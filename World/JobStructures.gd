@@ -14,12 +14,16 @@ func _init(
 	cost_: Dictionary = {},
 	max_workers_: int = 4,
 	currentWorkers_: Array[Person] = [],
-	production_per_worker_ = 1
+	production_per_worker_ = 1,
+	atlas_source_id_: int = -1,
+	atlas_coords: Vector2i = Vector2i.ZERO
 ) -> void:
 	super._init(name_, description_, type_, cost_)
 	self.max_workers = max_workers_
 	self.currentWorkers = currentWorkers_
 	self.production_per_worker = production_per_worker_
+	self.atlas_source_id = atlas_source_id_
+	self.atlas_coords = atlas_coords
 
 func add_worker(person: Person) -> bool:
 	if currentWorkers.size() < max_workers:

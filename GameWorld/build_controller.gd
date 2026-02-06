@@ -1,8 +1,16 @@
 extends Node2D
 
+#TileMaps
+@onready var background_layer: TileMapLayer = $"../TileMaps/BackgroundLayer"
+@onready var nature_layer: TileMapLayer = $"../TileMaps/NatureLayer"
+@onready var structure_layer: TileMapLayer = $"../TileMaps/StructureLayer"
+
+
 @onready var build_menu: Buildmenu = $"../../HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"
 @onready var input_manager: InputManager = $"../InputManager"
 @onready var tile_info_drawer: Drawer = %TileInfoDrawer
+
+
 
 
 var structure_selected: Enums.StructureTypes = Enums.StructureTypes.ZERO
@@ -21,11 +29,17 @@ func _on_structrue_selected(type: Enums.StructureTypes) -> void:
 func _on_left_click_received(coords: Vector2i) -> void:
 	print("Left Click Received. Placing Structure on: " + str(coords))
 	#Do building placement here!
-	
-	var s: Structures = _get_new_building_of_choosen_type(structure_selected)
-	if s:
-		DataManager.add_structure(coords, s)
-	#Place Buildings on the right tile
+	#Check if building can be placed!
+	if _is_tile_free(coords):
+		var s: Structures = _get_new_building_of_choosen_type(structure_selected)
+		if s:
+			DataManager.add_structure(coords, s)
+			structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
+			#Place Buildings on the right tile
+	else:
+		#pass on message about tile being occupied
+		print("Tile occupied: " + str(coords))
+		pass
 
 func _on_right_click_received() -> void:
 	if structure_selected != Enums.StructureTypes.ZERO:
@@ -35,13 +49,18 @@ func _on_right_click_received() -> void:
 func _close_tile_info_drawer() -> void:
 	tile_info_drawer.close()
 
+func _is_tile_free(coords: Vector2i) -> bool:
+	#return true, if both layers don't have any objects on that tile.
+	return structure_layer.get_cell_source_id(coords) == -1 and\
+	 nature_layer.get_cell_source_id(coords) == -1
+
 func _get_new_building_of_choosen_type(type: Enums.StructureTypes) -> Structures:
 	match type:
 		Enums.StructureTypes.HOUSE:
 			return House.new()
-		#Enums.StructureTypes.FIELD:
-			#pass
-		#Enums.StructureTypes.WINDMILL:
-			#pass
+		Enums.StructureTypes.FIELD:
+			return Field.new()
+		Enums.StructureTypes.WINDMILL:
+			return Windmill.new()
 		_:
 			return null

@@ -12,11 +12,15 @@ func _init(
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {},
 	max_people_: int = 4,
-	people_: Array[Person] = []
+	people_: Array[Person] = [],
+	atlas_source_id_: int = -1,
+	atlas_coords: Vector2i = Vector2i.ZERO
 ) -> void:
 	super._init(name_, description_, type_, cost_)
 	self.max_people = max_people_
 	self._people = people_
+	self.atlas_source_id = atlas_source_id_
+	self.atlas_coords = atlas_coords
 
 func add_person_to_house(p: Person) -> void:
 	_people.append(p)
