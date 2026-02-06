@@ -77,12 +77,12 @@ func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
 #endregion
 
 #region Structures
-func add_structure(s: Structures) -> void:
-	_structures[s.coords] = s
+func add_structure(coords: Vector2i, s: Structures) -> void:
+	_structures[coords] = s
 	# update UI here?
 
-func remove_structure(s: Structures) -> void:
-	_structures.erase(s.coords)
+func remove_structure(coords: Vector2i) -> void:
+	_structures.erase(coords)
 	# update UI here?
 
 func get_current_housing() -> int:
