@@ -1,5 +1,7 @@
 extends Node
 
+@onready var event_controller = $GameWorld/EventController
+
 #Skal indholde simulationen af spillet. Game Loop. 
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 var rng = RandomNumberGenerator.new()
@@ -38,11 +40,23 @@ func event_func() -> Event:
 #endregion
 
 #region harvest
+"""
+func harvest_event_stuff(new_event: Event) -> Array:
+	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
+		new_event.trigger_event() 
+		await event_controller.response.connect(harvest_func)
+	else:
+		harvest_func()
+
+func harvest_event_response():
+	harvest_func()
+"""
 func harvest_func(new_event: Event) -> Dictionary:
 	var grain: int = 0
 	var event_factor:= []
 	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
 		event_factor = new_event.trigger_event() 
+		event_factor = await event_controller.response.connect()
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
 	for struct in grain_structs:
 		grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor[0] in [0,1] else 1))

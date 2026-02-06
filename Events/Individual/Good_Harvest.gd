@@ -30,6 +30,7 @@ func can_event_trigger() -> bool:
 
 func trigger_event(optional = null) -> Array:
 	#do "await" visual box w/ ok btn
+	#Event_Controller.call_event()
 	#potentially move harvest factor up to include in message?
 	#do functionality
 	var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)

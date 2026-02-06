@@ -1,5 +1,7 @@
 extends PopupPanel
 
+class_name EventPopup
+
 signal button_pressed(button: String)
 
 func _ready() -> void:
