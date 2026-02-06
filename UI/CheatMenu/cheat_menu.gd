@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var __1_seasons: Button = $"PanelContainer/+1 Seasons"
 @onready var add_person: Button = $PanelContainer/AddPerson
 @onready var event_popup_btn: Button = $PanelContainer/EventPopup
-@onready var event_pop_up: PopupPanel = %EventPopUp
+@onready var event_pop_up: EventPopup = %EventPopUp
 
 func _ready() -> void:
 	left_draw_btn.pressed.connect(_on_left_draw_pressed)
@@ -33,7 +33,4 @@ func _on_plus_one_seasons_pressed() -> void:
 	DataManager.increase_seasons()
 
 func _on_event_pop_up_pressed() -> void:
-	if event_pop_up.visible:
-		event_pop_up.hide()
-	else:
-		event_pop_up.popup()
+	event_pop_up.open(BadHarvest.new())

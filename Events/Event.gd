@@ -5,7 +5,7 @@ extends Resource
 var event_name: String
 var description: String
 var type: Enums.EventTypes
-var options: Array = []
+var options: Array[Option] = []
 
 func _resolve_assets() -> void:
 	pass

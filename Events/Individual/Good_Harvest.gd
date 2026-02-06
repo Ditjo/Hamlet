@@ -10,7 +10,7 @@ func _init(
 	name_: String = "Good Harvest",
 	desc_: String = "",
 	type_: Enums.EventTypes = Enums.EventTypes.HARVEST,
-	opts_: Array = ["OK"]
+	opts_: Array[Option] = [Option.new()]
 ) -> void:
 	event_name = name_
 	description = desc_
