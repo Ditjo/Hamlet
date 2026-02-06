@@ -22,10 +22,9 @@ func _on_left_click_received(coords: Vector2i) -> void:
 	print("Left Click Received. Placing Structure on: " + str(coords))
 	#Do building placement here!
 	
-	#Add buildings to Strucutr in datamanager
 	var s: Structures = _get_new_building_of_choosen_type(structure_selected)
-	DataManager.add_structure(coords, s)
-	#DataManager.add_structure(h)
+	if s:
+		DataManager.add_structure(coords, s)
 	#Place Buildings on the right tile
 
 func _on_right_click_received() -> void:
