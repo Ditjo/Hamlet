@@ -12,8 +12,8 @@ func _ready() -> void:
 	get_window().size_changed.connect(_on_window_resize)
 	_cleanup()
 
-func _on_button_pressed(button: String) -> void:
-	button_pressed.emit(button)
+func _on_button_pressed(response: String) -> void:
+	button_pressed.emit(response)
 	close()
 
 func close() -> void:
@@ -27,7 +27,7 @@ func open(event: Event) -> void:
 	for o in event.options:
 		var btn = Button.new()
 		btn.text = o.btn_text
-		btn.pressed.connect(_on_button_pressed)
+		btn.pressed.connect(_on_button_pressed.bind(o.response))
 		options_panel.add_child(btn)
 	
 	_on_window_resize()

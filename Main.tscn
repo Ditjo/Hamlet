@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ga2f7bisyoup" path="res://UI/HUD/Topbar/ResourceOverview.tscn" id="3_lgr22"]
 [ext_resource type="Script" uid="uid://cdnr5jo84rol0" path="res://UI/CheatMenu/cheat_menu.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://ciicipb7mqxt8" path="res://camera_2d.gd" id="3_wkp8b"]
-[ext_resource type="Script" path="res://Events/Event_Controller.gd" id="4_j4qnp"]
+[ext_resource type="Script" uid="uid://bfou4xtjmkh35" path="res://Events/Event_Controller.gd" id="4_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
 [ext_resource type="Script" uid="uid://cswfj23guntde" path="res://UI/MainMenu/main_menu.gd" id="6_wkp8b"]
 [ext_resource type="Script" uid="uid://bus8qkvnso6nu" path="res://UI/HUD/BuildMenu/build_menu.gd" id="8_5vvyt"]
