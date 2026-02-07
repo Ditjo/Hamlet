@@ -1228,9 +1228,10 @@ tile_set = SubResource("TileSet_20pc6")
 tile_map_data = PackedByteArray("AAAmABIAAAAPAB8AAAApABMAAAAZACEAAAAoABEAAAAAACQAAAA=")
 tile_set = SubResource("TileSet_20pc6")
 
-[node name="Camera2D" type="Camera2D" parent="GameWorld"]
+[node name="Camera2D" type="Camera2D" parent="GameWorld" node_paths=PackedStringArray("tilemap_layer")]
 anchor_mode = 0
 script = ExtResource("3_wkp8b")
+tilemap_layer = NodePath("../TileMaps/BackgroundLayer")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

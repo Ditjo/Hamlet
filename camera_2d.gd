@@ -6,16 +6,31 @@ extends Camera2D
 @export var min_zoom: float = 1.0
 @export var max_zoom: float = 2.5
 
-#@export var tilemap_layer: TileMapLayer
-#
-#var world_bounds: Rect2
-#
-#func _ready() -> void:
-	#world_bounds = get_world_bounds(tilemap_layer)
+@export var tilemap_layer: TileMapLayer
 
+var world_bounds: Rect2
+
+func _ready() -> void:
+	anchor_mode = Camera2D.ANCHOR_MODE_DRAG_CENTER
+	
+	await get_tree().process_frame
+	
+	setup_camera_limits()
+	
+func setup_camera_limits():
+	if not tilemap_layer:
+		return
+	
+	var used_rect: Rect2i = tilemap_layer.get_used_rect()
+	var tile_map_size: = tilemap_layer.tile_set.tile_size
+	
+	limit_left = used_rect.position.x
+	limit_top = used_rect.position.y * tile_map_size.y
+	limit_right = (used_rect.position.x + used_rect.size.x) * tile_map_size.x
+	limit_bottom = (used_rect.position.y + used_rect.size.y) * tile_map_size.y
+	
 func _process(delta: float) -> void:
 	_move_camera(delta)
-	#_clamp_to_world()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -50,24 +65,61 @@ func _move_camera(delta: float) -> void:
 		global_position += direction * move_speed * delta
 
 func _zoom_camera(amount: float) -> void:
-	var new_zoom := zoom + Vector2(amount, amount) 
+	
+	var mouse_world_before: Vector2 = get_global_mouse_position()
+	
+	var new_zoom: Vector2 = zoom + Vector2(amount, amount) 
 	new_zoom.x = clamp(new_zoom.x, min_zoom, max_zoom)
 	new_zoom.y = clamp(new_zoom.y, min_zoom, max_zoom)
+	
+	if new_zoom == zoom:
+		return
+	
 	zoom = new_zoom
+	
+	var mouse_world_after: Vector2 = get_global_mouse_position()
+	
+	global_position += mouse_world_before - mouse_world_after
+	
 	
 ##region World Bounds
 #func get_world_bounds(tilemap: TileMapLayer) -> Rect2:
 	#var used: Rect2i = tilemap.get_used_rect()
-	#var tile_size: Vector2i = tilemap.tile_set.tile_size
+	#if used.size == Vector2i.ZERO:
+		#return Rect2()
 	#
-	#var world_pos: Vector2 = used.position * tile_size
-	#var world_size: Vector2 = used.size * tile_size
+	#var tile_size: Vector2 = tilemap.tile_set.tile_size
 	#
-	#return Rect2(world_pos, world_size)
+	#var local_pos: Vector2 = Vector2(used.position) * tile_size
+	#var local_size: Vector2 = Vector2(used.size) * tile_size
+	#var world_pos: = tilemap.to_global(local_pos)
+	#
+	#return Rect2(world_pos, local_size)
+	#
+#func _update_camera_limits() -> void:
+	#var viewport_size: Vector2 = get_viewport_rect().size
+	#var half_view: Vector2 = (viewport_size * 0.5)  / zoom
+	#
+	#limit_left = world_bounds.position.x - half_view.x
+	#limit_top = world_bounds.position.y - half_view.y
+	#limit_right = world_bounds.position.x + world_bounds.size.x - half_view.x
+	#limit_bottom = world_bounds.position.y + world_bounds.size.y - half_view.y
+	#
+	##var viewport_size: Vector2 = get_viewport_rect().size
+	##var view_size: Vector2 = viewport_size  / zoom
+	##
+	##limit_left = world_bounds.position.x
+	##limit_top = world_bounds.position.y
+	##limit_right = world_bounds.position.x + world_bounds.size.x - view_size.x
+	##limit_bottom = world_bounds.position.y + world_bounds.size.y - view_size.y
 	#
 #func _clamp_to_world() -> void:
+	#if world_bounds.size == Vector2.ZERO:
+		#return
+	#
 	#var viewport_size: Vector2 = get_viewport_rect().size
-	#var half_view: = viewport_size * 0.5 * zoom
+	##var half_view: = viewport_size * 0.5 * zoom
+	#var half_view: Vector2 = (viewport_size * 0.5) / zoom
 		#
 	#global_position.x = clamp(
 		#global_position.x,
