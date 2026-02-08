@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://rqip0wwj52od"]
+
+[ext_resource type="Script" uid="uid://bg4eoain6hd0y" path="res://UI/Shared/tooltip.gd" id="1_6pqvf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pqvf"]
+bg_color = Color(0.61893296, 1.540184e-06, 4.813075e-07, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="Tooltip" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_6pqvf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 0.7019608, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_6pqvf")
+horizontal_alignment = 1

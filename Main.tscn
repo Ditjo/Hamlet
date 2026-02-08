@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=19 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://br18yg602iwf" path="res://UI/HUD/TileInfoDrawer/TileInfoDrawer.gd" id="9_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/Drawer.tscn" id="9_20pc6"]
 [ext_resource type="Script" uid="uid://dqn075sku02po" path="res://UI/HUD/EventPopUp/event_pop_up.gd" id="12_c2ibq"]
+[ext_resource type="PackedScene" uid="uid://rqip0wwj52od" path="res://UI/Shared/Tooltip.tscn" id="14_fpfj3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wkp8b"]
 texture = ExtResource("2_03owx")
@@ -1400,6 +1401,8 @@ text = "An assortment of letters to make a sentance!"
 [node name="OptionsPanel" type="HBoxContainer" parent="HUD/EventPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="Tooltip" parent="HUD" instance=ExtResource("14_fpfj3")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

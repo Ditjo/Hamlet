@@ -5,13 +5,11 @@ extends Node2D
 @onready var nature_layer: TileMapLayer = $"../TileMaps/NatureLayer"
 @onready var structure_layer: TileMapLayer = $"../TileMaps/StructureLayer"
 
-
 @onready var build_menu: Buildmenu = $"../../HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"
 @onready var input_manager: InputManager = $"../InputManager"
 @onready var tile_info_drawer: Drawer = %TileInfoDrawer
 
-
-
+@onready var tooltip: Tooltip = $"../../HUD/Tooltip"
 
 var structure_selected: Enums.StructureTypes = Enums.StructureTypes.ZERO
 
@@ -24,36 +22,23 @@ func _on_structrue_selected(type: Enums.StructureTypes) -> void:
 	input_manager.set_structure_as_selected()
 	structure_selected = type
 	_close_tile_info_drawer()
-	#print("From Building Controller: " + type)
 
 func _on_left_click_received(coords: Vector2i) -> void:
-	#print("Left Click Received. Placing Structure on: " + str(coords))
-	#Do building placement here!
 	#Check if building can be placed!
 	var s: Structures = _get_new_building_of_choosen_type(structure_selected)
 	if s == null:
-		print("Strucutre Not Found")
+		tooltip.show_tooltip("Strucutre Not Found")
+		return
 	elif !_is_tile_free(coords):
-		print("Tile occupied: " + str(coords))
+		tooltip.show_tooltip("Tile is occupied")
+		return
 	elif !s.can_build_object():
-		print("Not enough gold")
+		tooltip.show_tooltip("Not enough gold")
+		return
 	else:
 		DataManager.remove_gold(s.cost.get(Enums.CostTypes.GOLD))
 		DataManager.add_structure(coords, s)
 		structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
-
-	#if _is_tile_free(coords):
-		##var s: Structures = _get_new_building_of_choosen_type(structure_selected)
-		#if s:
-			#if s.can_build_object():
-				#DataManager.add_structure(coords, s)
-				#structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
-			#else:
-				#print("Not enough gold")
-		#else: 
-			#print("Strucutre Not Found")
-	#else:
-		#print("Tile occupied: " + str(coords))
 
 func _on_right_click_received() -> void:
 	if structure_selected != Enums.StructureTypes.ZERO:
