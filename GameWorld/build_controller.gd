@@ -27,19 +27,33 @@ func _on_structrue_selected(type: Enums.StructureTypes) -> void:
 	#print("From Building Controller: " + type)
 
 func _on_left_click_received(coords: Vector2i) -> void:
-	print("Left Click Received. Placing Structure on: " + str(coords))
+	#print("Left Click Received. Placing Structure on: " + str(coords))
 	#Do building placement here!
 	#Check if building can be placed!
-	if _is_tile_free(coords):
-		var s: Structures = _get_new_building_of_choosen_type(structure_selected)
-		if s:
-			DataManager.add_structure(coords, s)
-			structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
-			#Place Buildings on the right tile
-	else:
-		#pass on message about tile being occupied
+	var s: Structures = _get_new_building_of_choosen_type(structure_selected)
+	if s == null:
+		print("Strucutre Not Found")
+	elif !_is_tile_free(coords):
 		print("Tile occupied: " + str(coords))
-		pass
+	elif !s.can_build_object():
+		print("Not enough gold")
+	else:
+		DataManager.remove_gold(s.cost.get(Enums.CostTypes.GOLD))
+		DataManager.add_structure(coords, s)
+		structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
+
+	#if _is_tile_free(coords):
+		##var s: Structures = _get_new_building_of_choosen_type(structure_selected)
+		#if s:
+			#if s.can_build_object():
+				#DataManager.add_structure(coords, s)
+				#structure_layer.set_cell(coords, s.atlas_source_id, s.atlas_coords)
+			#else:
+				#print("Not enough gold")
+		#else: 
+			#print("Strucutre Not Found")
+	#else:
+		#print("Tile occupied: " + str(coords))
 
 func _on_right_click_received() -> void:
 	if structure_selected != Enums.StructureTypes.ZERO:

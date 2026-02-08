@@ -17,6 +17,9 @@ var _structures: Dictionary = {}
 var _population: Array[Person] = []
 var _event_flags: Dictionary = {}
 
+func _ready() -> void:
+	add_gold(100)
+
 #region Gold
 func add_gold(gold: int) -> bool:
 	_gold += gold

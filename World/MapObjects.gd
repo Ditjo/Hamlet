@@ -5,8 +5,8 @@ extends Resource
 var object_name: String
 var description: String
 var map_object_type: Enums.MapObjectTypes
-var coords: Vector2i
-var cost: Dictionary = {}
+#var coords: Vector2i
+var cost: Dictionary = { Enums.CostTypes.GOLD: 0 }
 
 func _init(
 	name_: String = "",
@@ -23,9 +23,19 @@ func _init(
 
 func _resolve_assets() -> void:
 	pass
-	
+
+#Do you have more gold than it cost to remove it
 func can_delete_object() -> bool:
-	return true
+	var c: int = cost.get(Enums.CostTypes.GOLD)
+	return DataManager.get_gold() >= (c / 2)
 	
+#Do you have more gold than it cost to build it
 func can_build_object() -> bool:
-	return true
+	var c: int = cost.get(Enums.CostTypes.GOLD)
+	return DataManager.get_gold() >= c
+
+
+#Do you have more gold than it cost to build it
+#func can_pay_the_cost() -> bool:
+	#var c: int = cost.get(Enums.CostTypes.GOLD)
+	#return DataManager.get_gold() > c
