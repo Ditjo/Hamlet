@@ -1,17 +1,23 @@
 extends Node
+class_name EventController
 
-signal response
+signal return_response(reponse: Array)
 
 @onready var event_pop_up: EventPopup = %EventPopUp
 
-# Called when the node enters the scene tree for the first time.
+var event: Event
+
 func _ready():
-	pass # Replace with function body.
+	SimulationManager.event_controller = self
+	event_pop_up.button_pressed.connect(event_response)
 
 func call_event(event_: Event):
-	event_pop_up.button_pressed.connect(event_response)
-	event_pop_up.open(event_)
+	event = event_
+	GameManager.pause_game()
+	event_pop_up.open(event)
 
-func event_response(resp: String):
-	response.emit()
-	event_pop_up.close()
+func event_response(option: String):
+	var response: Array = event.trigger_event(option)
+	GameManager.unpause_game()
+	return_response.emit(response)
+	

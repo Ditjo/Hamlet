@@ -1369,6 +1369,7 @@ layout_mode = 2
 
 [node name="EventPopUp" type="PopupPanel" parent="HUD"]
 unique_name_in_owner = true
+process_mode = 3
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(109, 100)

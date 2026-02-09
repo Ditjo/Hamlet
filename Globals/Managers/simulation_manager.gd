@@ -1,12 +1,12 @@
 extends Node
 
-@onready var event_controller = $GameWorld/EventController
-@onready var event_pop_up = %EventPopUp
+var event_controller: EventController
+#@onready var event_pop_up = %EventPopUp
 
 #Skal indholde simulationen af spillet. Game Loop. 
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 var rng = RandomNumberGenerator.new()
-var event_chance: int = 0#7
+var event_chance: int = 100#7
 var pop_growth_chance: int = 7
 var events: Array[Event] = []
 
@@ -28,15 +28,17 @@ func _ready():
 
 func sim_main() -> void:
 	print("sim_main")
-	var new_event: Event = event_func()
-	var harvests = harvest_func(new_event)
-	var production = production_func(new_event, harvests)
-	sale_func(new_event, production)
-	people_func(new_event)
+	event_func()
+	#var new_event: Event = event_func()
+	#var harvests = harvest_func(new_event)
+	#var production = production_func(new_event, harvests)
+	#sale_func(new_event, production)
+	#people_func(new_event)
 
 #region events
-func event_func() -> Event:
+func event_func() -> void:
 	print("event_func")
+	var chosen_event: Event = null
 	if rng.randi_range(1,100) < event_chance:
 		#create list of valid events
 		var valid_events: Array = []
@@ -47,84 +49,207 @@ func event_func() -> Event:
 			if event.can_event_trigger():
 				valid_events.append(event)
 		print(valid_events.size())
-		#event_chance = 7
-		var chosen_event = valid_events.pick_random()
-		if chosen_event != null && chosen_event.type == Enums.EventTypes.EVENT:
-			"""do event stuff"""
-			return null
-		else:
-			return chosen_event
+		#event_chance = 7 <------------------------------Set back in again when done testing
+		chosen_event = valid_events.pick_random()
+
+
+		#if chosen_event != null && chosen_event.type == Enums.EventTypes.EVENT:
+			#"""do event stuff"""
+			#
+			#
+			#return null
+		#else:
+			#return chosen_event
 	else:
 		event_chance += 2
-		return null
+		#return null
+	event_event_check(chosen_event)
+
+func event_event_check(new_event: Event):
+	if new_event != null && new_event.type == Enums.EventTypes.EVENT:
+		event_controller.return_response.connect(event_event_response)
+		event_controller.call_event(new_event)
+	else:
+		harvest_event_check(new_event)
+
+func event_event_response(response: Array = []):
+	event_controller.return_response.disconnect(event_event_response)
+	#response not used for anything here?
+	harvest_event_check()
+
 #endregion
 
 #region harvest
-"""
-func harvest_event_stuff(new_event: Event) -> Array:
-	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
-		new_event.trigger_event() 
-		await event_controller.response.connect(harvest_func)
-	else:
-		harvest_func()
 
-func harvest_event_response():
-	harvest_func()
-"""
-func harvest_func(new_event: Event) -> Dictionary:
+func harvest_event_check(new_event: Event = null) -> void:
+	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
+		event_controller.return_response.connect(harvest_event_response)
+		event_controller.call_event(new_event)
+	else:
+		harvest_func([], new_event)
+
+func harvest_event_response(response: Array = []):
+	event_controller.return_response.disconnect(harvest_event_response)
+	harvest_func(response)
+
+func harvest_func(event_factor: Array, new_event: Event = null) -> void:
 	print("harvest_func")
 	var grain: int = 0
-	var event_factor:= []
-	if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
-		event_factor = new_event.trigger_event(event_pop_up) 
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
+		#event_factor = new_event.trigger_event(event_pop_up) 
 		#event_factor = await event_controller.response.connect()
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
 	for struct in grain_structs:
 		grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 	#can be inline in foreach if single-use
 	#maybe pass array of types? 
-	return {
+	var harvest: Dictionary = {
 		"grain": grain
 	}
+	
+	production_event_check(harvest, new_event)
+	
+	#return {
+		#"grain": grain
+	#}
+	
+	#func harvest_func(new_event: Event) -> Dictionary:
+	#print("harvest_func")
+	#var grain: int = 0
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
+		#event_factor = new_event.trigger_event(event_pop_up) 
+		##event_factor = await event_controller.response.connect()
+	#var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
+	#for struct in grain_structs:
+		#grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
+	##can be inline in foreach if single-use
+	##maybe pass array of types? 
+	#return {
+		#"grain": grain
+	#}
+	
 #endregion
 
 #region production
-func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
+var _harvest: Dictionary = {}
+
+func production_event_check(harvest: Dictionary, new_event: Event = null,) -> void:
+	if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
+		event_controller.return_response.connect(production_event_response)
+		_harvest = harvest
+		event_controller.call_event(new_event)
+	else:
+		production_func(harvest, [], new_event)
+
+func production_event_response(response: Array = []):
+	event_controller.return_response.disconnect(production_event_response)
+	production_func(_harvest, response)
+
+func production_func(harvest: Dictionary, event_factor: Array, new_event: Event = null) -> void:
 	print("prod_func")
 	var grain = harvest["grain"]
 	#var limiter: int = ???
 	var flour: int = 0
-	var event_factor:= []
-	if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
-		event_factor = new_event.trigger_event(event_pop_up) 
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
+		#event_factor = new_event.trigger_event(event_pop_up) 
 	var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
 	for struct in flour_structs:
 		var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 		var output = min(work_power, grain)
 		grain -= output
 		flour += output
-	return {
+		
+	var produce: Dictionary = {
 		"grain": grain,
 		"flour": flour
 	}
+	
+	sale_event_check(produce, new_event)
+	
+	#return {
+		#"grain": grain,
+		#"flour": flour
+	#}
+	
+	#func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
+	#print("prod_func")
+	#var grain = harvest["grain"]
+	##var limiter: int = ???
+	#var flour: int = 0
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
+		#event_factor = new_event.trigger_event(event_pop_up) 
+	#var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
+	#for struct in flour_structs:
+		#var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
+		#var output = min(work_power, grain)
+		#grain -= output
+		#flour += output
+	#return {
+		#"grain": grain,
+		#"flour": flour
+	#}
 #endregion
 
 #region sale
-func sale_func(new_event: Event, production: Dictionary) -> void:
+var _produce: Dictionary = {}
+
+func sale_event_check(produce: Dictionary, new_event: Event = null,) -> void:
+	if new_event != null && new_event.type == Enums.EventTypes.SALE:
+		event_controller.return_response.connect(sale_event_response)
+		_produce = produce
+		event_controller.call_event(new_event)
+	else:
+		sale_func(produce, [], new_event)
+
+func sale_event_response(response: Array = []):
+	event_controller.return_response.disconnect(sale_event_response)
+	sale_func(_produce, response)
+
+
+func sale_func(production: Dictionary, event_factor: Array, new_event: Event = null ) -> void:
 	print("sale_func")
 	var local_gold: int = 0
-	var event_factor:= []
-	if new_event != null && new_event.type == Enums.EventTypes.SALE:
-		event_factor = new_event.trigger_event(event_pop_up) 
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.SALE:
+		#event_factor = new_event.trigger_event(event_pop_up) 
 	local_gold += production["grain"] * 2 * event_filter(event_factor, [0,1])
 	local_gold += production["flour"] * 3 * event_filter(event_factor, [0,2])
 	#local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 	#local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
 	DataManager.add_gold(local_gold)
+	
+	people_event_check(new_event)
+#func sale_func(new_event: Event, production: Dictionary) -> void:
+	#print("sale_func")
+	#var local_gold: int = 0
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.SALE:
+		#event_factor = new_event.trigger_event(event_pop_up) 
+	#local_gold += production["grain"] * 2 * event_filter(event_factor, [0,1])
+	#local_gold += production["flour"] * 3 * event_filter(event_factor, [0,2])
+	##local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
+	##local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
+	#DataManager.add_gold(local_gold)
+	
 #endregion
 
 #region peaple
-func people_func(new_event: Event) -> void:
+func people_event_check(new_event: Event = null,) -> void:
+	if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
+		event_controller.return_response.connect(people_event_response)
+		event_controller.call_event(new_event)
+	else:
+		people_func([])
+
+func people_event_response(response: Array = []):
+	event_controller.return_response.disconnect(people_event_response)
+	people_func(response)
+
+func people_func(event_factor: Array) -> void:
 	print("ppl_func")
 	var population_overview := {
 		"max_population" = DataManager.get_max_housing(),
@@ -132,14 +257,14 @@ func people_func(new_event: Event) -> void:
 		"housed_population" = DataManager.get_current_housing()
 	}
 	##assume events have already been vetted for availability
-	var event_factor:= []
-	if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
-		event_factor = new_event.trigger_event(event_pop_up) 
-		"""
-		if event => reduce population, trigger effect here maybe?
-		if old_current > new: flag to prevent new ppl?
-		"""
-		pass
+	#var event_factor:= []
+	#if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
+		#event_factor = new_event.trigger_event(event_pop_up) 
+		#"""
+		#if event => reduce population, trigger effect here maybe?
+		#if old_current > new: flag to prevent new ppl?
+		#"""
+		#pass
 	if population_overview["current_population"] > population_overview["housed_population"]:
 		var homeless: Array = DataManager.get_homeless_list()
 		if population_overview["current_population"] < population_overview["max_population"]:
