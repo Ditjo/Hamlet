@@ -6,7 +6,7 @@ extends Node
 #Skal indholde simulationen af spillet. Game Loop. 
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 var rng = RandomNumberGenerator.new()
-var event_chance: int = 700
+var event_chance: int = 0#7
 var pop_growth_chance: int = 7
 var events: Array[Event] = []
 
@@ -117,7 +117,7 @@ func sale_func(new_event: Event, production: Dictionary) -> void:
 	if new_event != null && new_event.type == Enums.EventTypes.SALE:
 		event_factor = new_event.trigger_event(event_pop_up) 
 	local_gold += production["grain"] * 2 * event_filter(event_factor, [0,1])
-	local_gold += production["flour"] * 2 * event_filter(event_factor, [0,2])
+	local_gold += production["flour"] * 3 * event_filter(event_factor, [0,2])
 	#local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 	#local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
 	DataManager.add_gold(local_gold)
@@ -161,7 +161,7 @@ func people_func(new_event: Event) -> void:
 		#&& new_event.can_event_trigger(
 		if rng.randi_range(1,100) <= pop_growth_chance:
 			var available_housing = population_overview["max_population"] - population_overview["current_population"]
-			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_factor[1])
+			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_filter(event_factor, [0], 0))
 			for n in new_people_count:
 				var new_person = Person.new()
 				new_person.generate_person()
@@ -170,6 +170,8 @@ func people_func(new_event: Event) -> void:
 			pop_growth_chance = 7
 		else:
 			pop_growth_chance += 2
+	#upkeep
+	DataManager.remove_gold(max(0, min(int(DataManager.get_current_population() / 3), DataManager.get_gold() - 15)))
 #endregion
 
 #region math
@@ -181,6 +183,6 @@ func math_product(...values) -> int:
 	return int(result)
 """
 
-func event_filter(encoding: Array, allowed: Array) -> int:
-	return encoding[1] if encoding.size() > 1 and encoding[0] in allowed else 1
+func event_filter(encoding: Array, allowed: Array, default: int = 1) -> int:
+	return encoding[1] if encoding.size() > 1 and encoding[0] in allowed else default
 #endregion
