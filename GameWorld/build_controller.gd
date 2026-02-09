@@ -6,7 +6,8 @@ extends Node2D
 @onready var structure_layer: TileMapLayer = $"../TileMaps/StructureLayer"
 
 @onready var build_menu: Buildmenu = $"../../HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"
-@onready var input_manager: InputManager = $"../InputManager"
+@onready var input_controller: InputManager = $"../InputController"
+
 @onready var tile_info_drawer: Drawer = %TileInfoDrawer
 
 @onready var tooltip: Tooltip = $"../../HUD/Tooltip"
@@ -15,11 +16,11 @@ var structure_selected: Enums.StructureTypes = Enums.StructureTypes.ZERO
 
 func _ready() -> void:
 	build_menu.building_selected.connect(_on_structrue_selected)
-	input_manager.tile_right_click.connect(_on_right_click_received)
-	input_manager.tile_left_click.connect(_on_left_click_received)
+	input_controller.tile_right_click.connect(_on_right_click_received)
+	input_controller.tile_left_click.connect(_on_left_click_received)
 	
 func _on_structrue_selected(type: Enums.StructureTypes) -> void:
-	input_manager.set_structure_as_selected()
+	input_controller.set_structure_as_selected()
 	structure_selected = type
 	_close_tile_info_drawer()
 

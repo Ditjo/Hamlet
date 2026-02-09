@@ -107,6 +107,9 @@ func get_structures_by_type(type: Enums.StructureTypes) -> Array:
 	return _structures.values().filter(func(s: Structures) -> bool:
 		return s.structure_type == type
 	)
+
+func get_structure_by_coords(coords: Vector2i) -> Structures:
+	return _structures.get(coords)
 	
 func _on_max_housing_changed() -> void:
 	max_housing_changed.emit(get_max_housing())
