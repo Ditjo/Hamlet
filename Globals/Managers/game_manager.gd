@@ -1,17 +1,21 @@
 extends Node
 
 var is_running := false
+
 var is_paused := false
 var was_paused := false
+
+#Skal indholde tidsstyring. Seasons! Pause, play. 
 """
 signal paused
 signal unpaused
-"""
-#Skal indholde tidsstyring. Seasons! Pause, play. 
-"""
+
 func _init():
 	game_main()
 """
+func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+
 func game_main():
 	is_running = true
 	is_paused = false
@@ -19,12 +23,14 @@ func game_main():
 	run_game_loop()
 	pass
 
+
 func run_game_loop():
 	while is_running:
 		await logical_waiter(5.0)
 		#if get_tree().paused:
 			#await wait_until_unpaused()
 		#evt small timeout el lign her for stagger mellem pause og gamefunctions
+		#await get_tree().create_timer(5.0).timeout
 		print("running")
 		SimulationManager.sim_main()
 		#put season/ui stuff here?
@@ -44,7 +50,14 @@ func logical_waiter(sec: float, buffer: float = 0.5):
 	#while get_tree().paused:
 		#await get_tree().process_frame
 
+
 func pause_game():
+	"""
+	if get_tree().paused:
+		return
+	print("paused")
+	get_tree().paused = true
+	"""
 	if is_paused:
 		return
 	#get_tree().paused = true
@@ -52,11 +65,19 @@ func pause_game():
 	print("paused")
 	is_paused = true
 	was_paused = true
+	
 
 func unpause_game():
+	"""
+	if not get_tree().paused:
+		return
+	print("unpaused")
+	get_tree().paused = false
+	"""
 	if not is_paused:
 		return
 	#get_tree().paused = false
 	#unpaused.emit()
 	print("unpaused")
 	is_paused = false
+	

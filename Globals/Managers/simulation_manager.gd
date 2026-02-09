@@ -51,8 +51,6 @@ func event_func() -> void:
 		print(valid_events.size())
 		#event_chance = 7 <------------------------------Set back in again when done testing
 		chosen_event = valid_events.pick_random()
-
-
 		#if chosen_event != null && chosen_event.type == Enums.EventTypes.EVENT:
 			#"""do event stuff"""
 			#
