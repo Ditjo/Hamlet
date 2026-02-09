@@ -1322,25 +1322,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("8_5vvyt")
 
-[node name="HScrollBar" type="HScrollBar" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"]
-layout_mode = 2
-
-[node name="HouseBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HBoxContainer"]
-layout_mode = 2
-text = "House"
-
-[node name="FieldBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HBoxContainer"]
-layout_mode = 2
-text = "Field"
-
-[node name="WindmillBtn" type="Button" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu/HBoxContainer"]
-layout_mode = 2
-text = "Windmill"
-
 [node name="TileInfoDrawer" parent="HUD/Control" instance=ExtResource("9_20pc6")]
 unique_name_in_owner = true
 layout_mode = 0

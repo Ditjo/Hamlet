@@ -10,6 +10,7 @@ func _init(
 	max_workers_: int = 3,
 	currentWorkers_: Array[Person] = [],
 	production_per_worker_ = 2,
+	structure_type_: Enums.StructureTypes = Enums.StructureTypes.FIELD,
 	atlas_source_id_: int = 0,
 	atlas_coords_: Vector2i = Vector2i(0,7)
 ) -> void:
@@ -17,5 +18,6 @@ func _init(
 	self.max_workers = max_workers_
 	self.currentWorkers = currentWorkers_
 	self.production_per_worker = production_per_worker_
+	self.structure_type = structure_type_
 	self.atlas_source_id = atlas_source_id_
 	self.atlas_coords = atlas_coords_
