@@ -12,7 +12,16 @@ var is_visible: bool = false
 
 func _ready() -> void:
 	get_tree().root.get_window().size_changed.connect(_on_window_resize)
+	popup_hide.connect(popup_is_hiden)
 	_cleanup()
+
+#Work Around
+func popup_is_hiden() -> void:
+	if is_visible:
+		is_visible = false
+		_cleanup()
+		GameManager.unpause_game()
+		#print("popup_is_hiden!!!!")
 
 func _on_button_pressed(response: String) -> void:
 	button_pressed.emit(response)
