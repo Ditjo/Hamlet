@@ -72,7 +72,16 @@ func event_event_check(new_event: Event):
 
 func event_event_response(response: Array = []):
 	event_controller.return_response.disconnect(event_event_response)
-	#response not used for anything here?
+	#response not used for anything here? -> this is where event-event functionality happens!
+	if response[0] == 0:#encoded to add a flag
+		for index in response:
+			if index is String:
+				DataManager.add_event_flag(index)
+	if response[0] == 1:#encoded to remove a flag
+		for index in response:
+			if index is String:
+				DataManager.remove_event_flag(index)
+	#maybe combine these so the array can be encoded with multi function eg: [0, "name, 1, "othername"]
 	harvest_event_check()
 
 #endregion
@@ -99,7 +108,8 @@ func harvest_func(event_factor: Array, new_event: Event = null) -> void:
 		#event_factor = await event_controller.response.connect()
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
 	for struct in grain_structs:
-		grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
+		grain += int(struct.production_per_worker * struct.get_current_worker_count() * event_filter(event_factor, [0,1]))
+		#(event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 	#can be inline in foreach if single-use
 	#maybe pass array of types? 
 	var harvest: Dictionary = {
@@ -155,7 +165,8 @@ func production_func(harvest: Dictionary, event_factor: Array, new_event: Event 
 		#event_factor = new_event.trigger_event(event_pop_up) 
 	var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
 	for struct in flour_structs:
-		var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
+		var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * event_filter(event_factor, [0,1]))
+		#(event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 		var output = min(work_power, grain)
 		grain -= output
 		flour += output
@@ -214,10 +225,12 @@ func sale_func(production: Dictionary, event_factor: Array, new_event: Event = n
 	#var event_factor:= []
 	#if new_event != null && new_event.type == Enums.EventTypes.SALE:
 		#event_factor = new_event.trigger_event(event_pop_up) 
-	local_gold += production["grain"] * 2 * event_filter(event_factor, [0,1])
-	local_gold += production["flour"] * 3 * event_filter(event_factor, [0,2])
+	local_gold += int(production["grain"] * 2 * event_filter(event_factor, [0,1]))
+	local_gold += int(production["flour"] * 3 * event_filter(event_factor, [0,2]))
 	#local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 	#local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
+	if DataManager.check_event_flag("Lord_Taxing"):
+		local_gold = int(local_gold * 0.95)
 	DataManager.add_gold(local_gold)
 	
 	people_event_check(new_event)

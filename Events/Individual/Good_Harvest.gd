@@ -1,16 +1,14 @@
 extends Event
 
-var rng = RandomNumberGenerator.new()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 func _init(
 	name_: String = "Good Harvest",
-	desc_: String = "",
+	desc_: String = "You fields are producing more than usual!",
 	type_: Enums.EventTypes = Enums.EventTypes.HARVEST,
-	opts_: Array[Option] = [Option.new("Fantastic", "Good")]
+	opts_: Array[Option] = [Option.new("OK", "OK")]
 ) -> void:
 	event_name = name_
 	description = desc_
@@ -30,10 +28,7 @@ func can_event_trigger() -> bool:
 	#else:
 		#return false
 
-func trigger_event(response: String) -> Array:
-	#do "await" visual box w/ ok btn
-	#var temp = await pop.button_pressed
-	#potentially move harvest factor up to include in message?
-	#do functionality
+func trigger_event(option: String) -> Array:
+	var rng = RandomNumberGenerator.new()
 	var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)
 	return [1, harvest_factor]

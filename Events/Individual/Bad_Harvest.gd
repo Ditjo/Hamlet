@@ -5,15 +5,20 @@ func _init(
 	name_: String = "Bad Harvest",
 	desc_: String = "It's been a bad year for the Harvest.",
 	type_: Enums.EventTypes = Enums.EventTypes.HARVEST,
-	opts_: Array[Option] = [
-		Option.new("Sad, but nothing we can do", "sad"),
-		Option.new("Okay, but nothing we can do", "ok")
-	]
+	opts_: Array[Option] = [Option.new("OK", "OK")]
 ) -> void:
 	event_name = name_
 	description = desc_
 	type = type_
 	options = opts_
+
+"""
+	opts_: Array[Option] = [Option.new("Okay, but nothing we can do", "ok")]
+		
+		Option.new("Sad, but nothing we can do", "sad"),
+		Option.new("Okay, but nothing we can do", "ok")
+	]
+"""
 
 func can_event_trigger() -> bool:
 	#If player has any fields this event can happen
@@ -22,7 +27,9 @@ func can_event_trigger() -> bool:
 
 func trigger_event(option: String) -> Array:
 	var rng = RandomNumberGenerator.new()
-	
+	var harvest_factor: float = snapped(rng.randf_range(0.95,0.8),0.01)
+	return [1, harvest_factor]
+	"""
 	if option == "sad":
 		#First Option
 		print("Bad Harvets: First Option")
@@ -37,3 +44,4 @@ func trigger_event(option: String) -> Array:
 		#Something else happened
 		print("Bad Harvets: Something else happened")
 		return []
+	"""

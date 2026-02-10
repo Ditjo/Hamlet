@@ -10,7 +10,7 @@ func _init(
 	name_: String = "Good Sale",
 	desc_: String = "",
 	type_: Enums.EventTypes = Enums.EventTypes.SALE,
-	opts_: Array[Option] = [Option.new("Very Good", "Ok")]
+	opts_: Array[Option] = [Option.new("OK", "Ok")]
 ) -> void:
 	event_name = name_
 	description = desc_
@@ -29,9 +29,7 @@ func can_event_trigger() -> bool:
 			return true
 	return false
 
-func trigger_event(optional = null) -> Array:
-	#do "await" visual box w/ ok btn
-	#potentially move harvest factor up to include in message?
-	#do functionality
-	var harvest_factor: float = snapped(rng.randf_range(1.2,1.4),0.01)
-	return [0, harvest_factor]#0 affects everything
+func trigger_event(option: String) -> Array:
+	var rng = RandomNumberGenerator.new()
+	var sale_factor: float = snapped(rng.randf_range(1.15,1.35),0.01)
+	return [1, sale_factor]

@@ -115,5 +115,22 @@ func _on_max_housing_changed() -> void:
 	max_housing_changed.emit(get_max_housing())
 #endregion
 
+#region eventFlags
+func add_event_flag(flag_name: String) -> void:
+	_event_flags.app[flag_name] = true
+
+func remove_event_flag(flag_name: String) -> void:
+	_event_flags.app[flag_name] = false
+
+func get_event_flags() -> Dictionary:
+	return _event_flags
+
+func check_event_flag(flag_name: String) -> bool:
+	if _event_flags.get(flag_name, false) == true:
+		return true
+	else:
+		return false
+#endregion
+
 #When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 
 #The TileMapLayer script will then sub to that and add/delete it.
