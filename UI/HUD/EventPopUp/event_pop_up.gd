@@ -1,5 +1,4 @@
 extends PopupPanel
-
 class_name EventPopup
 
 signal button_pressed(button: String)
@@ -7,27 +6,18 @@ signal button_pressed(button: String)
 @onready var event_title: Label = $MarginContainer/VBoxContainer/EventTitle
 @onready var description: RichTextLabel = $MarginContainer/VBoxContainer/Description
 @onready var options_panel: HBoxContainer = $MarginContainer/VBoxContainer/OptionsPanel
+@onready var overlay: ColorRect = $"../Overlay"
 
 var is_visible: bool = false
 
 func _ready() -> void:
+	popup_window = false
+	set_flag(Window.FLAG_POPUP, false)
 	get_tree().root.get_window().size_changed.connect(_on_window_resize)
-	popup_hide.connect(popup_is_hiden)
 	_cleanup()
 
-#Work Around
-func popup_is_hiden() -> void:
-	if is_visible:
-		is_visible = false
-		_cleanup()
-		GameManager.unpause_game()
-		#print("popup_is_hiden!!!!")
-
-func _on_button_pressed(response: String) -> void:
-	button_pressed.emit(response)
-	close()
-
 func close() -> void:
+	overlay.visible = false
 	self.hide()
 	is_visible = false
 	_cleanup()
@@ -36,6 +26,7 @@ func open(event: Event) -> void:
 	_cleanup()
 	event_title.text = event.event_name
 	description.text = event.description
+	
 	for o in event.options:
 		#MakeBtn
 		var btn = Button.new()
@@ -49,12 +40,17 @@ func open(event: Event) -> void:
 		center.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		
 		center.add_child(btn)
-		
 		options_panel.add_child(center)
 	
 	_on_window_resize()
 	is_visible = true
+	overlay.visible = true
+
 	self.popup()
+
+func _on_button_pressed(response: String) -> void:
+	button_pressed.emit(response)
+	close()
 
 func _cleanup() -> void:
 	event_title.text = ""
@@ -64,7 +60,6 @@ func _cleanup() -> void:
 		btn.queue_free()
 
 func _on_window_resize() -> void:
-	
 	_popup_percent(0.4, 0.4)
 	
 	if is_visible:
@@ -80,6 +75,3 @@ func _popup_percent(width_pct: float, height_pct: float):
 	)
 	
 	size = popup_size
-	
-	
-	

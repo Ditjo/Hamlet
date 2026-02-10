@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c466hearaa038"]
+
+[ext_resource type="Script" uid="uid://3f4ew361rx6h" path="res://UI/Shared/build_info_popup.gd" id="1_3nenx"]
+
+[node name="BuildInfoPopup" type="PopupPanel"]
+oversampling_override = 1.0
+visible = true
+script = ExtResource("1_3nenx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ObjectNameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
