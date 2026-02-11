@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsun88p4dv1oe"]
+
+[ext_resource type="Script" uid="uid://br18yg602iwf" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.gd" id="1_1by08"]
+
+[node name="TileInfoPanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1by08")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BaseinfoSection" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="VBox/BaseinfoSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="VBox/BaseinfoSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="VBox/BaseinfoSection/PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
+
+[node name="PeopleSection" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PeopleDisplay" type="HBoxContainer" parent="VBox/PeopleSection"]
+layout_mode = 2
+
+[node name="PeopleInfo" type="Label" parent="VBox/PeopleSection/PeopleDisplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PersonControls" type="HBoxContainer" parent="VBox/PeopleSection/PeopleDisplay"]
+layout_mode = 2
+
+[node name="RemovePersonBtn" type="Button" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Spacer" type="PanelContainer" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddPersonBtn" type="Button" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="PersonListContainer" type="PanelContainer" parent="VBox/PeopleSection"]
+layout_mode = 2
+
+[node name="DeleteSection" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="DeleteBtn" type="Button" parent="VBox/DeleteSection"]
+visible = false
+layout_mode = 2
+text = "Delete"

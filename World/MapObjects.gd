@@ -27,7 +27,7 @@ func _resolve_assets() -> void:
 #Do you have more gold than it cost to remove it
 func can_delete_object() -> bool:
 	var c: int = cost.get(Enums.CostTypes.GOLD)
-	return DataManager.get_gold() >= (c / 2)
+	return DataManager.get_gold() >= int(c / 2)
 	
 #Do you have more gold than it cost to build it
 func can_build_object() -> bool:

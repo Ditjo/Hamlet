@@ -3,7 +3,7 @@
 extends Structures
 
 var max_workers: int
-var currentWorkers: Array = []
+var currentWorkers: Array[Person] = []
 var production_per_worker: int
 
 func _init(
