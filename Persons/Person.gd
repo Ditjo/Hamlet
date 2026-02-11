@@ -10,8 +10,8 @@ var home: Vector2
 var job: Vector2
 
 func _init(
-	name_: String = "",
-	age_: int = 20,
+	name_: String = generate_name(),
+	age_: int = randi_range(18,63),
 	home_: Vector2 = Vector2.ZERO,
 	job_: Vector2 = Vector2.ZERO
 ) -> void:
