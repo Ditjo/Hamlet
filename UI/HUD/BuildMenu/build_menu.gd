@@ -11,7 +11,7 @@ func _populate_build_menu() -> void:
 	for s in StructureRegistry.structures:
 		var btn: BuildMenuButton = BuildMenuButton.new()
 		btn.setup(s)
-		btn.building_selected.connect(_on_building_selected.bind(s.structure_type))
+		btn.building_selected.connect(_on_building_selected)
 		
 		buildcontainer.add_child(btn)
 	self.add_child(buildcontainer)
