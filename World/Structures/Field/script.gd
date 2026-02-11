@@ -3,7 +3,7 @@ class_name Field
 
 func _init(
 	name_: String = "Field",
-	description_: String = "",
+	description_: String = "A field can grow grops, that can be sold, to earn gold. The field must be worked by people to generate grops.",
 	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 15},

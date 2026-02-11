@@ -4,26 +4,32 @@
 
 [node name="BuildInfoPopup" type="PopupPanel"]
 oversampling_override = 1.0
+size = Vector2i(208, 112)
 visible = true
 script = ExtResource("1_3nenx")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 204.0
+offset_bottom = 108.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="ObjectNameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
 
 [node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
+
+[node name="PeopleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14

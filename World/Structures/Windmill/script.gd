@@ -3,7 +3,7 @@ class_name Windmill
 
 func _init(
 	name_: String = "Windmill",
-	description_: String = "",
+	description_: String = "A windmill mills crops into flour, that sells for a higher price. ",
 	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 30},

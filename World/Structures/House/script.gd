@@ -3,7 +3,7 @@ class_name House
 
 func _init(
 	name_: String = "House",
-	description_: String = "",
+	description_: String = "A house for people to live in. To increase your population you need to increase your max housing by building more houses.",
 	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 20},
