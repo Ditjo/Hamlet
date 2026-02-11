@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=45 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
@@ -29,7 +29,6 @@
 [ext_resource type="Script" uid="uid://bril4f4ul6ki5" path="res://World/MapObjects/bush.gd" id="12_xrxkg"]
 [ext_resource type="Script" uid="uid://b2p50pnmpelt1" path="res://World/MapObjects/grassland_with_flowers.gd" id="13_sqvbp"]
 [ext_resource type="PackedScene" uid="uid://rqip0wwj52od" path="res://UI/Shared/Tooltip.tscn" id="14_fpfj3"]
-[ext_resource type="PackedScene" uid="uid://c466hearaa038" path="res://UI/Shared/BuildInfoPopup.tscn" id="24_5mvff"]
 
 [sub_resource type="Resource" id="Resource_xrxkg"]
 script = ExtResource("6_2gh4u")
@@ -1861,9 +1860,6 @@ text = "Build Menu"
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("8_5vvyt")
-
-[node name="BuildInfoPopup" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu" instance=ExtResource("24_5mvff")]
-visible = false
 
 [node name="TileInfoDrawer" parent="HUD/Control" instance=ExtResource("9_20pc6")]
 unique_name_in_owner = true

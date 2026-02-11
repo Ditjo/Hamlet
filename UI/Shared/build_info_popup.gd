@@ -13,7 +13,7 @@ func _ready() -> void:
 	#mouse_entered_popup.connect(_on_mouse_entered_popup)
 	#mouse_exited_popup.connect(_on_mouse_exited_popup)
 
-func set_data(structure: Structures) -> void:
+func setup(structure: Structures) -> void:
 	object_name_label.text = structure.object_name
 	description_label.text = structure.description
 	cost_label.text = "Cost: %d Gold" % structure.cost.get(Enums.CostTypes.GOLD)
