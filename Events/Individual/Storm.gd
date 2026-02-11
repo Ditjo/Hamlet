@@ -28,7 +28,7 @@ func can_event_trigger() -> bool:
 		#return false
 
 func trigger_event(option: String) -> Array:
-	if option == "YES":
+	if option == "NO":
 		#First Option
 		var rng = RandomNumberGenerator.new()
 		var chance = 40
@@ -36,7 +36,7 @@ func trigger_event(option: String) -> Array:
 			return[0, 0.0]
 		var prod_factor: float = snapped(rng.randf_range(1.3,1.6),0.01)
 		return [0, prod_factor]
-	elif option == "NO":
+	elif option == "YES":
 		#Second Option
 		var rng = RandomNumberGenerator.new()
 		var prod_factor: float = snapped(rng.randf_range(0.6,0.7),0.01)
