@@ -276,8 +276,14 @@ func people_func(event_factor: Array) -> void:
 		#if old_current > new: flag to prevent new ppl?
 		#"""
 		#pass
+	var can_add: bool = true
+	if event_factor != null and event_factor[0] == 1:#event not null + encoded to remove ppl
+		can_add = false
+		for count in range(event_factor[1]):
+			DataManager.remove_person(DataManager.get_random_person())
 	if population_overview["current_population"] > population_overview["housed_population"]:
-		var homeless: Array = DataManager.get_homeless_list()
+		can_add = false
+		var homeless: Array = DataManager.get_homeless_population()
 		if population_overview["current_population"] < population_overview["max_population"]:
 			var houses: Array = DataManager.get_structures_by_type(Enums.StructureTypes.HOUSE)
 			for house in houses:
@@ -293,7 +299,7 @@ func people_func(event_factor: Array) -> void:
 			if rng.randi_range(1,100) < min(90,30+10*homeless.size()):
 				DataManager.remove_person(person)
 				homeless.erase(person)
-	elif population_overview["current_population"] < population_overview["max_population"]:
+	if can_add and population_overview["current_population"] < population_overview["max_population"]:
 		#&& new_event.can_event_trigger(
 		if rng.randi_range(1,100) <= pop_growth_chance:
 			var available_housing = population_overview["max_population"] - population_overview["current_population"]

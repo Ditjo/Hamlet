@@ -58,6 +58,9 @@ func remove_person(p: Person) -> void:
 	_population.erase(p)
 	_on_population_changed()
 
+func get_random_person() -> Person:
+	return _population.pick_random()
+
 func get_current_population() -> int:
 	return _population.size()
 	
