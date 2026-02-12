@@ -51,13 +51,6 @@ func event_func() -> void:
 		print(valid_events.size())
 		#event_chance = 7 <------------------------------Set back in again when done testing
 		chosen_event = valid_events.pick_random()
-		#if chosen_event != null && chosen_event.type == Enums.EventTypes.EVENT:
-			#"""do event stuff"""
-			#
-			#
-			#return null
-		#else:
-			#return chosen_event
 	else:
 		event_chance += 2
 		#return null
@@ -102,42 +95,13 @@ func harvest_event_response(response: Array = []):
 func harvest_func(event_factor: Array, new_event: Event = null) -> void:
 	print("harvest_func")
 	var grain: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
-		#event_factor = new_event.trigger_event(event_pop_up) 
-		#event_factor = await event_controller.response.connect()
 	var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
 	for struct in grain_structs:
 		grain += int(struct.production_per_worker * struct.get_current_worker_count() * event_filter(event_factor, [0,1]))
-		#(event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
-	#can be inline in foreach if single-use
-	#maybe pass array of types? 
 	var harvest: Dictionary = {
 		"grain": grain
 	}
-	
 	production_event_check(harvest, new_event)
-	
-	#return {
-		#"grain": grain
-	#}
-	
-	#func harvest_func(new_event: Event) -> Dictionary:
-	#print("harvest_func")
-	#var grain: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.HARVEST:
-		#event_factor = new_event.trigger_event(event_pop_up) 
-		##event_factor = await event_controller.response.connect()
-	#var grain_structs = DataManager.get_structures_by_type(Enums.StructureTypes.FIELD)
-	#for struct in grain_structs:
-		#grain += int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
-	##can be inline in foreach if single-use
-	##maybe pass array of types? 
-	#return {
-		#"grain": grain
-	#}
-	
 #endregion
 
 #region production
@@ -158,15 +122,10 @@ func production_event_response(response: Array = []):
 func production_func(harvest: Dictionary, event_factor: Array, new_event: Event = null) -> void:
 	print("prod_func")
 	var grain = harvest["grain"]
-	#var limiter: int = ???
 	var flour: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
-		#event_factor = new_event.trigger_event(event_pop_up) 
 	var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
 	for struct in flour_structs:
 		var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * event_filter(event_factor, [0,1]))
-		#(event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
 		var output = min(work_power, grain)
 		grain -= output
 		flour += output
@@ -177,30 +136,6 @@ func production_func(harvest: Dictionary, event_factor: Array, new_event: Event 
 	}
 	
 	sale_event_check(produce, new_event)
-	
-	#return {
-		#"grain": grain,
-		#"flour": flour
-	#}
-	
-	#func production_func(new_event: Event, harvest: Dictionary) -> Dictionary:
-	#print("prod_func")
-	#var grain = harvest["grain"]
-	##var limiter: int = ???
-	#var flour: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.PRODUCTION:
-		#event_factor = new_event.trigger_event(event_pop_up) 
-	#var flour_structs = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
-	#for struct in flour_structs:
-		#var work_power = int(struct.production_per_worker * struct.get_current_worker_count() * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
-		#var output = min(work_power, grain)
-		#grain -= output
-		#flour += output
-	#return {
-		#"grain": grain,
-		#"flour": flour
-	#}
 #endregion
 
 #region sale
@@ -222,30 +157,13 @@ func sale_event_response(response: Array = []):
 func sale_func(production: Dictionary, event_factor: Array, new_event: Event = null ) -> void:
 	print("sale_func")
 	var local_gold: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.SALE:
-		#event_factor = new_event.trigger_event(event_pop_up) 
 	local_gold += int(production["grain"] * 2 * event_filter(event_factor, [0,1]))
 	local_gold += int(production["flour"] * 3 * event_filter(event_factor, [0,2]))
-	#local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
-	#local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
 	if DataManager.check_event_flag("Lord_Taxing"):
 		local_gold = int(local_gold * 0.95)
 	DataManager.add_gold(local_gold)
 	
 	people_event_check(new_event)
-#func sale_func(new_event: Event, production: Dictionary) -> void:
-	#print("sale_func")
-	#var local_gold: int = 0
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.SALE:
-		#event_factor = new_event.trigger_event(event_pop_up) 
-	#local_gold += production["grain"] * 2 * event_filter(event_factor, [0,1])
-	#local_gold += production["flour"] * 3 * event_filter(event_factor, [0,2])
-	##local_gold += int(production["grain"] * 2 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,1] else 1))
-	##local_gold += int(production["flour"] * 3 * (event_factor[1] if event_factor.size() > 1 and event_factor[0] in [0,2] else 1))
-	#DataManager.add_gold(local_gold)
-	
 #endregion
 
 #region peaple
@@ -267,15 +185,6 @@ func people_func(event_factor: Array) -> void:
 		"current_population" = DataManager.get_current_population(), #get_population -> size
 		"housed_population" = DataManager.get_current_housing()
 	}
-	##assume events have already been vetted for availability
-	#var event_factor:= []
-	#if new_event != null && new_event.type == Enums.EventTypes.POPULATION:
-		#event_factor = new_event.trigger_event(event_pop_up) 
-		#"""
-		#if event => reduce population, trigger effect here maybe?
-		#if old_current > new: flag to prevent new ppl?
-		#"""
-		#pass
 	var can_add: bool = true
 	if event_factor.size() > 1 and event_factor[0] == 1:#event not null + encoded to remove ppl
 		can_add = false
@@ -324,14 +233,6 @@ func people_func(event_factor: Array) -> void:
 #endregion
 
 #region math
-"""
-func math_product(...values) -> int:
-	var result = 1
-	for v in values:
-		result *= v
-	return int(result)
-"""
-
-func event_filter(encoding: Array, allowed: Array, default: int = 1) -> int:
+func event_filter(encoding: Array, allowed: Array, default: int = 1) -> float:
 	return encoding[1] if encoding.size() > 1 and encoding[0] in allowed else default
 #endregion
