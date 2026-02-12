@@ -15,15 +15,18 @@ class_name TileInfoPanel
 
 @onready var delete_btn: Button = $VBox/DeleteSection/DeleteBtn
 
-var is_structure: bool = false	
+var is_structure: bool = false
 var structure: Structures = null
+var object: MapObjects = null
+var coords: Vector2i = Vector2i.ZERO
 
-func set_info_panel(object: MapObjects, coords: Vector2i = Vector2i(-1,-1)) -> void:
+func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) -> void:
+	people_display.visible = false
 	person_controls.visible = false
 	is_structure = false
 	structure = null
-	for child in person_list_container.get_children():
-		child.queue_free()
+	object = object_
+	coords = coords_
 	
 	title.text = object.object_name
 	description.text = object.description
@@ -31,15 +34,19 @@ func set_info_panel(object: MapObjects, coords: Vector2i = Vector2i(-1,-1)) -> v
 	add_person_btn.pressed.connect(_on_add_person)
 	delete_btn.pressed.connect(_on_delete_object)
 	
-	_update_ui()
+	#might need to be moved under if Coords
+
 	
 	if coords != Vector2i(-1,-1):
 		is_structure = true
+		people_display.visible = true
 		structure = DataManager.get_structure_by_coords(coords)
 		#if struct == null:
 			#print("NO structure with Coords: " + str(coords))
 		#structure = struct
 		_build_people_list(structure)
+	
+	_update_ui()
 	
 	if object.can_delete_object():
 		delete_btn.visible = true
@@ -53,7 +60,9 @@ func _build_people_list(struct: Structures) -> void:
 	#var struct: Structures = DataManager.get_structure_by_coords(coords)
 	#if struct == null:
 		#print("NO structure with Coords: " + str(coords))
-			
+	for child in person_list_container.get_children():
+		child.queue_free()
+	
 	var people: Array[Person] = []
 	var people_count: int = 0
 	if struct is JobStructures:
@@ -84,29 +93,39 @@ func _build_people_list(struct: Structures) -> void:
 func _update_ui() -> void:
 	delete_btn.disabled = _can_object_be_deleted()
 	if is_structure:
+		_build_people_list(structure)
 		remove_person_btn.disabled = _can_remove_be_pressed()
 		add_person_btn.disabled = _can_add_be_pressed()
-		_build_people_list(structure)
 
 func _on_add_person() -> void:
-	#Needs to add a Person to this struct.
-	#Get a Person
-	pass
+	if structure is JobStructures:
+		var p = DataManager.get_jobless_person()
+		structure.add_worker(p)
+		p.job = coords
+	_update_ui()
+
 
 func _can_add_be_pressed() -> bool:
+	if structure is JobStructures:
+		return !structure.currentWorkers.size() < structure.max_workers or\
+		!DataManager.get_jobless_person() != null
 	return true
 
 func _on_remove_person() -> void:
-	pass
+	if structure is JobStructures:
+		structure.remove_worker(structure.get_current_worker_count() - 1)
+	_update_ui()
 
 func _can_remove_be_pressed() -> bool:
+	if structure is JobStructures:
+		return !structure.currentWorkers.size() > 0
 	return true
 
 func _on_delete_object() -> void:
 	pass
 
 func _can_object_be_deleted() -> bool:
-	return true
+	return object.can_delete_object()
 	
 	#Get MapObject: Create UI
 	#if MapObject is Structure: Create More UI

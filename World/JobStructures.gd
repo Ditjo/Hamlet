@@ -34,6 +34,8 @@ func add_worker(person: Person) -> bool:
 
 func remove_worker(index: int) -> bool:
 	if currentWorkers[index] != null:
+		var p: Person = currentWorkers.get(index)
+		p.job = Vector2i.ZERO
 		currentWorkers.remove_at(index)
 		return true
 	else:
