@@ -17,8 +17,8 @@ func _process(delta: float) -> void:
 
 #region Start Setup
 
-var house_coords: Vector2i = Vector2i(1,1)
-var field_coords: Vector2i = Vector2i(1,2)
+var house_coords: Vector2i = Vector2i(42,19)
+var field_coords: Vector2i = Vector2i(42,20)
 
 var start_setup_structs = [
 	{
@@ -37,10 +37,12 @@ var start_setup_people: Array[Person] = [
 ]
 
 func _set_up_start() -> void:
+	#Setup Structures
 	for s in start_setup_structs:
 		build_controller.structure_selected = s.get("type")
 		build_controller._on_left_click_received(s.get("coords"))
 	
+	#Setup People
 	for p in start_setup_people:
 		#Add to House
 		var h = DataManager.get_house_w_space()
@@ -52,6 +54,6 @@ func _set_up_start() -> void:
 		if s is JobStructures:
 			p.job = field_coords
 			s.add_worker(p)
-	
+		DataManager.add_person_to_population(p)
 	GameManager.game_main()
 #endregion

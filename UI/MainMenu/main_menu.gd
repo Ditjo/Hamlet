@@ -39,9 +39,11 @@ func _on_main_menu_pressed() -> void:
 		#Close Main Menu
 		GameManager.unpause_game()
 		_close_all_sidedrawers()
+		drawer_main_menu.close()
 	else:
 		#Open Main Menu
 		GameManager.pause_game()
+		drawer_main_menu.toggle()
 		
 
 func _close_all_sidedrawers() -> void:
