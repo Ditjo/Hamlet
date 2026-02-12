@@ -115,13 +115,13 @@ func _can_remove_be_pressed() -> bool:
 func _on_delete_object() -> void:
 	DataManager.remove_gold(object.get_removal_cost())
 	
-	if object is JobStructures:
-		object.remove_all_workers()
-		DataManager.remove_structure(coords)
-	elif object is HousingStructures:
-		object.remove_all_people()
-		DataManager.remove_structure(coords)
-	
+	#if object is JobStructures:
+		#object.remove_all_workers()
+		#DataManager.remove_structure(coords)
+	#elif object is HousingStructures:
+		#object.remove_all_people()
+		#DataManager.remove_structure(coords)
+	DataManager.remove_structure(coords)
 	delete_pressed.emit()
 
 func _can_object_be_deleted() -> bool:

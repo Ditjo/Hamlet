@@ -74,7 +74,7 @@ func get_jobless_person() -> Person:
 	
 func get_homeless_population() -> Array[Person]:
 	return _population.filter(func(p: Person) -> bool:
-		return p.home == null
+		return p.home == Vector2i.ZERO
 		)
 
 func _on_population_changed() -> void:
@@ -100,6 +100,12 @@ func add_structure(coords: Vector2i, s: Structures) -> void:
 	_on_available_jobs_changed()
 
 func remove_structure(coords: Vector2i) -> void:
+	var s = _structures.get(coords)
+	if s is JobStructures:
+		s.remove_all_workers()
+	if s is HousingStructures:
+		s.remove_all_people()
+
 	_structures.erase(coords)
 	_on_max_housing_changed()
 	_on_available_jobs_changed()
@@ -177,11 +183,3 @@ func check_event_flag(flag_name: String) -> bool:
 	else:
 		return false
 #endregion
-
-#region jobs
-
-	
-#endregion
-
-#When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 
-#The TileMapLayer script will then sub to that and add/delete it.
