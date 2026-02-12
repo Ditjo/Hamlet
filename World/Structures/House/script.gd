@@ -8,7 +8,7 @@ func _init(
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 20},
 	max_people_: int = 4,
-	people_: Array[Person] = [Person.new(),Person.new()],
+	people_: Array[Person] = [],
 	structure_type_: Enums.StructureTypes = Enums.StructureTypes.HOUSE,
 	atlas_source_id_: int = 0,
 	atlas_coords_: Vector2i = Vector2i(15,31)
