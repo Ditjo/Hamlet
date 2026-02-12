@@ -6,7 +6,8 @@ signal delete_pressed()
 @onready var title: Label = $VBox/BaseinfoSection/Title
 @onready var description: Label = $VBox/BaseinfoSection/PanelContainer/Description
 
-@onready var people_display: HBoxContainer = $VBox/PeopleSection/PeopleDisplay
+@onready var people_section: VBoxContainer = $VBox/PeopleSection
+
 @onready var people_info: Label = $VBox/PeopleSection/PeopleDisplay/PeopleInfo
 @onready var person_controls: HBoxContainer = $VBox/PeopleSection/PeopleDisplay/PersonControls
 @onready var remove_person_btn: Button = $VBox/PeopleSection/PeopleDisplay/PersonControls/RemovePersonBtn
@@ -23,7 +24,7 @@ var object: MapObjects = null
 var coords: Vector2i = Vector2i.ZERO
 
 func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) -> void:
-	people_display.visible = false
+	people_section.visible = false
 	person_controls.visible = false
 	is_structure = false
 	structure = null
@@ -36,33 +37,17 @@ func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) ->
 	remove_person_btn.pressed.connect(_on_remove_person)
 	add_person_btn.pressed.connect(_on_add_person)
 	delete_btn.pressed.connect(_on_delete_object)
-	
-	#might need to be moved under if Coords
-
+	DataManager.population_changed.connect(_on_population_changed)
 	
 	if coords != Vector2i(-1,-1):
 		is_structure = true
-		people_display.visible = true
+		people_section.visible = true
 		structure = DataManager.get_structure_by_coords(coords)
-		#if struct == null:
-			#print("NO structure with Coords: " + str(coords))
-		#structure = struct
 		_build_people_list(structure)
 	
 	_update_ui()
-	
-	#if _show_delete_btn():
-		#delete_btn.visible = true
-	#else:
-		#delete_btn.visible = false
-		##Use this Area to Handle Structures
-	
-#---------------------------------------
 
 func _build_people_list(struct: Structures) -> void:
-	#var struct: Structures = DataManager.get_structure_by_coords(coords)
-	#if struct == null:
-		#print("NO structure with Coords: " + str(coords))
 	for child in person_list_container.get_children():
 		child.queue_free()
 	
@@ -100,6 +85,9 @@ func _update_ui() -> void:
 		_build_people_list(structure)
 		remove_person_btn.disabled = _can_remove_be_pressed()
 		add_person_btn.disabled = _can_add_be_pressed()
+
+func _on_population_changed(pop: int) -> void:
+	_update_ui()
 
 func _on_add_person() -> void:
 	if structure is JobStructures:
