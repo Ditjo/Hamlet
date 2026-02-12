@@ -66,7 +66,7 @@ func get_current_population() -> int:
 	
 func get_jobless_person() -> Person:
 	var jobless: Array[Person] = _population.filter(func(p: Person) -> bool:
-		return p.job == Vector2.ZERO
+		return p.job == Vector2i.ZERO
 		)
 	return jobless.front()
 	

@@ -6,14 +6,14 @@ var rng = RandomNumberGenerator.new()
 
 var person_name: String
 var age: int
-var home: Vector2
-var job: Vector2
+var home: Vector2i
+var job: Vector2i
 
 func _init(
 	name_: String = generate_name(),
 	age_: int = randi_range(18,63),
-	home_: Vector2 = Vector2.ZERO,
-	job_: Vector2 = Vector2.ZERO
+	home_: Vector2 = Vector2i.ZERO,
+	job_: Vector2 = Vector2i.ZERO
 ) -> void:
 	person_name = name_
 	age = age_
@@ -23,11 +23,11 @@ func _init(
 func _resolve_assets() -> void:
 	pass
 
-func generate_person() -> void:
-	person_name = generate_name()
-	age = randi_range(18,63)
-	home = Vector2.ZERO
-	job = Vector2.ZERO
+#func generate_person() -> void:
+	#person_name = generate_name()
+	#age = randi_range(18,63)
+	#home = Vector2.ZERO
+	#job = Vector2.ZERO
 
 func generate_name() -> String:
 	var forenames: Array = ["Ella", "Alma", "Nora", "Ida", "Freja", "Sofia", "Luna", "Olivia", "Agnes", "Asta", "Clara", "Emma", "Frida", "Alberte", "Ella", "Sofie", "Leah", "Sara", "William", "Oscar", "Carl", "Malthe", "Emil", "Valdemar", "Noah", "Aksel", "August", "Theo", "Alexander", "Jacob", "Lucas", "Oliver", "Isak", "Filip", "Sebastian", "Vincent"]
