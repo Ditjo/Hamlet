@@ -7,7 +7,7 @@ var event_controller: EventController
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
 var rng = RandomNumberGenerator.new()
 var event_chance: int = 100#7
-var pop_growth_chance: int = 7
+var pop_growth_chance: int = 100#7
 var events: Array[Event] = []
 
 func _ready():
@@ -309,7 +309,7 @@ func people_func(event_factor: Array) -> void:
 				new_person.generate_person()
 				DataManager.add_person_to_population(new_person)
 				"""add person to house"""
-			pop_growth_chance = 7
+			#pop_growth_chance = 7
 		else:
 			pop_growth_chance += 2
 	#upkeep
