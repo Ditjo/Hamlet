@@ -1,5 +1,7 @@
 extends Node
 
+signal is_paused_changed()
+
 var is_running := false
 
 var is_paused := false
@@ -14,7 +16,14 @@ func _init():
 	game_main()
 """
 func _ready():
-	process_mode = Node.PROCESS_MODE_PAUSABLE
+	process_mode = Node.PROCESS_MODE_PAUSABLE 
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause_unpause"):
+		if is_paused:
+			unpause_game()
+		else:
+			pause_game()
 
 func game_main():
 	is_running = true
@@ -65,6 +74,7 @@ func pause_game():
 	print("paused")
 	is_paused = true
 	was_paused = true
+	_on_is_paused_changed()
 	
 
 func unpause_game():
@@ -80,4 +90,7 @@ func unpause_game():
 	#unpaused.emit()
 	print("unpaused")
 	is_paused = false
-	
+	_on_is_paused_changed()
+
+func _on_is_paused_changed() -> void:
+	is_paused_changed.emit()

@@ -1,4 +1,5 @@
 extends Control
+class_name MainMenu
 
 #Drawers
 @onready var drawer_main_menu: Drawer = %DrawerMainMenu
@@ -21,6 +22,28 @@ func _ready() -> void:
 	load_game_btn.pressed.connect(_on_load_game_pressed)
 	options_btn.pressed.connect(_on_options_pressed)
 	quit_btn.pressed.connect(_on_quit_pressed)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("escape"):
+		_on_main_menu_pressed()
+
+func _on_main_menu_pressed() -> void:
+	if GameManager.is_paused:
+		#Close Main Menu
+		GameManager.unpause_game()
+		_close_all_sidedrawers()
+	else:
+		#Open Main Menu
+		GameManager.pause_game()
+		
+	
+	drawer_main_menu.toggle()
+
+func _close_all_sidedrawers() -> void:
+	drawer_new_game.close()
+	drawer_save_game.close()
+	drawer_load_game.close()
+	drawer_options.close()
 
 func _on_new_game_pressed() -> void:
 	drawer_new_game.toggle()

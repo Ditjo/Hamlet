@@ -9,6 +9,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	DataManager.seasons_changed.connect(_set_seasons)
 	pause_play_btn.pressed.connect(_pause_player_action)
+	GameManager.is_paused_changed.connect(_pause_player_action)
 
 func _set_seasons(value: int) -> void:
 	season_count.set_amount(value)
