@@ -127,9 +127,10 @@ func get_key_by_value(struct: Structures) -> Vector2i:
 	return _structures.find_key(struct)
 
 func get_house_w_space() -> House:
-	for struct in _structures:
-		if struct.structure_type == Enums.StructureTypes.HOUSE and struct.available_housing >= 1:
-			return struct
+	for struct in _structures.values():
+		if struct is HousingStructures:
+			if struct.available_housing() >= 1:
+				return struct
 	return null
 #endregion
 
