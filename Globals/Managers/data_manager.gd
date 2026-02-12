@@ -64,6 +64,12 @@ func get_random_person() -> Person:
 func get_current_population() -> int:
 	return _population.size()
 	
+func get_jobless_person() -> Person:
+	var jobless: Array[Person] = _population.filter(func(p: Person) -> bool:
+		return p.job == Vector2.ZERO
+		)
+	return jobless.front()
+	
 func get_homeless_population() -> Array[Person]:
 	return _population.filter(func(p: Person) -> bool:
 		return p.home == null
