@@ -70,8 +70,4 @@ func _on_options_pressed() -> void:
 	drawer_options.toggle()
 
 func _on_quit_pressed() -> void:
-	drawer_main_menu.close()
-	drawer_new_game.close()
-	drawer_save_game.close()
-	drawer_load_game.close()
-	drawer_options.close()
+	get_tree().quit()
