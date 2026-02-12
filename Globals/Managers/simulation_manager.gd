@@ -277,7 +277,7 @@ func people_func(event_factor: Array) -> void:
 		#"""
 		#pass
 	var can_add: bool = true
-	if event_factor != null and event_factor[0] == 1:#event not null + encoded to remove ppl
+	if event_factor.size() > 1 and event_factor[0] == 1:#event not null + encoded to remove ppl
 		can_add = false
 		for count in range(event_factor[1]):
 			DataManager.remove_person(DataManager.get_random_person())
