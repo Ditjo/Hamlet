@@ -116,6 +116,9 @@ func get_structure_by_coords(coords: Vector2i) -> Structures:
 	
 func _on_max_housing_changed() -> void:
 	max_housing_changed.emit(get_max_housing())
+	
+func get_key_by_value(struct: Structures) -> Vector2i:
+	return _structures.find_key(struct)
 
 func get_house_w_space() -> House:
 	for struct in _structures:
