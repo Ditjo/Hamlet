@@ -290,7 +290,9 @@ func people_func(event_factor: Array) -> void:
 				var space: int = house.available_housing()
 				#maybe for i=?, i > min(space;homeless.size())
 				while space > 0 && not homeless.is_empty():
-					house.add_person(homeless.pop_front())
+					var next_person = homeless.pop_front()
+					house.add_person(next_person)
+					next_person.home = DataManager.get_key_by_value(house)
 					space -= 1
 				if homeless.is_empty():
 					break
@@ -308,6 +310,11 @@ func people_func(event_factor: Array) -> void:
 				var new_person = Person.new()
 				#new_person.generate_person()
 				DataManager.add_person_to_population(new_person)
+				var house_w_space = DataManager.get_house_w_space()
+				if house_w_space != null:
+					#DataManager.get_key_by_value(house_w_space)
+					house_w_space.add_person_to_house(new_person)
+					new_person.home = DataManager.get_key_by_value(house_w_space)
 				"""add person to house"""
 			#pop_growth_chance = 7
 		else:
