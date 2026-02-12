@@ -287,7 +287,7 @@ func people_func(event_factor: Array) -> void:
 		if population_overview["current_population"] < population_overview["max_population"]:
 			var houses: Array = DataManager.get_structures_by_type(Enums.StructureTypes.HOUSE)
 			for house in houses:
-				var space: int = house.available_space()
+				var space: int = house.available_housing()
 				#maybe for i=?, i > min(space;homeless.size())
 				while space > 0 && not homeless.is_empty():
 					house.add_person(homeless.pop_front())
