@@ -57,6 +57,14 @@ func add_person_to_population(p: Person) -> void:
 	_on_population_changed()
 	
 func remove_person(p: Person) -> void:
+	if p.home != Vector2i.ZERO:
+		var s = get_structure_by_coords(p.home)
+		if s is HousingStructures:
+			s.remove_person(p)
+	if p.job != Vector2i.ZERO:
+		var s = get_structure_by_coords(p.job)
+		if s is JobStructures:
+			s.remove_worker_by_person(p)
 	_population.erase(p)
 	_on_population_changed()
 

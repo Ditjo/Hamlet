@@ -35,6 +35,9 @@ func add_worker(person: Person) -> bool:
 	else:
 		return false
 
+func remove_worker_by_person(p: Person) -> void:
+	currentWorkers.erase(p)
+
 func remove_worker(index: int) -> bool:
 	if currentWorkers[index] != null:
 		var p: Person = currentWorkers.get(index)
