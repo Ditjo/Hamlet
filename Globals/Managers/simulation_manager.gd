@@ -306,7 +306,7 @@ func people_func(event_factor: Array) -> void:
 			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_filter(event_factor, [0], 0))
 			for n in new_people_count:
 				var new_person = Person.new()
-				new_person.generate_person()
+				#new_person.generate_person()
 				DataManager.add_person_to_population(new_person)
 				"""add person to house"""
 			#pop_growth_chance = 7

@@ -116,6 +116,12 @@ func get_structure_by_coords(coords: Vector2i) -> Structures:
 	
 func _on_max_housing_changed() -> void:
 	max_housing_changed.emit(get_max_housing())
+
+func get_house_w_space() -> House:
+	for struct in _structures:
+		if struct.structure_type == Enums.StructureTypes.HOUSE and struct.available_housing >= 1:
+			return struct
+	return null
 #endregion
 
 #region eventFlags
