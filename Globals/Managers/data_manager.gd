@@ -3,6 +3,8 @@ extends Node
 signal gold_changed(value: int)
 signal population_changed(value: int)
 signal max_housing_changed(value: int)
+signal working_population_changed(value: int)
+signal available_jobs_changed(value: int)
 signal seasons_changed(value: int)
 
 var town_name: String
@@ -91,12 +93,16 @@ func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
 
 #region Structures
 func add_structure(coords: Vector2i, s: Structures) -> void:
+	if s is JobStructures:
+		s.workers_changed.connect(_on_working_population_changed)
 	_structures[coords] = s
 	_on_max_housing_changed()
+	_on_available_jobs_changed()
 
 func remove_structure(coords: Vector2i) -> void:
 	_structures.erase(coords)
 	_on_max_housing_changed()
+	_on_available_jobs_changed()
 
 func get_current_housing() -> int:
 	var current_pop: int = 0
@@ -112,6 +118,36 @@ func get_max_housing() -> int:
 			max_pop += s.max_people
 	return max_pop
 
+func get_house_w_space() -> House:
+	for struct in _structures.values():
+		if struct is HousingStructures:
+			if struct.available_housing() >= 1:
+				return struct
+	return null
+
+func _on_max_housing_changed() -> void:
+	max_housing_changed.emit(get_max_housing())
+
+func get_available_jobs() -> int:
+	var _total_jobs = 0
+	for s in _structures.values():
+		if s is JobStructures:
+			_total_jobs += s.max_workers
+	return _total_jobs
+
+func _on_available_jobs_changed() -> void:
+	available_jobs_changed.emit(get_available_jobs())
+
+func get_working_population() -> int:
+	var _total_workers = 0
+	for s in _structures.values():
+		if s is JobStructures:
+			_total_workers += s.get_current_worker_count()
+	return _total_workers
+
+func _on_working_population_changed() -> void:
+	working_population_changed.emit(get_working_population())
+
 func get_structures_by_type(type: Enums.StructureTypes) -> Array:
 	return _structures.values().filter(func(s: Structures) -> bool:
 		return s.structure_type == type
@@ -120,19 +156,9 @@ func get_structures_by_type(type: Enums.StructureTypes) -> Array:
 func get_structure_by_coords(coords: Vector2i) -> Structures:
 	return _structures.get(coords)
 	
-func _on_max_housing_changed() -> void:
-	print("Max Housing: " + str(get_max_housing()))
-	max_housing_changed.emit(get_max_housing())
-	
 func get_key_by_value(struct: Structures) -> Vector2i:
 	return _structures.find_key(struct)
 
-func get_house_w_space() -> House:
-	for struct in _structures.values():
-		if struct is HousingStructures:
-			if struct.available_housing() >= 1:
-				return struct
-	return null
 #endregion
 
 #region eventFlags
@@ -150,6 +176,11 @@ func check_event_flag(flag_name: String) -> bool:
 		return true
 	else:
 		return false
+#endregion
+
+#region jobs
+
+	
 #endregion
 
 #When a MapObject or Building is added/deleted it needs to emit a signal telling what and where it was. 

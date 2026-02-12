@@ -2,6 +2,8 @@
 
 extends Structures
 
+signal workers_changed()
+
 var max_workers: int
 var currentWorkers: Array[Person] = []
 var production_per_worker: int
@@ -28,6 +30,7 @@ func _init(
 func add_worker(person: Person) -> bool:
 	if currentWorkers.size() < max_workers:
 		currentWorkers.append(person)
+		_on_workers_changed()
 		return true
 	else:
 		return false
@@ -37,9 +40,13 @@ func remove_worker(index: int) -> bool:
 		var p: Person = currentWorkers.get(index)
 		p.job = Vector2i.ZERO
 		currentWorkers.remove_at(index)
+		_on_workers_changed()
 		return true
 	else:
 		return false
+	
+func _on_workers_changed() -> void:
+	workers_changed.emit()
 
 func remove_all_workers() -> void:
 	for p in currentWorkers:

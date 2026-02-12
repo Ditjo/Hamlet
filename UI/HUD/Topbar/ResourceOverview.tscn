@@ -22,3 +22,11 @@ InfoLabel = "People: "
 [node name="HousingInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
 InfoLabel = "Housing: "
+
+[node name="WorkersInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
+layout_mode = 2
+InfoLabel = "Workers: "
+
+[node name="JobsInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
+layout_mode = 2
+InfoLabel = "jobs: "
