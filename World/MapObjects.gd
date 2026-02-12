@@ -34,6 +34,10 @@ func can_build_object() -> bool:
 	var c: int = cost.get(Enums.CostTypes.GOLD)
 	return DataManager.get_gold() >= c
 
+func get_removal_cost() -> int:
+	var c: int = cost.get(Enums.CostTypes.GOLD)
+	return int(c / 2)
+
 
 #Do you have more gold than it cost to build it
 #func can_pay_the_cost() -> bool:

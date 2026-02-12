@@ -121,6 +121,7 @@ func get_structure_by_coords(coords: Vector2i) -> Structures:
 	return _structures.get(coords)
 	
 func _on_max_housing_changed() -> void:
+	print("Max Housing: " + str(get_max_housing()))
 	max_housing_changed.emit(get_max_housing())
 	
 func get_key_by_value(struct: Structures) -> Vector2i:

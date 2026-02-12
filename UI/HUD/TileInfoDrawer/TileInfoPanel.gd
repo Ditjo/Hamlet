@@ -1,6 +1,8 @@
 extends PanelContainer
 class_name TileInfoPanel
 
+signal delete_pressed()
+
 @onready var title: Label = $VBox/BaseinfoSection/Title
 @onready var description: Label = $VBox/BaseinfoSection/PanelContainer/Description
 
@@ -27,6 +29,7 @@ func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) ->
 	structure = null
 	object = object_
 	coords = coords_
+	delete_btn.text = "Delete: %d gold" % object.get_removal_cost()
 	
 	title.text = object.object_name
 	description.text = object.description
@@ -48,11 +51,11 @@ func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) ->
 	
 	_update_ui()
 	
-	if object.can_delete_object():
-		delete_btn.visible = true
-	else:
-		delete_btn.visible = false
-		#Use this Area to Handle Structures
+	#if _show_delete_btn():
+		#delete_btn.visible = true
+	#else:
+		#delete_btn.visible = false
+		##Use this Area to Handle Structures
 	
 #---------------------------------------
 
@@ -92,6 +95,7 @@ func _build_people_list(struct: Structures) -> void:
 
 func _update_ui() -> void:
 	delete_btn.disabled = _can_object_be_deleted()
+	delete_btn.visible = _show_delete_btn()
 	if is_structure:
 		_build_people_list(structure)
 		remove_person_btn.disabled = _can_remove_be_pressed()
@@ -103,7 +107,6 @@ func _on_add_person() -> void:
 		structure.add_worker(p)
 		p.job = coords
 	_update_ui()
-
 
 func _can_add_be_pressed() -> bool:
 	if structure is JobStructures:
@@ -122,12 +125,21 @@ func _can_remove_be_pressed() -> bool:
 	return true
 
 func _on_delete_object() -> void:
-	pass
+	DataManager.remove_gold(object.get_removal_cost())
+	
+	if object is JobStructures:
+		object.remove_all_workers()
+		DataManager.remove_structure(coords)
+	elif object is HousingStructures:
+		object.remove_all_people()
+		DataManager.remove_structure(coords)
+	
+	delete_pressed.emit()
 
 func _can_object_be_deleted() -> bool:
-	return object.can_delete_object()
-	
-	#Get MapObject: Create UI
-	#if MapObject is Structure: Create More UI
-	#If MapObject is Job or Housing: Create More UI
-	#If MapObejct can be deleted add a Button to do so.
+	return !object.can_delete_object()
+
+func _show_delete_btn() -> bool:
+	return object.map_object_type == Enums.MapObjectTypes.STRUCTURES or\
+	object.map_object_type == Enums.MapObjectTypes.TREES or\
+	object.map_object_type == Enums.MapObjectTypes.ROCKS

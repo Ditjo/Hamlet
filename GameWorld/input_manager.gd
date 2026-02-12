@@ -32,7 +32,7 @@ func handle_left_click(mouse_pos: Vector2) -> void:
 	if _is_structure_selected_in_buildmenu:
 		tile_left_click.emit(tile_coords)
 	else:
-		tile_info_controller.check_layer(tile_coords)
+		tile_info_controller.find_map_object(tile_coords)
 
 func handle_right_click() -> void:
 	tile_info_controller._close_tile_info_drawer()

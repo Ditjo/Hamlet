@@ -41,6 +41,11 @@ func remove_worker(index: int) -> bool:
 	else:
 		return false
 
+func remove_all_workers() -> void:
+	for p in currentWorkers:
+		p.job = Vector2i.ZERO
+		currentWorkers.erase(p)
+
 func get_max_workers() -> int:
 	return max_workers
 	

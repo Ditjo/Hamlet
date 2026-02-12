@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var build_menu: Buildmenu = $"../../HUD/Control/VBoxContainer/BottomBar/HBoxContainer/BuildMenu"
 @onready var input_controller: InputManager = $"../InputController"
+@onready var tile_info_controller: TileInfoController = $"../TileInfoController"
 
 @onready var tile_info_drawer: Drawer = %TileInfoDrawer
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	build_menu.building_selected.connect(_on_structrue_selected)
 	input_controller.tile_right_click.connect(_on_right_click_received)
 	input_controller.tile_left_click.connect(_on_left_click_received)
+	tile_info_controller.deleted_pressed.connect(_on_delete_pressed)
 	
 func _on_structrue_selected(type: Enums.StructureTypes) -> void:
 	input_controller.set_structure_as_selected()
@@ -64,3 +66,9 @@ func _get_new_building_of_choosen_type(type: Enums.StructureTypes) -> Structures
 			return Windmill.new()
 		_:
 			return null
+
+func _on_delete_pressed(coords: Vector2i):
+	if structure_layer.get_cell_source_id(coords) != -1:
+		structure_layer.set_cell(coords)
+	elif nature_layer.get_cell_source_id(coords) != -1:
+		nature_layer.set_cell(coords)

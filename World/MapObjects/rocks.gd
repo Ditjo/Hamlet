@@ -4,7 +4,7 @@ class_name MapObjectRocks
 func _init(
 	name_: String = "Rocks",
 	description_: String = "Rocks are in the way. They can however be move.",
-	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.GRASS,
+	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.ROCKS,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 20}
 ) -> void:
 	object_name = name_

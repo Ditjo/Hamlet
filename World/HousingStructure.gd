@@ -27,6 +27,11 @@ func add_person_to_house(p: Person) -> void:
 	
 func remove_person(p: Person) -> void:
 	_people.erase(p)
+
+func remove_all_people() -> void:
+	for p in _people:
+		p.home = Vector2i.ZERO
+		remove_person(p)
 	
 func get_current_house_population() -> int:
 	return _people.size()
