@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name BuildController
 #TileMaps
 @onready var background_layer: TileMapLayer = $"../TileMaps/BackgroundLayer"
 @onready var nature_layer: TileMapLayer = $"../TileMaps/NatureLayer"
@@ -72,3 +72,4 @@ func _on_delete_pressed(coords: Vector2i):
 		structure_layer.set_cell(coords)
 	elif nature_layer.get_cell_source_id(coords) != -1:
 		nature_layer.set_cell(coords)
+		

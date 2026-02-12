@@ -10,11 +10,7 @@ signal seasons_changed(value: int)
 var town_name: String
 var _gold: int
 var _seasons: int
-var _map_objects: Dictionary = {
-	#Enums.MapObjectTypes.TREES: Array[MapObjects],
-	#Enums.MapObjectTypes.MOUNTAINS: Array[MapObjects]
-} #{key=enum: Array=[MapObjects]} 
-#Come back to this!
+var _map_objects: Dictionary = {} 
 var _structures: Dictionary = {}
 var _population: Array[Person] = []
 var _event_flags: Dictionary = {}

@@ -9,19 +9,26 @@ class_name MainMenu
 @onready var drawer_options: Drawer = $DrawerOptions
 
 #Buttons
+@onready var continue_game_btn: Button = %ContinueGameBtn
 @onready var new_game_btn: Button = %NewGameBtn
 @onready var save_game_btn: Button = %SaveGameBtn
 @onready var load_game_btn: Button = %LoadGameBtn
 @onready var options_btn: Button = %OptionsBtn
 @onready var quit_btn: Button = %QuitBtn
 
+@onready var new_game_menu: NewGameMenu = %NewGameMenu
+
+
 
 func _ready() -> void:	
+	continue_game_btn.pressed.connect(_on_main_menu_pressed)
 	new_game_btn.pressed.connect(_on_new_game_pressed)
 	save_game_btn.pressed.connect(_on_save_game_pressed)
 	load_game_btn.pressed.connect(_on_load_game_pressed)
 	options_btn.pressed.connect(_on_options_pressed)
 	quit_btn.pressed.connect(_on_quit_pressed)
+	new_game_menu.new_game_started.connect(_on_new_game_started)
+	continue_game_btn.visible = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
@@ -36,8 +43,6 @@ func _on_main_menu_pressed() -> void:
 		#Open Main Menu
 		GameManager.pause_game()
 		
-	
-	drawer_main_menu.toggle()
 
 func _close_all_sidedrawers() -> void:
 	drawer_new_game.close()
@@ -68,6 +73,11 @@ func _on_options_pressed() -> void:
 	drawer_save_game.close()
 	drawer_load_game.close()
 	drawer_options.toggle()
+
+func _on_new_game_started() -> void:
+	_close_all_sidedrawers()
+	drawer_main_menu.close()
+	continue_game_btn.visible = true
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
