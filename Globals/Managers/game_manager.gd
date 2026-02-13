@@ -18,12 +18,16 @@ func _init():
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("pause_unpause"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause_unpause"):
+		if get_viewport().gui_get_focus_owner():
+			get_viewport().gui_get_focus_owner().release_focus()
+		
 		if is_paused:
 			unpause_game()
 		else:
 			pause_game()
+		get_viewport().set_input_as_handled()
 
 func game_main():
 	is_running = true

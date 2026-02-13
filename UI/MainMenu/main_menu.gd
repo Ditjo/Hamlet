@@ -18,8 +18,6 @@ class_name MainMenu
 
 @onready var new_game_menu: NewGameMenu = %NewGameMenu
 
-
-
 func _ready() -> void:	
 	continue_game_btn.pressed.connect(_on_main_menu_pressed)
 	new_game_btn.pressed.connect(_on_new_game_pressed)
@@ -29,9 +27,9 @@ func _ready() -> void:
 	quit_btn.pressed.connect(_on_quit_pressed)
 	new_game_menu.new_game_started.connect(_on_new_game_started)
 	continue_game_btn.visible = false
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("escape"):
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("escape"):
 		_on_main_menu_pressed()
 
 func _on_main_menu_pressed() -> void:

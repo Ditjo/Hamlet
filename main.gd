@@ -11,8 +11,8 @@ func _ready():
 	cheat_menu.visible = false
 	new_game_menu.new_game_started.connect(_set_up_start)
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("cheat_menu"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("cheat_menu"):
 		cheat_menu.visible = !cheat_menu.visible
 
 #region Start Setup
