@@ -16,6 +16,7 @@ func _init():
 	game_main()
 """
 func _ready():
+	randomize()
 	process_mode = Node.PROCESS_MODE_PAUSABLE 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -39,7 +40,7 @@ func game_main():
 
 func run_game_loop():
 	while is_running:
-		await logical_waiter(5.0)
+		await logical_waiter(7.0)
 		#if get_tree().paused:
 			#await wait_until_unpaused()
 		#evt small timeout el lign her for stagger mellem pause og gamefunctions

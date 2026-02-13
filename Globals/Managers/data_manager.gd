@@ -173,10 +173,10 @@ func get_key_by_value(struct: Structures) -> Vector2i:
 
 #region eventFlags
 func add_event_flag(flag_name: String) -> void:
-	_event_flags.app[flag_name] = true
+	_event_flags[flag_name] = true
 
 func remove_event_flag(flag_name: String) -> void:
-	_event_flags.app[flag_name] = false
+	_event_flags[flag_name] = false
 
 func get_event_flags() -> Dictionary:
 	return _event_flags

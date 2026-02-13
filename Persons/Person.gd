@@ -2,7 +2,7 @@ class_name Person
 
 extends Resource
 
-var rng = RandomNumberGenerator.new()
+#var rng = RandomNumberGenerator.new()
 
 var person_name: String
 var age: int
@@ -11,7 +11,7 @@ var job: Vector2i
 
 func _init(
 	name_: String = generate_name(),
-	age_: int = randi_range(18,63),
+	age_: int = min(randi_range(18,63),randi_range(18,63)),
 	home_: Vector2 = Vector2i.ZERO,
 	job_: Vector2 = Vector2i.ZERO
 ) -> void:

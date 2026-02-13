@@ -19,7 +19,11 @@ func _init(
 	options = opts_
 
 func can_event_trigger() -> bool:
-	if DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL).size() > 0:
+	var windmills = DataManager.get_structures_by_type(Enums.StructureTypes.WINDMILL)
+	var workers: int
+	for struct in windmills:
+		workers += struct.get_current_worker_count()
+	if  windmills.size() > 0 and workers > 0:
 		return true
 	else:
 		return false 
@@ -30,16 +34,14 @@ func can_event_trigger() -> bool:
 func trigger_event(option: String) -> Array:
 	if option == "NO":
 		#First Option
-		var rng = RandomNumberGenerator.new()
 		var chance = 40
-		if rng.randi_range(1,100) < chance:
+		if randi_range(1,100) < chance:
 			return[0, 0.0]
-		var prod_factor: float = snapped(rng.randf_range(1.3,1.6),0.01)
+		var prod_factor: float = snapped(randf_range(1.3,1.6),0.01)
 		return [0, prod_factor]
 	elif option == "YES":
 		#Second Option
-		var rng = RandomNumberGenerator.new()
-		var prod_factor: float = snapped(rng.randf_range(0.6,0.7),0.01)
+		var prod_factor: float = snapped(randf_range(0.6,0.7),0.01)
 		return [0, prod_factor]
 	else:
 		#Something else happened

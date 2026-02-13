@@ -1,7 +1,5 @@
 extends Event
 
-var rng = RandomNumberGenerator.new()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,19 +15,19 @@ func _init(
 	type = type_
 	options = opts_
 
-"""
-func _resolve_assets() -> void:
-	pass
-"""
-
 func can_event_trigger() -> bool:
 	var money_makers:= [Enums.StructureTypes.FIELD]#add all building types that earn money
+	var money_structs: Array = []
 	for struct_type in money_makers:
-		if DataManager.get_structures_by_type(struct_type).size() > 0:
-			return true
-	return false
+		money_structs += DataManager.get_structures_by_type(struct_type)
+	var workers: int
+	for struct in money_structs:
+		workers += struct.get_current_worker_count()
+	if  money_structs.size() > 0 and workers > 0:
+		return true
+	else:
+		return false
 
 func trigger_event(option: String) -> Array:
-	var rng = RandomNumberGenerator.new()
-	var sale_factor: float = snapped(rng.randf_range(1.15,1.35),0.01)
+	var sale_factor: float = snapped(randf_range(1.15,1.35),0.05)
 	return [0, sale_factor]

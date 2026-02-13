@@ -12,36 +12,19 @@ func _init(
 	type = type_
 	options = opts_
 
-"""
-	opts_: Array[Option] = [Option.new("Okay, but nothing we can do", "ok")]
-		
-		Option.new("Sad, but nothing we can do", "sad"),
-		Option.new("Okay, but nothing we can do", "ok")
-	]
-"""
-
 func can_event_trigger() -> bool:
-	#If player has any fields this event can happen
-	return DataManager.get_structures_by_type(Enums.StructureTypes.FIELD).size() > 0
-
+	var harvest_types:= [Enums.StructureTypes.FIELD]#add all building types that do harvest
+	var harvest_structs: Array = []
+	for struct_type in harvest_types:
+		harvest_structs += DataManager.get_structures_by_type(struct_type)
+	var workers: int
+	for struct in harvest_structs:
+		workers += struct.get_current_worker_count()
+	if  harvest_structs.size() > 0 and workers > 0:
+		return true
+	else:
+		return false
 
 func trigger_event(option: String) -> Array:
-	var rng = RandomNumberGenerator.new()
-	var harvest_factor: float = snapped(rng.randf_range(0.95,0.8),0.01)
+	var harvest_factor: float = snapped(randf_range(0.95,0.8),0.05)
 	return [1, harvest_factor]
-	"""
-	if option == "sad":
-		#First Option
-		print("Bad Harvets: First Option")
-		var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)
-		return [1, harvest_factor]
-	elif option == "ok":
-		#Second Option
-		print("Bad Harvets: Second Option")
-		var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)
-		return [1, harvest_factor]
-	else:
-		#Something else happened
-		print("Bad Harvets: Something else happened")
-		return []
-	"""

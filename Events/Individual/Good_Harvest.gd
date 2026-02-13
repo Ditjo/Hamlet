@@ -15,20 +15,19 @@ func _init(
 	type = type_
 	options = opts_
 
-"""
-func _resolve_assets() -> void:
-	pass
-"""
-
 func can_event_trigger() -> bool:
-	print("can harvest trigger?")
-	return true
-	return DataManager.get_structures_by_type(Enums.StructureTypes.FIELD).size() > 0
-		#return true
-	#else:
-		#return false
+	var harvest_types:= [Enums.StructureTypes.FIELD]#add all building types that do harvest
+	var harvest_structs: Array = []
+	for struct_type in harvest_types:
+		harvest_structs += DataManager.get_structures_by_type(struct_type)
+	var workers: int
+	for struct in harvest_structs:
+		workers += struct.get_current_worker_count()
+	if  harvest_structs.size() > 0 and workers > 0:
+		return true
+	else:
+		return false
 
 func trigger_event(option: String) -> Array:
-	var rng = RandomNumberGenerator.new()
-	var harvest_factor: float = snapped(rng.randf_range(1.1,1.4),0.01)
+	var harvest_factor: float = snapped(randf_range(1.1,1.4),0.05)
 	return [1, harvest_factor]

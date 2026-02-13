@@ -1,7 +1,5 @@
 extends Event
 
-var rng = RandomNumberGenerator.new()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,17 +15,11 @@ func _init(
 	type = type_
 	options = opts_
 
-"""
-func _resolve_assets() -> void:
-	pass
-"""
-
 func can_event_trigger() -> bool:
 	if !DataManager.check_event_flag("Lord_Taxing") and DataManager.get_current_population() > 20:
 		return true
 	return false
 
 func trigger_event(option: String) -> Array:
-	var rng = RandomNumberGenerator.new()
-	var ppl_factor: int = rng.randi_range(2,6)
+	var ppl_factor: int = randi_range(2,6)
 	return [1, ppl_factor]

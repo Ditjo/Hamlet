@@ -5,9 +5,9 @@ var event_controller: EventController
 
 #Skal indholde simulationen af spillet. Game Loop. 
 #Skal subscribe til et signal fra GameManageren som fortæller hvornår at simuleringen skal køre. 
-var rng = RandomNumberGenerator.new()
-var event_chance: int = 100#7
-var pop_growth_chance: int = 100#7
+#var rng = RandomNumberGenerator.new()
+var event_chance: int = 11
+var pop_growth_chance: int = 34
 var events: Array[Event] = []
 
 func _ready():
@@ -39,7 +39,7 @@ func sim_main() -> void:
 func event_func() -> void:
 	print("event_func")
 	var chosen_event: Event = null
-	if rng.randi_range(1,100) < event_chance:
+	if randi_range(1,100) < event_chance:
 		#create list of valid events
 		var valid_events: Array = []
 		"""
@@ -49,10 +49,10 @@ func event_func() -> void:
 			if event.can_event_trigger():
 				valid_events.append(event)
 		print(valid_events.size())
-		#event_chance = 7 <------------------------------Set back in again when done testing
+		event_chance = 11
 		chosen_event = valid_events.pick_random()
 	else:
-		event_chance += 2
+		event_chance += 4
 		#return null
 	event_event_check(chosen_event)
 
@@ -207,14 +207,14 @@ func people_func(event_factor: Array) -> void:
 					break
 		#chance ppl leave if still ppl
 		for person in homeless:
-			if rng.randi_range(1,100) < min(90,30+10*homeless.size()):
+			if randi_range(1,100) < min(96,60+9*homeless.size()):
 				DataManager.remove_person(person)
 				homeless.erase(person)
 	if can_add and population_overview["current_population"] < population_overview["max_population"]:
 		#&& new_event.can_event_trigger(
-		if rng.randi_range(1,100) <= pop_growth_chance:
+		if randi_range(1,100) <= pop_growth_chance:
 			var available_housing = population_overview["max_population"] - population_overview["current_population"]
-			var new_people_count = min(available_housing, rng.randi_range(1,4) + event_filter(event_factor, [0], 0))
+			var new_people_count = min(available_housing, randi_range(1,4) + event_filter(event_factor, [0], 0))
 			for n in new_people_count:
 				var new_person = Person.new()
 				#new_person.generate_person()
@@ -225,9 +225,9 @@ func people_func(event_factor: Array) -> void:
 					house_w_space.add_person_to_house(new_person)
 					new_person.home = DataManager.get_key_by_value(house_w_space)
 				"""add person to house"""
-			#pop_growth_chance = 7
+			pop_growth_chance = 34
 		else:
-			pop_growth_chance += 2
+			pop_growth_chance += 7
 	#upkeep
 	DataManager.remove_gold(max(0, min(int(DataManager.get_current_population() / 3), DataManager.get_gold() - 15)))
 #endregion

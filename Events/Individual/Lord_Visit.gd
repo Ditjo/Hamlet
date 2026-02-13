@@ -19,7 +19,7 @@ func _init(
 	options = opts_
 
 func can_event_trigger() -> bool:
-	if !DataManager.check_event_flag("Lord_Taxing") and !DataManager.check_event_flag("Lord_Angry") and DataManager.get_gold() > 500:
+	if !DataManager.check_event_flag("Lord_Taxing") and !DataManager.check_event_flag("Lord_Angry") and DataManager.get_gold() > 200:
 		return true
 	else:
 		return false 
