@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/Drawer.tscn" id="9_20pc6"]
 [ext_resource type="Script" uid="uid://wcv1kupwkiuw" path="res://world/MapObjects/road.gd" id="9_oye8v"]
 [ext_resource type="Script" uid="uid://vkn3v18wxl6j" path="res://world/MapObjects/river.gd" id="10_bg4s2"]
-[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/fouse/script.gd" id="10_w3rk5"]
+[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/house/script.gd" id="10_w3rk5"]
 [ext_resource type="Script" uid="uid://dah4e0ohg3sgu" path="res://world/MapObjects/grassland_with_mushrooms.gd" id="11_mxvw5"]
 [ext_resource type="Script" uid="uid://dqn075sku02po" path="res://UI/HUD/EventPopUp/event_pop_up.gd" id="12_c2ibq"]
 [ext_resource type="Script" uid="uid://bril4f4ul6ki5" path="res://world/MapObjects/bush.gd" id="12_xrxkg"]

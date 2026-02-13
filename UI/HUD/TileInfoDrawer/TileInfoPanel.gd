@@ -43,7 +43,8 @@ func set_info_panel(object_: MapObjects, coords_: Vector2i = Vector2i(-1,-1)) ->
 		is_structure = true
 		people_section.visible = true
 		structure = DataManager.get_structure_by_coords(coords)
-		_build_people_list(structure)
+		if structure.map_object_type == Enums.MapObjectTypes.STRUCTURES:
+			_build_people_list(structure)
 	
 	_update_ui()
 
@@ -132,4 +133,5 @@ func _can_object_be_deleted() -> bool:
 func _show_delete_btn() -> bool:
 	return object.map_object_type == Enums.MapObjectTypes.STRUCTURES or\
 	object.map_object_type == Enums.MapObjectTypes.TREES or\
-	object.map_object_type == Enums.MapObjectTypes.ROCKS
+	object.map_object_type == Enums.MapObjectTypes.ROCKS or\
+	object.map_object_type == Enums.MapObjectTypes.EYECANDY

@@ -7,7 +7,8 @@ enum MapObjectTypes {
 	MOUNTAINS,
 	WATER,
 	ROAD,
-	GRASS
+	GRASS,
+	EYECANDY
 }
 
 enum CostTypes {

@@ -4,7 +4,7 @@ class_name ParkTree
 func _init(
 	name_: String = "Park Tree",
 	description_: String = "A nice planet tree. Like they didn't have enough trees already. No use in game, though look nice.",
-	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
+	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.EYECANDY,
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 20},
 	structure_type_: Enums.StructureTypes = Enums.StructureTypes.PARKTREE,

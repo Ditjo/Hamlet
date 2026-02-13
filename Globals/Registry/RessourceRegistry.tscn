@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dur2kuds8nx5v" path="res://Globals/Registry/ressource_registry.gd" id="1_hy65t"]
 [ext_resource type="Script" uid="uid://b68e1yml7eaiw" path="res://world/structures/field/script.gd" id="2_h7q2r"]
-[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/fouse/script.gd" id="3_7pq35"]
+[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/house/script.gd" id="3_7pq35"]
 [ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://world/structures/parktree/script.gd" id="4_0mpvp"]
 [ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://world/structures/signpost/script.gd" id="5_8aujd"]
 [ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://world/structures/statue/script.gd" id="6_4603w"]

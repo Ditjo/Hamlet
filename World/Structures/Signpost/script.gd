@@ -4,7 +4,7 @@ class_name Signpost
 func _init(
 	name_: String = "Signpost",
 	description_: String = "Signpost to guide people to nowhere and everywhere. No use in game, though look nice.",
-	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.STRUCTURES,
+	type_: Enums.MapObjectTypes = Enums.MapObjectTypes.EYECANDY,
 	#coords_: Vector2i = Vector2i.ZERO,
 	cost_: Dictionary = {Enums.CostTypes.GOLD: 10},
 	structure_type_: Enums.StructureTypes = Enums.StructureTypes.SIGNPOST,
