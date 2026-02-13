@@ -14,8 +14,17 @@ func _populate_build_menu() -> void:
 		btn.building_selected.connect(_on_building_selected)
 		btn.custom_minimum_size = Vector2(100, 0)
 		
+		
+		var margin: = MarginContainer.new()
+		#margin.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		margin.add_theme_constant_override("margin_left", 3)
+		margin.add_theme_constant_override("margin_right", 3)
+		margin.add_theme_constant_override("margin_top", 30)
+		margin.add_theme_constant_override("margin_bottom", 30)
+		margin.add_child(btn)
+	
 		buildcontainer.alignment = BoxContainer.ALIGNMENT_CENTER
-		buildcontainer.add_child(btn)
+		buildcontainer.add_child(margin)
 	self.add_child(buildcontainer)
 
 func _on_building_selected(type: Enums.StructureTypes) -> void:

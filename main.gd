@@ -10,6 +10,7 @@ extends Node
 func _ready():
 	cheat_menu.visible = false
 	new_game_menu.new_game_started.connect(_set_up_start)
+	DataManager.add_gold(50)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cheat_menu"):

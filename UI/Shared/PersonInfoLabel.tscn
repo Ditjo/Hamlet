@@ -4,6 +4,15 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ko22"]
 bg_color = Color(0.4812644, 0.4021538, 0.2953117, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.39607844, 0.21960784, 0.23137255, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="PersonInfoLabel" type="Control"]
 layout_mode = 3

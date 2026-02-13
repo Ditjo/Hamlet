@@ -1,18 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://c466hearaa038"]
+[gd_scene load_steps=3 format=3 uid="uid://c466hearaa038"]
 
 [ext_resource type="Script" uid="uid://3f4ew361rx6h" path="res://UI/Shared/build_info_popup.gd" id="1_3nenx"]
+[ext_resource type="StyleBox" uid="uid://dycyqowvsqv73" path="res://Assets/ResourceOverview.tres" id="1_e8w40"]
 
 [node name="BuildInfoPopup" type="PopupPanel"]
 oversampling_override = 1.0
 size = Vector2i(208, 112)
 visible = true
+theme_override_styles/panel = ExtResource("1_e8w40")
 script = ExtResource("1_3nenx")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 204.0
-offset_bottom = 108.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 205.0
+offset_bottom = 109.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
