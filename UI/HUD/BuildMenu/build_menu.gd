@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 func _populate_build_menu() -> void:
 	var buildcontainer: HBoxContainer = HBoxContainer.new()
-	for s in StructureRegistry.structures:
+	for s in RessourceRegistry.structures:
 		var btn: BuildMenuButton = BuildMenuButton.new()
 		btn.setup(s)
 		btn.building_selected.connect(_on_building_selected)

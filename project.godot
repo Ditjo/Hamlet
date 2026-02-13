@@ -23,7 +23,8 @@ GameManager="*res://Globals/Managers/game_manager.gd"
 SimulationManager="*res://Globals/Managers/simulation_manager.gd"
 Enums="*res://Globals/Enums/enums.gd"
 CheatManager="*res://Globals/Managers/cheat_manager.gd"
-StructureRegistry="*res://Globals/Registry/StructureRegistry.gd"
+StructureRegistry="*res://Globals/Registry/StructureRegistryOld.gd"
+RessourceRegistry="*res://Globals/Registry/RessourceRegistry.tscn"
 
 [display]
 

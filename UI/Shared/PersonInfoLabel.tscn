@@ -38,6 +38,7 @@ layout_mode = 2
 [node name="PersonName" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
 
 [node name="PersonAge" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2

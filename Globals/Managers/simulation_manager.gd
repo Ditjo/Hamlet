@@ -10,21 +10,21 @@ var event_chance: int = 11
 var pop_growth_chance: int = 34
 var events: Array[Event] = []
 
-func _ready():
-	var folder_path = "res://Events/Individual/"  # folder containing your class scripts
-	var dir = DirAccess.open(folder_path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if !dir.current_is_dir() and file_name.ends_with(".gd"):
-				var script_path = folder_path + "/" + file_name
-				var script = load(script_path)
-				if script:
-					events.append(script.new())
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	print(events.size())
+#func _ready():
+	#var folder_path = "res://Events/Individual/"  # folder containing your class scripts
+	#var dir = DirAccess.open(folder_path)
+	#if dir:
+		#dir.list_dir_begin()
+		#var file_name = dir.get_next()
+		#while file_name != "":
+			#if !dir.current_is_dir() and file_name.ends_with(".gd"):
+				#var script_path = folder_path + "/" + file_name
+				#var script = load(script_path)
+				#if script:
+					#events.append(script.new())
+			#file_name = dir.get_next()
+		#dir.list_dir_end()
+	#print(events.size())
 
 func sim_main() -> void:
 	print("sim_main")
@@ -45,7 +45,7 @@ func event_func() -> void:
 		"""
 		some way to get all events
 		"""
-		for event in events:
+		for event in RessourceRegistry.events:
 			if event.can_event_trigger():
 				valid_events.append(event)
 		print(valid_events.size())

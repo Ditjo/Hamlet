@@ -4,14 +4,13 @@ var structures: Array[Structures] = []
 
 func _ready() -> void:
 	structures = _get_structures()
-	print("StructureRegistry amount that is Structures: " + str(structures.size()))
 
 func _get_structures() -> Array[Structures]:
 	#var structures: Array[GDScript] = []
 	var _structures: Array[Structures] = []
 	
 	#Opens the directory on the path and null checks
-	var dir: = DirAccess.open("res://World/Structures/")
+	var dir: = DirAccess.open("res://world/structures/")
 	if dir == null:
 		return _structures
 	
@@ -23,7 +22,7 @@ func _get_structures() -> Array[Structures]:
 	while folder != "":
 		if dir.current_is_dir() and not folder.begins_with("."):
 			#Opens Subfolder and check if there is anything
-			var sub: = DirAccess.open("res://World/Structures/%s" % folder)
+			var sub: = DirAccess.open("res://world/structures/%s" % folder)
 			if sub:
 				sub.list_dir_begin()
 				var file: = sub.get_next()
@@ -31,7 +30,7 @@ func _get_structures() -> Array[Structures]:
 				#Runs through subfolders files
 				while file != "":
 					if file.ends_with(".gd"):
-						var script: Resource = load("res://World/Structures/%s/%s" % [folder, file])
+						var script: Resource = load("res://world/structures/%s/%s" % [folder, file])
 						if script is GDScript:
 							var instance: Structures = script.new()
 							
@@ -40,7 +39,7 @@ func _get_structures() -> Array[Structures]:
 							else:
 								push_warning(
 									"%s does not extend Structures" %
-									["res://World/Structures/%s/%s" % [folder, file]]
+									["res://world/structures/%s/%s" % [folder, file]]
 								)
 							#structs.append(struc)
 						#structures.append(load("res://World/Structures/%s/%s" % [folder, file]))

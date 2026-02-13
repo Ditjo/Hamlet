@@ -73,16 +73,16 @@ func _build_people_list(struct: Structures) -> void:
 			person_info_label.set_person(people[p])
 		else:
 			var empty_person_label: Label = Label.new()
+			empty_person_label.text = "Free"
 			personPanel.add_child(empty_person_label)
 			var style = load("res://Assets/PanelTexture.tres")
 			personPanel.add_theme_stylebox_override("panel", style)
-			empty_person_label.text = "Free"
 		var margin: = MarginContainer.new()
 		margin.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		margin.add_theme_constant_override("margin_left", 3)
 		margin.add_theme_constant_override("margin_right", 3)
-		margin.add_theme_constant_override("margin_top", 3)
-		margin.add_theme_constant_override("margin_bottom", 3)
+		margin.add_theme_constant_override("margin_top", 0)
+		margin.add_theme_constant_override("margin_bottom", 1)
 		margin.add_child(personPanel)
 		person_list.add_child(margin)
 	person_list_container.add_child(person_list)

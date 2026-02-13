@@ -48,7 +48,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 autowrap_mode = 2
 
 [node name="PeopleSection" type="VBoxContainer" parent="VBox"]

@@ -11,28 +11,28 @@
 [ext_resource type="Script" uid="uid://bfou4xtjmkh35" path="res://Events/Event_Controller.gd" id="4_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://cykkrdr0q6i83" path="res://UI/HUD/Topbar/TimeControl.tscn" id="4_trn2v"]
 [ext_resource type="Script" uid="uid://klsv63l62lhb" path="res://GameWorld/tile_info_controller.gd" id="5_kjvhd"]
-[ext_resource type="Script" uid="uid://clc4o4tr76ya1" path="res://World/MapObjects/tree.gd" id="5_sc1dx"]
-[ext_resource type="Script" uid="uid://dpbnxr3j6iinr" path="res://World/MapObjects/grassland.gd" id="6_2gh4u"]
+[ext_resource type="Script" uid="uid://clc4o4tr76ya1" path="res://world/MapObjects/tree.gd" id="5_sc1dx"]
+[ext_resource type="Script" uid="uid://dpbnxr3j6iinr" path="res://world/MapObjects/grassland.gd" id="6_2gh4u"]
 [ext_resource type="Script" uid="uid://cswfj23guntde" path="res://UI/MainMenu/main_menu.gd" id="6_wkp8b"]
-[ext_resource type="Script" uid="uid://ccd4vo7q5t72u" path="res://World/MapObjects/mountain.gd" id="7_devvj"]
-[ext_resource type="Script" uid="uid://cga8ycr3l5ysq" path="res://World/Structures/Windmill/script.gd" id="7_hri7i"]
-[ext_resource type="Script" uid="uid://cxuaas2f7njvc" path="res://World/MapObjects/rocks.gd" id="8_2gh4u"]
+[ext_resource type="Script" uid="uid://ccd4vo7q5t72u" path="res://world/MapObjects/mountain.gd" id="7_devvj"]
+[ext_resource type="Script" uid="uid://cga8ycr3l5ysq" path="res://world/structures/windmill/script.gd" id="7_hri7i"]
+[ext_resource type="Script" uid="uid://cxuaas2f7njvc" path="res://world/MapObjects/rocks.gd" id="8_2gh4u"]
 [ext_resource type="Script" uid="uid://bus8qkvnso6nu" path="res://UI/HUD/BuildMenu/build_menu.gd" id="8_5vvyt"]
-[ext_resource type="Script" uid="uid://b68e1yml7eaiw" path="res://World/Structures/Field/script.gd" id="8_w3rk5"]
-[ext_resource type="Script" uid="uid://d2klxybfxhu4n" path="res://World/MapObjects/lake.gd" id="9_3b0ty"]
+[ext_resource type="Script" uid="uid://b68e1yml7eaiw" path="res://world/structures/field/script.gd" id="8_w3rk5"]
+[ext_resource type="Script" uid="uid://d2klxybfxhu4n" path="res://world/MapObjects/lake.gd" id="9_3b0ty"]
 [ext_resource type="PackedScene" uid="uid://l80mqyqnfmys" path="res://UI/Shared/Drawer.tscn" id="9_20pc6"]
-[ext_resource type="Script" uid="uid://wcv1kupwkiuw" path="res://World/MapObjects/road.gd" id="9_oye8v"]
-[ext_resource type="Script" uid="uid://vkn3v18wxl6j" path="res://World/MapObjects/river.gd" id="10_bg4s2"]
-[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://World/Structures/House/script.gd" id="10_w3rk5"]
-[ext_resource type="Script" uid="uid://dah4e0ohg3sgu" path="res://World/MapObjects/grassland_with_mushrooms.gd" id="11_mxvw5"]
+[ext_resource type="Script" uid="uid://wcv1kupwkiuw" path="res://world/MapObjects/road.gd" id="9_oye8v"]
+[ext_resource type="Script" uid="uid://vkn3v18wxl6j" path="res://world/MapObjects/river.gd" id="10_bg4s2"]
+[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/fouse/script.gd" id="10_w3rk5"]
+[ext_resource type="Script" uid="uid://dah4e0ohg3sgu" path="res://world/MapObjects/grassland_with_mushrooms.gd" id="11_mxvw5"]
 [ext_resource type="Script" uid="uid://dqn075sku02po" path="res://UI/HUD/EventPopUp/event_pop_up.gd" id="12_c2ibq"]
-[ext_resource type="Script" uid="uid://bril4f4ul6ki5" path="res://World/MapObjects/bush.gd" id="12_xrxkg"]
-[ext_resource type="Script" uid="uid://b2p50pnmpelt1" path="res://World/MapObjects/grassland_with_flowers.gd" id="13_sqvbp"]
+[ext_resource type="Script" uid="uid://bril4f4ul6ki5" path="res://world/MapObjects/bush.gd" id="12_xrxkg"]
+[ext_resource type="Script" uid="uid://b2p50pnmpelt1" path="res://world/MapObjects/grassland_with_flowers.gd" id="13_sqvbp"]
 [ext_resource type="PackedScene" uid="uid://rqip0wwj52od" path="res://UI/Shared/Tooltip.tscn" id="14_fpfj3"]
-[ext_resource type="Script" uid="uid://b0g03bplkwatt" path="res://World/Structures/Well/script.gd" id="16_5mkgo"]
-[ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://World/Structures/ParkTree/script.gd" id="17_3ccbu"]
-[ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://World/Structures/Signpost/script.gd" id="19_ny7u2"]
-[ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://World/Structures/Statue/script.gd" id="20_x3yn0"]
+[ext_resource type="Script" uid="uid://b0g03bplkwatt" path="res://world/structures/well/script.gd" id="16_5mkgo"]
+[ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://world/structures/parktree/script.gd" id="17_3ccbu"]
+[ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://world/structures/signpost/script.gd" id="19_ny7u2"]
+[ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://world/structures/statue/script.gd" id="20_x3yn0"]
 [ext_resource type="StyleBox" uid="uid://ds4kklfy5o6lk" path="res://Assets/PanelTexture.tres" id="22_gb15f"]
 [ext_resource type="PackedScene" uid="uid://dsun88p4dv1oe" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.tscn" id="25_w3rk5"]
 [ext_resource type="Script" uid="uid://t8ypq0owvj1b" path="res://UI/MainMenu/new_game_menu.gd" id="29_5mvff"]
@@ -2088,7 +2088,6 @@ process_mode = 3
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(128, 100)
-visible = true
 theme = ExtResource("31_40n85")
 theme_override_styles/panel = SubResource("StyleBoxFlat_40n85")
 script = ExtResource("12_c2ibq")
@@ -2162,6 +2161,13 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer"]
 layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 42
+text = "Hamlet"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -2342,10 +2348,9 @@ layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 162.0
-offset_top = -89.0
-offset_right = 224.0
-offset_bottom = -66.0
+offset_top = -1.0
+offset_right = 351.0
+offset_bottom = 42.0
 grow_horizontal = 1
 grow_vertical = 1
 

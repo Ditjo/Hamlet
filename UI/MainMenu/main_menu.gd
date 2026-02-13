@@ -19,7 +19,6 @@ class_name MainMenu
 @onready var overlay: ColorRect = $"../../HUD/Overlay"
 @onready var hud_control: Control = $"../../HUD/Control"
 
-
 @onready var new_game_menu: NewGameMenu = %NewGameMenu
 
 func _ready() -> void:	

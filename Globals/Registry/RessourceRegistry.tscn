@@ -1,0 +1,23 @@
+[gd_scene load_steps=17 format=3 uid="uid://fmlyxb8tb85w"]
+
+[ext_resource type="Script" uid="uid://dur2kuds8nx5v" path="res://Globals/Registry/ressource_registry.gd" id="1_hy65t"]
+[ext_resource type="Script" uid="uid://b68e1yml7eaiw" path="res://world/structures/field/script.gd" id="2_h7q2r"]
+[ext_resource type="Script" uid="uid://t1utlwjvr4xd" path="res://world/structures/fouse/script.gd" id="3_7pq35"]
+[ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://world/structures/parktree/script.gd" id="4_0mpvp"]
+[ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://world/structures/signpost/script.gd" id="5_8aujd"]
+[ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://world/structures/statue/script.gd" id="6_4603w"]
+[ext_resource type="Script" uid="uid://b0g03bplkwatt" path="res://world/structures/well/script.gd" id="7_erop5"]
+[ext_resource type="Script" uid="uid://cga8ycr3l5ysq" path="res://world/structures/windmill/script.gd" id="8_w6gmf"]
+[ext_resource type="Script" uid="uid://cm2qwjkcxotj4" path="res://Events/Individual/Bad_Harvest.gd" id="9_g8tlt"]
+[ext_resource type="Script" uid="uid://8wywulgmi6dq" path="res://Events/Individual/Bandits_People.gd" id="10_1vmwo"]
+[ext_resource type="Script" uid="uid://dun1lxjflrgit" path="res://Events/Individual/Bandits_Sale.gd" id="11_x058w"]
+[ext_resource type="Script" uid="uid://b41sne04taffb" path="res://Events/Individual/Good_Harvest.gd" id="12_3hyty"]
+[ext_resource type="Script" uid="uid://4k7icayebyja" path="res://Events/Individual/Good_Sale.gd" id="13_rdwk0"]
+[ext_resource type="Script" uid="uid://b100k4itacedx" path="res://Events/Individual/Lord_Visit.gd" id="14_vr37r"]
+[ext_resource type="Script" uid="uid://rvx8u4sbh2ac" path="res://Events/Individual/Storm.gd" id="15_7lq8l"]
+[ext_resource type="Script" uid="uid://d3l22orbumxia" path="res://Events/Individual/Raskal.gd" id="16_1vmwo"]
+
+[node name="RessourceRegistry" type="Node"]
+script = ExtResource("1_hy65t")
+structure_scripts = Array[Script]([ExtResource("2_h7q2r"), ExtResource("3_7pq35"), ExtResource("4_0mpvp"), ExtResource("5_8aujd"), ExtResource("6_4603w"), ExtResource("7_erop5"), ExtResource("8_w6gmf")])
+event_scripts = Array[Script]([ExtResource("9_g8tlt"), ExtResource("10_1vmwo"), ExtResource("11_x058w"), ExtResource("12_3hyty"), ExtResource("13_rdwk0"), ExtResource("14_vr37r"), ExtResource("15_7lq8l"), ExtResource("16_1vmwo")])
