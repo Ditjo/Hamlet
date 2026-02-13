@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsun88p4dv1oe"]
+[gd_scene load_steps=4 format=3 uid="uid://dsun88p4dv1oe"]
 
 [ext_resource type="Script" uid="uid://br18yg602iwf" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.gd" id="1_1by08"]
+[ext_resource type="Theme" uid="uid://6hc0y8a08gvw" path="res://Assets/BrownButton.tres" id="2_igtuj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igtuj"]
+bg_color = Color(0.39607844, 0.21960784, 0.23137255, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.7607843, 0.6313726, 0.2901961, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="TileInfoPanel" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,9 +33,14 @@ size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="VBox/BaseinfoSection"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+
+[node name="HSeparator" type="HSeparator" parent="VBox/BaseinfoSection"]
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBox/BaseinfoSection"]
+self_modulate = Color(1, 1, 1, 0.11764706)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -29,7 +48,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 2
 
 [node name="PeopleSection" type="VBoxContainer" parent="VBox"]
@@ -42,32 +61,49 @@ layout_mode = 2
 [node name="PeopleInfo" type="Label" parent="VBox/PeopleSection/PeopleDisplay"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
 
 [node name="PersonControls" type="HBoxContainer" parent="VBox/PeopleSection/PeopleDisplay"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="RemovePersonBtn" type="Button" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "-"
 
 [node name="Spacer" type="PanelContainer" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="AddPersonBtn" type="Button" parent="VBox/PeopleSection/PeopleDisplay/PersonControls"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "+"
 
 [node name="PersonListContainer" type="PanelContainer" parent="VBox/PeopleSection"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DeleteSection" type="PanelContainer" parent="VBox"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+theme = ExtResource("2_igtuj")
 
-[node name="DeleteBtn" type="Button" parent="VBox/DeleteSection"]
+[node name="MarginContainer" type="MarginContainer" parent="VBox/DeleteSection"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DeleteBtn" type="Button" parent="VBox/DeleteSection/MarginContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("2_igtuj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_igtuj")
 text = "Delete"

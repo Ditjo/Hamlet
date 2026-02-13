@@ -12,7 +12,9 @@ func _populate_build_menu() -> void:
 		var btn: BuildMenuButton = BuildMenuButton.new()
 		btn.setup(s)
 		btn.building_selected.connect(_on_building_selected)
+		btn.custom_minimum_size = Vector2(100, 0)
 		
+		buildcontainer.alignment = BoxContainer.ALIGNMENT_CENTER
 		buildcontainer.add_child(btn)
 	self.add_child(buildcontainer)
 

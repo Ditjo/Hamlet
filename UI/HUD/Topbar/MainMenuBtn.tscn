@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4wga8p3io7vi"]
+[gd_scene load_steps=3 format=3 uid="uid://c4wga8p3io7vi"]
 
 [ext_resource type="Script" uid="uid://grnkhitvnb4w" path="res://UI/HUD/Topbar/main_menu_btn.gd" id="1_5k6e4"]
+[ext_resource type="Theme" uid="uid://6hc0y8a08gvw" path="res://Assets/BrownButton.tres" id="2_6ru4l"]
 
 [node name="MainMenuBtn" type="PanelContainer"]
 offset_right = 53.0
@@ -9,4 +10,5 @@ script = ExtResource("1_5k6e4")
 
 [node name="MenuBtn" type="Button" parent="."]
 layout_mode = 2
+theme = ExtResource("2_6ru4l")
 text = "Menu"

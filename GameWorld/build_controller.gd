@@ -64,6 +64,14 @@ func _get_new_building_of_choosen_type(type: Enums.StructureTypes) -> Structures
 			return Field.new()
 		Enums.StructureTypes.WINDMILL:
 			return Windmill.new()
+		Enums.StructureTypes.WELL:
+			return Well.new()
+		Enums.StructureTypes.SIGNPOST:
+			return Signpost.new()
+		Enums.StructureTypes.STATUE:
+			return Statue.new()
+		Enums.StructureTypes.PARKTREE:
+			return ParkTree.new()
 		_:
 			return null
 

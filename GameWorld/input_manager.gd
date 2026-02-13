@@ -38,3 +38,5 @@ func handle_right_click() -> void:
 	tile_info_controller._close_tile_info_drawer()
 	tile_right_click.emit()
 	_is_structure_selected_in_buildmenu = false
+	if get_viewport().gui_get_focus_owner():
+		get_viewport().gui_get_focus_owner().release_focus()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=59 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
@@ -29,8 +29,14 @@
 [ext_resource type="Script" uid="uid://bril4f4ul6ki5" path="res://World/MapObjects/bush.gd" id="12_xrxkg"]
 [ext_resource type="Script" uid="uid://b2p50pnmpelt1" path="res://World/MapObjects/grassland_with_flowers.gd" id="13_sqvbp"]
 [ext_resource type="PackedScene" uid="uid://rqip0wwj52od" path="res://UI/Shared/Tooltip.tscn" id="14_fpfj3"]
+[ext_resource type="Script" uid="uid://b0g03bplkwatt" path="res://World/Structures/Well/script.gd" id="16_5mkgo"]
+[ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://World/Structures/ParkTree/script.gd" id="17_3ccbu"]
+[ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://World/Structures/Signpost/script.gd" id="19_ny7u2"]
+[ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://World/Structures/Statue/script.gd" id="20_x3yn0"]
+[ext_resource type="StyleBox" uid="uid://ds4kklfy5o6lk" path="res://Assets/PanelTexture.tres" id="22_gb15f"]
 [ext_resource type="PackedScene" uid="uid://dsun88p4dv1oe" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.tscn" id="25_w3rk5"]
 [ext_resource type="Script" uid="uid://t8ypq0owvj1b" path="res://UI/MainMenu/new_game_menu.gd" id="29_5mvff"]
+[ext_resource type="Theme" uid="uid://6hc0y8a08gvw" path="res://Assets/BrownButton.tres" id="31_40n85"]
 
 [sub_resource type="Resource" id="Resource_xrxkg"]
 script = ExtResource("6_2gh4u")
@@ -52,7 +58,7 @@ metadata/_custom_type_script = "uid://wcv1kupwkiuw"
 script = ExtResource("7_devvj")
 metadata/_custom_type_script = "uid://ccd4vo7q5t72u"
 
-[sub_resource type="Resource" id="Resource_gb15f"]
+[sub_resource type="Resource" id="Resource_1w2xm"]
 script = ExtResource("10_w3rk5")
 metadata/_custom_type_script = "uid://t1utlwjvr4xd"
 
@@ -72,9 +78,25 @@ metadata/_custom_type_script = "uid://clc4o4tr76ya1"
 script = ExtResource("10_bg4s2")
 metadata/_custom_type_script = "uid://vkn3v18wxl6j"
 
+[sub_resource type="Resource" id="Resource_gngx1"]
+script = ExtResource("16_5mkgo")
+metadata/_custom_type_script = "uid://b0g03bplkwatt"
+
+[sub_resource type="Resource" id="Resource_jt61w"]
+script = ExtResource("17_3ccbu")
+metadata/_custom_type_script = "uid://cdudh8i3mlgo5"
+
 [sub_resource type="Resource" id="Resource_hri7i"]
 script = ExtResource("11_mxvw5")
 metadata/_custom_type_script = "uid://dah4e0ohg3sgu"
+
+[sub_resource type="Resource" id="Resource_v8qla"]
+script = ExtResource("19_ny7u2")
+metadata/_custom_type_script = "uid://o6xfxdfvech1"
+
+[sub_resource type="Resource" id="Resource_y1tbi"]
+script = ExtResource("20_x3yn0")
+metadata/_custom_type_script = "uid://b3y8jtvt202ua"
 
 [sub_resource type="Resource" id="Resource_sqvbp"]
 script = ExtResource("12_xrxkg")
@@ -1567,7 +1589,9 @@ texture = ExtResource("2_03owx")
 28:26/0 = 0
 29:26/0 = 0
 30:26/0 = 0
+30:26/0/custom_data_1 = SubResource("Resource_v8qla")
 31:26/0 = 0
+31:26/0/custom_data_1 = SubResource("Resource_y1tbi")
 33:26/0 = 0
 34:26/0 = 0
 35:26/0 = 0
@@ -1624,7 +1648,9 @@ texture = ExtResource("2_03owx")
 23:29/0 = 0
 24:29/0 = 0
 25:29/0 = 0
+25:29/0/custom_data_1 = SubResource("Resource_gngx1")
 26:29/0 = 0
+26:29/0/custom_data_1 = SubResource("Resource_jt61w")
 27:29/0 = 0
 28:29/0 = 0
 29:29/0 = 0
@@ -1653,8 +1679,11 @@ texture = ExtResource("2_03owx")
 2:31/0 = 0
 3:31/0 = 0
 16:31/0 = 0
+16:31/0/custom_data_1 = SubResource("Resource_1w2xm")
 17:31/0 = 0
+17:31/0/custom_data_1 = SubResource("Resource_1w2xm")
 18:31/0 = 0
+18:31/0/custom_data_1 = SubResource("Resource_1w2xm")
 19:31/0 = 0
 20:31/0 = 0
 21:31/0 = 0
@@ -1674,8 +1703,11 @@ texture = ExtResource("2_03owx")
 2:32/0 = 0
 3:32/0 = 0
 15:32/0 = 0
+15:32/0/custom_data_1 = SubResource("Resource_1w2xm")
 16:32/0 = 0
+16:32/0/custom_data_1 = SubResource("Resource_1w2xm")
 17:32/0 = 0
+17:32/0/custom_data_1 = SubResource("Resource_1w2xm")
 19:32/0 = 0
 20:32/0 = 0
 21:32/0 = 0
@@ -1698,8 +1730,11 @@ texture = ExtResource("2_03owx")
 2:33/0 = 0
 3:33/0 = 0
 15:33/0 = 0
+15:33/0/custom_data_1 = SubResource("Resource_1w2xm")
 16:33/0 = 0
+16:33/0/custom_data_1 = SubResource("Resource_1w2xm")
 17:33/0 = 0
+17:33/0/custom_data_1 = SubResource("Resource_1w2xm")
 19:33/0 = 0
 20:33/0 = 0
 21:33/0 = 0
@@ -1866,7 +1901,7 @@ texture = ExtResource("2_03owx")
 38:39/0 = 0
 39:39/0 = 0
 15:31/0 = 0
-15:31/0/custom_data_1 = SubResource("Resource_gb15f")
+15:31/0/custom_data_1 = SubResource("Resource_1w2xm")
 3:34/animation_frame_0/duration = 1.0
 3:34/animation_frame_1/duration = 1.0
 3:34/0 = 0
@@ -1878,6 +1913,18 @@ custom_data_layer_0/type = 2
 custom_data_layer_1/name = "script"
 custom_data_layer_1/type = 24
 sources/0 = SubResource("TileSetAtlasSource_wkp8b")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40n85"]
+bg_color = Color(0.7411765, 0.64705884, 0.52156866, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.39607844, 0.21960784, 0.23137255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Main" type="Node"]
 script = ExtResource("1_glv2v")
@@ -1941,16 +1988,19 @@ size_flags_vertical = 3
 
 [node name="MainMenuBtn" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("2_fos0i")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("22_gb15f")
 
 [node name="ResourceOverview" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("3_lgr22")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 7.0
+theme_override_styles/panel = ExtResource("22_gb15f")
 
 [node name="TimeControl" parent="HUD/Control/VBoxContainer/TopBar" instance=ExtResource("4_trn2v")]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = ExtResource("22_gb15f")
 
 [node name="GameView" type="Control" parent="HUD/Control/VBoxContainer"]
 layout_mode = 2
@@ -1992,6 +2042,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MenuPicker" type="PanelContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer/MenuPicker"]
@@ -2001,6 +2052,7 @@ text = "Build Menu"
 [node name="BuildMenu" type="PanelContainer" parent="HUD/Control/VBoxContainer/BottomBar/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("22_gb15f")
 script = ExtResource("8_5vvyt")
 
 [node name="TileInfoDrawer" parent="HUD/Control" instance=ExtResource("9_20pc6")]
@@ -2035,14 +2087,17 @@ unique_name_in_owner = true
 process_mode = 3
 oversampling_override = 1.0
 initial_position = 1
-size = Vector2i(109, 100)
+size = Vector2i(128, 100)
+visible = true
+theme = ExtResource("31_40n85")
+theme_override_styles/panel = SubResource("StyleBoxFlat_40n85")
 script = ExtResource("12_c2ibq")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/EventPopUp"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 105.0
-offset_bottom = 96.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 97.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -2053,11 +2108,16 @@ layout_mode = 2
 
 [node name="EventTitle" type="Label" parent="HUD/EventPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.26679605, 0.19522426, 0.07166413, 1)
+theme_override_colors/font_shadow_color = Color(0.29219002, 0.29219005, 0.29219002, 0)
+theme_override_font_sizes/font_size = 20
 text = "Event Title"
 
 [node name="Description" type="RichTextLabel" parent="HUD/EventPopUp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.12280347, 0.09506407, 0.057430044, 1)
+theme_override_font_sizes/normal_font_size = 14
 text = "An assortment of letters to make a sentance!"
 
 [node name="OptionsPanel" type="HBoxContainer" parent="HUD/EventPopUp/MarginContainer/VBoxContainer"]
@@ -2110,21 +2170,25 @@ size_flags_vertical = 3
 [node name="ContinueGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("31_40n85")
 text = "Continue Game"
 
 [node name="NewGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("31_40n85")
 text = "New Game"
 
 [node name="SaveGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("31_40n85")
 text = "Save game"
 
 [node name="LoadGameBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("31_40n85")
 text = "Load Game"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer"]
@@ -2134,13 +2198,15 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Option"
+theme = ExtResource("31_40n85")
+text = "Settings"
 
 [node name="QuitBtn" type="Button" parent="UI/MainMenu/DrawerMainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 tooltip_text = "WIP. Used to close the Main Menu for Now!"
+theme = ExtResource("31_40n85")
 text = "Quit"
 
 [node name="DrawerNewGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
@@ -2153,10 +2219,12 @@ grow_vertical = 1
 
 [node name="NewGameMenu" type="PanelContainer" parent="UI/MainMenu/DrawerNewGame"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 script = ExtResource("29_5mvff")
 
 [node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerNewGame/NewGameMenu"]
+visible = false
 layout_mode = 2
 color = Color(0.5019608, 0.5019608, 0.5019608, 0.5019608)
 
@@ -2198,6 +2266,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TownNameLabel" type="Label" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.18112561, 0.13800174, 0.030311171, 1)
 text = "Town Name:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
@@ -2209,16 +2278,19 @@ theme_override_constants/margin_bottom = 5
 
 [node name="TownNameInput" type="LineEdit" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
-placeholder_text = "Hamlet"
+tooltip_text = "Write you hamlets name here."
+theme = ExtResource("31_40n85")
+placeholder_text = "Hamlet..."
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.28627452)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="Maps Label" type="Label" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Maps"
+text = "Maps would be here."
 
 [node name="MarginContainer3" type="MarginContainer" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -2229,6 +2301,8 @@ theme_override_constants/margin_bottom = 15
 
 [node name="StartGameBtn" type="Button" parent="UI/MainMenu/DrawerNewGame/NewGameMenu/MarginContainer/VBoxContainer/MarginContainer3"]
 layout_mode = 2
+tooltip_text = "Write a hamlet name before starting the game."
+theme = ExtResource("31_40n85")
 text = "Start New Hamlet"
 
 [node name="DrawerSaveGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
@@ -2277,9 +2351,11 @@ grow_vertical = 1
 
 [node name="Label" type="Label" parent="UI/MainMenu/DrawerOptions"]
 layout_mode = 2
-text = "Options"
+size_flags_horizontal = 4
+text = "Settings would be here, if there where any."
 
 [node name="ColorRect2" type="ColorRect" parent="UI/MainMenu/DrawerOptions"]
+visible = false
 layout_mode = 2
 color = Color(0, 0.49546498, 0.93534493, 0.5019608)
 

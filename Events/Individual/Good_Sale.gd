@@ -6,7 +6,7 @@ func _ready():
 
 func _init(
 	name_: String = "Good Sale",
-	desc_: String = "",
+	desc_: String = "You had a very succesful sale at the market",
 	type_: Enums.EventTypes = Enums.EventTypes.SALE,
 	opts_: Array[Option] = [Option.new("OK", "Ok")]
 ) -> void:

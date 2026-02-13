@@ -18,7 +18,11 @@ enum StructureTypes {
 	ZERO,
 	HOUSE,
 	FIELD,
-	WINDMILL
+	WINDMILL,
+	WELL,
+	PARKTREE,
+	SIGNPOST,
+	STATUE
 }
 
 enum EventFlags {

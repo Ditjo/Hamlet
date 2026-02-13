@@ -13,6 +13,7 @@ config_version=5
 config/name="Hamlet"
 run/main_scene="uid://dl28irjl4ys5t"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/bg_color=Color(0.31297678, 0.5473542, 0.9823026, 1)
 config/icon="res://icon.svg"
 
 [autoload]

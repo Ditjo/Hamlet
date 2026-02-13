@@ -32,7 +32,7 @@ func setup_camera_limits():
 func _process(delta: float) -> void:
 	_move_camera(delta)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			_zoom_camera(zoom_speed)
@@ -43,8 +43,16 @@ func _move_camera(delta: float) -> void:
 	var direction := Vector2.ZERO
 	
 	#keyboard movement
-	direction.x = Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left")
-	direction.y = Input.get_action_strength("camera_down") - Input.get_action_strength("camera_up")
+	if Input.is_action_pressed("camera_right"):
+		direction.x += 1
+	if Input.is_action_pressed("camera_left"):
+		direction.x -= 1
+	if Input.is_action_pressed("camera_down"):
+		direction.y += 1
+	if Input.is_action_pressed("camera_up"):
+		direction.y -= 1
+	#direction.x = Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left")
+	#direction.y = Input.get_action_strength("camera_down") - Input.get_action_strength("camera_up")
 
 	#Mouse movement
 	var mouse_pos := get_viewport().get_mouse_position()

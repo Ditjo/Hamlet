@@ -16,6 +16,10 @@ class_name MainMenu
 @onready var options_btn: Button = %OptionsBtn
 @onready var quit_btn: Button = %QuitBtn
 
+@onready var overlay: ColorRect = $"../../HUD/Overlay"
+@onready var hud_control: Control = $"../../HUD/Control"
+
+
 @onready var new_game_menu: NewGameMenu = %NewGameMenu
 
 func _ready() -> void:	
@@ -26,7 +30,10 @@ func _ready() -> void:
 	options_btn.pressed.connect(_on_options_pressed)
 	quit_btn.pressed.connect(_on_quit_pressed)
 	new_game_menu.new_game_started.connect(_on_new_game_started)
+	
 	continue_game_btn.visible = false
+	hud_control.visible = false
+	overlay.visible = true
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
@@ -38,10 +45,12 @@ func _on_main_menu_pressed() -> void:
 		GameManager.unpause_game()
 		_close_all_sidedrawers()
 		drawer_main_menu.close()
+		overlay.visible = false
 	else:
 		#Open Main Menu
 		GameManager.pause_game()
 		drawer_main_menu.toggle()
+		overlay.visible = true
 		
 
 func _close_all_sidedrawers() -> void:
@@ -78,6 +87,8 @@ func _on_new_game_started() -> void:
 	_close_all_sidedrawers()
 	drawer_main_menu.close()
 	continue_game_btn.visible = true
+	hud_control.visible = true
+	overlay.visible = false
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

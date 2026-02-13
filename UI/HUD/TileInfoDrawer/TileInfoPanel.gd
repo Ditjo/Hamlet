@@ -16,7 +16,7 @@ signal delete_pressed()
 
 @onready var person_list_container: PanelContainer = $VBox/PeopleSection/PersonListContainer
 
-@onready var delete_btn: Button = $VBox/DeleteSection/DeleteBtn
+@onready var delete_btn: Button = $VBox/DeleteSection/MarginContainer/DeleteBtn
 
 var is_structure: bool = false
 var structure: Structures = null
@@ -73,6 +73,8 @@ func _build_people_list(struct: Structures) -> void:
 			person_info_label.set_person(people[p])
 		else:
 			var empty_person_label: Label = Label.new()
+			#var style = load("res://Assets/PanelTexture.tres")
+			#empty_person_label.add_theme_stylebox_override("panel", style)
 			personPanel.add_child(empty_person_label)
 			empty_person_label.text = "Free"
 		person_list.add_child(personPanel)

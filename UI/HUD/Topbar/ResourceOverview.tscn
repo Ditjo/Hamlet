@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ga2f7bisyoup"]
+[gd_scene load_steps=4 format=3 uid="uid://ga2f7bisyoup"]
 
 [ext_resource type="Script" uid="uid://duog55bm0t01s" path="res://UI/HUD/Topbar/resource_overview.gd" id="1_ixe7y"]
 [ext_resource type="PackedScene" uid="uid://cx0gmiubte21m" path="res://UI/Shared/BasicInfoPanel.tscn" id="2_p4n8p"]
+[ext_resource type="StyleBox" uid="uid://dycyqowvsqv73" path="res://Assets/ResourceOverview.tres" id="3_co2yq"]
 
 [node name="ResourceOverview" type="PanelContainer"]
 offset_right = 110.0
@@ -13,31 +14,38 @@ layout_mode = 2
 
 [node name="GoldInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co2yq")
 InfoLabel = "Gold: "
 
 [node name="PeopleInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co2yq")
 InfoLabel = "People: "
 
 [node name="HousingInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co2yq")
 InfoLabel = "Housing: "
 
 [node name="WorkersInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co2yq")
 InfoLabel = "Workers: "
 
 [node name="JobsInfo" parent="HBoxContainer" instance=ExtResource("2_p4n8p")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_co2yq")
 InfoLabel = "jobs: "
 
 [node name="Filler" type="PanelContainer" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_styles/panel = ExtResource("3_co2yq")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -46,3 +54,4 @@ theme_override_constants/margin_right = 20
 
 [node name="TownNameLabel" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20

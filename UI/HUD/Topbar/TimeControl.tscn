@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cykkrdr0q6i83"]
+[gd_scene load_steps=5 format=3 uid="uid://cykkrdr0q6i83"]
 
 [ext_resource type="Script" uid="uid://dcu8irdg723ly" path="res://UI/HUD/Topbar/time_control.gd" id="1_yu6mx"]
 [ext_resource type="PackedScene" uid="uid://cx0gmiubte21m" path="res://UI/Shared/BasicInfoPanel.tscn" id="2_ss3bh"]
+[ext_resource type="StyleBox" uid="uid://dycyqowvsqv73" path="res://Assets/ResourceOverview.tres" id="3_3ogpv"]
+[ext_resource type="Theme" uid="uid://6hc0y8a08gvw" path="res://Assets/BrownButton.tres" id="4_g5vav"]
 
 [node name="TimeControl" type="PanelContainer"]
 offset_right = 141.0
@@ -13,14 +15,18 @@ layout_mode = 2
 
 [node name="SeasonCount" parent="HBoxContainer" instance=ExtResource("2_ss3bh")]
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_3ogpv")
 InfoLabel = "Seasons: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
 [node name="PausePlayBtn" type="Button" parent="HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 tooltip_text = "The Game Playing"
+theme = ExtResource("4_g5vav")
+theme_override_font_sizes/font_size = 30
 text = ">"
 
 [node name="Pause" type="Label" parent="HBoxContainer/HBoxContainer"]
@@ -34,5 +40,6 @@ layout_mode = 2
 text = ">"
 
 [node name="FastForward" type="Label" parent="HBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = ">>"
