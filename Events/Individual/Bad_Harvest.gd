@@ -26,5 +26,5 @@ func can_event_trigger() -> bool:
 		return false
 
 func trigger_event(option: String) -> Array:
-	var harvest_factor: float = snapped(randf_range(0.95,0.8),0.05)
+	var harvest_factor: float = snapped(randf_range(0.9,0.7),0.05)
 	return [1, harvest_factor]

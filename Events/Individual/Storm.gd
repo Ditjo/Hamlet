@@ -37,11 +37,11 @@ func trigger_event(option: String) -> Array:
 		var chance = 40
 		if randi_range(1,100) < chance:
 			return[0, 0.0]
-		var prod_factor: float = snapped(randf_range(1.3,1.6),0.01)
+		var prod_factor: float = snapped(randf_range(1.3,1.65),0.05)
 		return [0, prod_factor]
 	elif option == "YES":
 		#Second Option
-		var prod_factor: float = snapped(randf_range(0.6,0.7),0.01)
+		var prod_factor: float = snapped(randf_range(0.55,0.7),0.05)
 		return [0, prod_factor]
 	else:
 		#Something else happened

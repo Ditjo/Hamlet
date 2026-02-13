@@ -21,5 +21,5 @@ func can_event_trigger() -> bool:
 	return false
 
 func trigger_event(option: String) -> Array:
-	var sale_factor: float = snapped(randf_range(0.9,0.8),0.01)
+	var sale_factor: float = snapped(randf_range(0.6,0.8),0.05)
 	return [0, sale_factor]

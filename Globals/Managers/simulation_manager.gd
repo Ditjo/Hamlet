@@ -225,11 +225,12 @@ func people_func(event_factor: Array) -> void:
 					house_w_space.add_person_to_house(new_person)
 					new_person.home = DataManager.get_key_by_value(house_w_space)
 				"""add person to house"""
-			pop_growth_chance = 34
+			pop_growth_chance = 23
 		else:
-			pop_growth_chance += 7
+			pop_growth_chance += 17
 	#upkeep
 	DataManager.remove_gold(max(0, min(int(DataManager.get_current_population() / 3), DataManager.get_gold() - 15)))
+	DataManager.increase_seasons()
 #endregion
 
 #region math
