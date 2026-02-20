@@ -1,2 +1,2 @@
 # Hamlet
-The Citybuilder ga,e Hamlet
+The Citybuilder game Hamlet

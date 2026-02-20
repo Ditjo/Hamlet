@@ -3,8 +3,6 @@ extends PanelContainer
 @onready var season_count: BasicInfoPanel = $HBoxContainer/SeasonCount
 @onready var pause_play_btn: Button = $HBoxContainer/HBoxContainer/PausePlayBtn
 
-#var is_paused: bool = false
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	DataManager.seasons_changed.connect(_set_seasons)

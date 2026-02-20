@@ -1,9 +1,5 @@
 extends Event
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 func _init(
 	name_: String = "Stormy Weather",
 	desc_: String = "The stormy weather can either improve your production or halt it. Do you want to reduce windmill effectiveness to avoid the risk?",

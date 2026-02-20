@@ -1,5 +1,4 @@
 extends Event
-class_name BadHarvest
 
 func _init(
 	name_: String = "Bad Harvest",

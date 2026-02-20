@@ -10,12 +10,9 @@ signal seasons_changed(value: int)
 var town_name: String
 var _gold: int
 var _seasons: int
-var _map_objects: Dictionary = {} 
 var _structures: Dictionary = {}
 var _population: Array[Person] = []
 var _event_flags: Dictionary = {}
-
-#func _ready() -> void:
 
 #region Gold
 func add_gold(gold: int) -> bool:
@@ -83,15 +80,6 @@ func get_homeless_population() -> Array[Person]:
 func _on_population_changed() -> void:
 	population_changed.emit(_population.size())
 
-#endregion
-
-#region Map Objects
-func add_map_object(type: Enums.MapObjectTypes, m: MapObjects) -> void:
-	var o = _map_objects.get(type)
-	#if o != null:
-		
-#add
-#remove
 #endregion
 
 #region Structures

@@ -38,4 +38,3 @@ func get_current_house_population() -> int:
 
 func available_housing() -> int:
 	return max_people - _people.size()
-	#Is this needed?

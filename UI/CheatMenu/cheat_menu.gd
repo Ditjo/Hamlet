@@ -33,4 +33,4 @@ func _on_plus_one_seasons_pressed() -> void:
 	DataManager.increase_seasons()
 
 func _on_event_pop_up_pressed() -> void:
-	event_pop_up.open(BadHarvest.new())
+	pass

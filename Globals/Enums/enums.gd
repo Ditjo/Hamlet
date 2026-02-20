@@ -26,13 +26,6 @@ enum StructureTypes {
 	STATUE
 }
 
-enum EventFlags {
-	LORDISSATISFIED,
-	LOARDISVENGEFULL,
-	DUCKTALES,
-	BROKENWINDMILL
-}
-
 enum EventTypes {
 	EVENT,
 	HARVEST,

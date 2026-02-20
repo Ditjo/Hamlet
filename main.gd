@@ -6,8 +6,6 @@ extends Node
 @onready var new_game_menu: NewGameMenu = %NewGameMenu
 @onready var drawer_main_menu: Drawer = %DrawerMainMenu
 
-
-
 func _ready():
 	cheat_menu.visible = false
 	new_game_menu.new_game_started.connect(_set_up_start)
