@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://dl28irjl4ys5t"]
+[gd_scene load_steps=61 format=4 uid="uid://dl28irjl4ys5t"]
 
 [ext_resource type="Script" uid="uid://2njsybcmm2jb" path="res://main.gd" id="1_glv2v"]
 [ext_resource type="Texture2D" uid="uid://cnhgq7ulkhvc4" path="res://Assets/Fliegevogel's TinyWorld.png" id="2_03owx"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://cdudh8i3mlgo5" path="res://world/structures/parktree/script.gd" id="17_3ccbu"]
 [ext_resource type="Script" uid="uid://o6xfxdfvech1" path="res://world/structures/signpost/script.gd" id="19_ny7u2"]
 [ext_resource type="Script" uid="uid://b3y8jtvt202ua" path="res://world/structures/statue/script.gd" id="20_x3yn0"]
+[ext_resource type="Script" uid="uid://bsijkkq8onhl6" path="res://world/MapObjects/bridge.gd" id="22_3ccbu"]
 [ext_resource type="StyleBox" uid="uid://ds4kklfy5o6lk" path="res://Assets/PanelTexture.tres" id="22_gb15f"]
 [ext_resource type="PackedScene" uid="uid://dsun88p4dv1oe" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.tscn" id="25_w3rk5"]
 [ext_resource type="Script" uid="uid://t8ypq0owvj1b" path="res://UI/MainMenu/new_game_menu.gd" id="29_5mvff"]
@@ -101,6 +102,10 @@ metadata/_custom_type_script = "uid://b3y8jtvt202ua"
 [sub_resource type="Resource" id="Resource_sqvbp"]
 script = ExtResource("12_xrxkg")
 metadata/_custom_type_script = "uid://bril4f4ul6ki5"
+
+[sub_resource type="Resource" id="Resource_ny7u2"]
+script = ExtResource("22_3ccbu")
+metadata/_custom_type_script = "uid://bsijkkq8onhl6"
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_sc1dx")
@@ -1593,11 +1598,17 @@ texture = ExtResource("2_03owx")
 31:26/0 = 0
 31:26/0/custom_data_1 = SubResource("Resource_y1tbi")
 33:26/0 = 0
+33:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 34:26/0 = 0
+34:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 35:26/0 = 0
+35:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 36:26/0 = 0
+36:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 37:26/0 = 0
+37:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 38:26/0 = 0
+38:26/0/custom_data_1 = SubResource("Resource_ny7u2")
 39:26/0 = 0
 0:27/animation_frame_0/duration = 1.0
 0:27/animation_frame_1/duration = 1.0
@@ -1613,11 +1624,17 @@ texture = ExtResource("2_03owx")
 30:27/0 = 0
 31:27/0 = 0
 33:27/0 = 0
+33:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 34:27/0 = 0
+34:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 35:27/0 = 0
+35:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 36:27/0 = 0
+36:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 37:27/0 = 0
+37:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 38:27/0 = 0
+38:27/0/custom_data_1 = SubResource("Resource_ny7u2")
 39:27/0 = 0
 0:28/0 = 0
 1:28/0 = 0
@@ -1634,11 +1651,17 @@ texture = ExtResource("2_03owx")
 30:28/0 = 0
 31:28/0 = 0
 33:28/0 = 0
+33:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 34:28/0 = 0
+34:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 35:28/0 = 0
+35:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 36:28/0 = 0
+36:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 37:28/0 = 0
+37:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 38:28/0 = 0
+38:28/0/custom_data_1 = SubResource("Resource_ny7u2")
 39:28/0 = 0
 0:29/0 = 0
 1:29/0 = 0
@@ -1657,6 +1680,7 @@ texture = ExtResource("2_03owx")
 30:29/0 = 0
 31:29/0 = 0
 33:29/0 = 0
+33:29/0/custom_data_1 = SubResource("Resource_ny7u2")
 34:29/0 = 0
 35:29/0 = 0
 36:29/0 = 0
@@ -1668,6 +1692,7 @@ texture = ExtResource("2_03owx")
 2:30/0 = 0
 3:30/0 = 0
 33:30/0 = 0
+33:30/0/custom_data_1 = SubResource("Resource_ny7u2")
 34:30/0 = 0
 35:30/0 = 0
 36:30/0 = 0
