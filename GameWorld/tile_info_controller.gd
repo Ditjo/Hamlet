@@ -21,6 +21,7 @@ func find_map_object(coords_: Vector2i) -> void:
 	coords = coords_
 	var object: MapObjects = check_layer(coords_)
 	if object == null:
+		tile_info_drawer.close()
 		return
 	if object.map_object_type == Enums.MapObjectTypes.STRUCTURES:
 		_open_tile_info_drawer(object, coords)
