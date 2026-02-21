@@ -18,4 +18,4 @@ func can_event_trigger() -> bool:
 
 
 func trigger_event(option: String) -> Array:
-	return []
+	return [0]

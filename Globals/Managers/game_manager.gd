@@ -4,7 +4,7 @@ signal is_paused_changed()
 
 var is_running := false
 
-var is_paused := false
+var is_paused := true
 var was_paused := false
 
 #Skal indholde tidsstyring. Seasons! Pause, play. 

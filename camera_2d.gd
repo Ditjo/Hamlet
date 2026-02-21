@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var move_speed: float = 600.0
+@export var move_speed: float = 800.0
 @export var edge_margin: int = 20
 @export var zoom_speed: float = 0.1
 @export var min_zoom: float = 1.0
@@ -8,29 +8,22 @@ extends Camera2D
 
 @export var tilemap_layer: TileMapLayer
 
-var world_bounds: Rect2
-
 func _ready() -> void:
 	anchor_mode = Camera2D.ANCHOR_MODE_DRAG_CENTER
 	
-	await get_tree().process_frame
-	
-	setup_camera_limits()
-	
-func setup_camera_limits():
-	if not tilemap_layer:
-		return
-	
 	var used_rect: Rect2i = tilemap_layer.get_used_rect()
-	var tile_map_size: = tilemap_layer.tile_set.tile_size
+	var tile_map_size: Vector2i = tilemap_layer.tile_set.tile_size
 	
-	limit_left = used_rect.position.x
-	limit_top = used_rect.position.y * tile_map_size.y
-	limit_right = (used_rect.position.x + used_rect.size.x) * tile_map_size.x
-	limit_bottom = (used_rect.position.y + used_rect.size.y) * tile_map_size.y
+	global_position = Vector2(240, 160)
+
+	limit_left = used_rect.position.x # usally 0
+	limit_right = used_rect.size.x * tile_map_size.x
+	limit_top =  used_rect.position.y # usally 0
+	limit_bottom = used_rect.size.y * tile_map_size.y
 	
 func _process(delta: float) -> void:
-	_move_camera(delta)
+	if !GameManager.is_paused:
+		_move_camera(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -51,8 +44,6 @@ func _move_camera(delta: float) -> void:
 		direction.y += 1
 	if Input.is_action_pressed("camera_up"):
 		direction.y -= 1
-	#direction.x = Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left")
-	#direction.y = Input.get_action_strength("camera_down") - Input.get_action_strength("camera_up")
 
 	#Mouse movement
 	var mouse_pos := get_viewport().get_mouse_position()
@@ -70,10 +61,19 @@ func _move_camera(delta: float) -> void:
 		
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
-		global_position += direction * move_speed * delta
+		global_position += clamp_movement(direction * move_speed * delta)
+
+func clamp_movement(delta_pos: Vector2) -> Vector2:
+	if (global_position.x <= limit_left and delta_pos.x < 0) or (global_position.x >= limit_right and delta_pos.x > 0):
+		delta_pos.x = 0
+	if (global_position.y <= limit_top and delta_pos.y < 0) or (global_position.y >= limit_bottom and delta_pos.y > 0):
+		delta_pos.y = 0
+	return delta_pos
 
 func _zoom_camera(amount: float) -> void:
-	
+	if GameManager.is_paused:
+		return
+		
 	var mouse_world_before: Vector2 = get_global_mouse_position()
 	
 	var new_zoom: Vector2 = zoom + Vector2(amount, amount) 
@@ -88,56 +88,3 @@ func _zoom_camera(amount: float) -> void:
 	var mouse_world_after: Vector2 = get_global_mouse_position()
 	
 	global_position += mouse_world_before - mouse_world_after
-	
-	
-##region World Bounds
-#func get_world_bounds(tilemap: TileMapLayer) -> Rect2:
-	#var used: Rect2i = tilemap.get_used_rect()
-	#if used.size == Vector2i.ZERO:
-		#return Rect2()
-	#
-	#var tile_size: Vector2 = tilemap.tile_set.tile_size
-	#
-	#var local_pos: Vector2 = Vector2(used.position) * tile_size
-	#var local_size: Vector2 = Vector2(used.size) * tile_size
-	#var world_pos: = tilemap.to_global(local_pos)
-	#
-	#return Rect2(world_pos, local_size)
-	#
-#func _update_camera_limits() -> void:
-	#var viewport_size: Vector2 = get_viewport_rect().size
-	#var half_view: Vector2 = (viewport_size * 0.5)  / zoom
-	#
-	#limit_left = world_bounds.position.x - half_view.x
-	#limit_top = world_bounds.position.y - half_view.y
-	#limit_right = world_bounds.position.x + world_bounds.size.x - half_view.x
-	#limit_bottom = world_bounds.position.y + world_bounds.size.y - half_view.y
-	#
-	##var viewport_size: Vector2 = get_viewport_rect().size
-	##var view_size: Vector2 = viewport_size  / zoom
-	##
-	##limit_left = world_bounds.position.x
-	##limit_top = world_bounds.position.y
-	##limit_right = world_bounds.position.x + world_bounds.size.x - view_size.x
-	##limit_bottom = world_bounds.position.y + world_bounds.size.y - view_size.y
-	#
-#func _clamp_to_world() -> void:
-	#if world_bounds.size == Vector2.ZERO:
-		#return
-	#
-	#var viewport_size: Vector2 = get_viewport_rect().size
-	##var half_view: = viewport_size * 0.5 * zoom
-	#var half_view: Vector2 = (viewport_size * 0.5) / zoom
-		#
-	#global_position.x = clamp(
-		#global_position.x,
-		#world_bounds.position.x + half_view.x,
-		#world_bounds.position.x + world_bounds.size.x - half_view.x
-	#)
-	#
-	#global_position.y = clamp(
-		#global_position.y,
-		#world_bounds.position.y + half_view.y,
-		#world_bounds.position.y + world_bounds.size.y - half_view.y
-	#)
-##endregion
