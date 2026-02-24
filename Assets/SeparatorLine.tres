@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxLine" format=3 uid="uid://cuvl78w3g4tcr"]
+
+[resource]
+color = Color(0.5568628, 0.3529412, 0.23529412, 1)
+grow_begin = -1.0
+grow_end = -1.0

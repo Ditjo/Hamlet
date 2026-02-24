@@ -1,19 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsun88p4dv1oe"]
 
 [ext_resource type="Script" uid="uid://br18yg602iwf" path="res://UI/HUD/TileInfoDrawer/TileInfoPanel.gd" id="1_1by08"]
+[ext_resource type="StyleBox" uid="uid://cuvl78w3g4tcr" path="res://Assets/SeparatorLine.tres" id="2_05hhy"]
 [ext_resource type="Theme" uid="uid://6hc0y8a08gvw" path="res://Assets/BrownButton.tres" id="2_igtuj"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igtuj"]
-bg_color = Color(0.39607844, 0.21960784, 0.23137255, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.7607843, 0.6313726, 0.2901961, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [node name="TileInfoPanel" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -38,6 +27,7 @@ theme_override_font_sizes/font_size = 24
 
 [node name="HSeparator" type="HSeparator" parent="VBox/BaseinfoSection"]
 layout_mode = 2
+theme_override_styles/separator = ExtResource("2_05hhy")
 
 [node name="PanelContainer" type="PanelContainer" parent="VBox/BaseinfoSection"]
 self_modulate = Color(1, 1, 1, 0.11764706)
@@ -107,5 +97,4 @@ theme_override_constants/margin_bottom = 10
 visible = false
 layout_mode = 2
 theme = ExtResource("2_igtuj")
-theme_override_styles/normal = SubResource("StyleBoxFlat_igtuj")
 text = "Delete"
