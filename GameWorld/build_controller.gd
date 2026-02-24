@@ -30,13 +30,16 @@ func _on_left_click_received(coords: Vector2i) -> void:
 	#Check if building can be placed!
 	var s: Structures = _get_new_building_of_choosen_type(structure_selected)
 	if s == null:
-		tooltip.show_tooltip("Strucutre Not Found")
+		tooltip.show_tooltip("Strucutre Not Found!")
+		return
+	if _is_placing_in_void(coords):
+		tooltip.show_tooltip("Can't build in void!")
 		return
 	elif !_is_tile_free(coords):
-		tooltip.show_tooltip("Tile is occupied")
+		tooltip.show_tooltip("Tile is occupied!")
 		return
 	elif !s.can_build_object():
-		tooltip.show_tooltip("Not enough gold")
+		tooltip.show_tooltip("Not enough gold!")
 		return
 	else:
 		DataManager.remove_gold(s.cost.get(Enums.CostTypes.GOLD))
@@ -50,6 +53,9 @@ func _on_right_click_received() -> void:
 	
 func _close_tile_info_drawer() -> void:
 	tile_info_drawer.close()
+
+func _is_placing_in_void(coords: Vector2i) -> bool:
+	return background_layer.get_cell_source_id(coords) == -1
 
 func _is_tile_free(coords: Vector2i) -> bool:
 	#return true, if both layers don't have any objects on that tile.
