@@ -31,11 +31,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func game_main():
-	is_running = true
 	is_paused = false
 	was_paused = false
-	run_game_loop()
-	pass
+	if !is_running:
+		is_running = true
+		run_game_loop()
 
 
 func run_game_loop():

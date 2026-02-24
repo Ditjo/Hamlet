@@ -14,8 +14,8 @@ func _ready() -> void:
 	
 func _on_start_game_btn_pressed() -> void:
 	DataManager.town_name = town_name_input.text
-	
 	new_game_started.emit()
+	town_name_input.clear()
 
 func _can_start_game_btn_be_pressed(text: String) -> void:
 	start_game_btn.disabled = text.is_empty()

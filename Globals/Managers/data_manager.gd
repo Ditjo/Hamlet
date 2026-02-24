@@ -38,6 +38,10 @@ func increase_seasons() -> void:
 	_seasons += 1
 	_on_seasons_changed(_seasons)
 
+func reset_seasons_to_zero() -> void:
+	_seasons = 0
+	_on_seasons_changed(_seasons)
+
 func _on_seasons_changed(value: int) -> void:
 	seasons_changed.emit(value)
 
@@ -59,6 +63,9 @@ func remove_person(p: Person) -> void:
 			s.remove_worker_by_person(p)
 	_population.erase(p)
 	_on_population_changed()
+
+func get_all_people() -> Array:
+	return _population
 
 func get_random_person() -> Person:
 	return _population.pick_random()
@@ -100,6 +107,9 @@ func remove_structure(coords: Vector2i) -> void:
 	_structures.erase(coords)
 	_on_max_housing_changed()
 	_on_available_jobs_changed()
+
+func get_all_structures() -> Dictionary:
+	return _structures
 
 func get_current_housing() -> int:
 	var current_pop: int = 0

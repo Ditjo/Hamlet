@@ -9,7 +9,6 @@ extends Node
 func _ready():
 	cheat_menu.visible = false
 	new_game_menu.new_game_started.connect(_set_up_start)
-	DataManager.add_gold(50)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cheat_menu"):
@@ -17,6 +16,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 #region Start Setup
 
+#Setup info
 var house_coords: Vector2i = Vector2i(42,19)
 var field_coords: Vector2i = Vector2i(42,20)
 
@@ -36,7 +36,14 @@ var start_setup_people: Array[Person] = [
 	Person.new()
 ]
 
+
 func _set_up_start() -> void:
+	#Clears the game map
+	_clear_game()
+	
+	#Set Start Gold
+	DataManager.add_gold(50) # 35 gold goes to setup. Only 15 in game.
+	
 	#Setup Structures
 	for s in start_setup_structs:
 		build_controller.structure_selected = s.get("type")
@@ -56,4 +63,24 @@ func _set_up_start() -> void:
 			s.add_worker(p)
 		DataManager.add_person_to_population(p)
 	GameManager.game_main()
+
+func _clear_game() -> void:
+	#Set Seasons to Zero
+	DataManager.reset_seasons_to_zero()
+	
+	#Remove all Gold
+	DataManager.remove_gold(DataManager.get_gold())
+	
+	#Remove People
+	DataManager._population.clear()
+	
+	#Remove Structures
+	for s in DataManager.get_all_structures().keys():
+		DataManager.remove_structure(Vector2i(s))
+		build_controller._on_delete_pressed(Vector2i(s))
+		
+	#Empty Eventflags
+	DataManager._event_flags.clear()
+	
+
 #endregion
