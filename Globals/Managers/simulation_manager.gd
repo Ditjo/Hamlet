@@ -10,21 +10,6 @@ var event_chance: int = 11
 var pop_growth_chance: int = 34
 var events: Array[Event] = []
 
-#func _ready():
-	#var folder_path = "res://Events/Individual/"  # folder containing your class scripts
-	#var dir = DirAccess.open(folder_path)
-	#if dir:
-		#dir.list_dir_begin()
-		#var file_name = dir.get_next()
-		#while file_name != "":
-			#if !dir.current_is_dir() and file_name.ends_with(".gd"):
-				#var script_path = folder_path + "/" + file_name
-				#var script = load(script_path)
-				#if script:
-					#events.append(script.new())
-			#file_name = dir.get_next()
-		#dir.list_dir_end()
-	#print(events.size())
 
 func sim_main() -> void:
 	print("sim_main")
@@ -34,6 +19,9 @@ func sim_main() -> void:
 	#var production = production_func(new_event, harvests)
 	#sale_func(new_event, production)
 	#people_func(new_event)
+
+func run_phase(phase_name: String, context: SimulationContext):
+	get_tree().call_group("phase_" + phase_name, "on_phase", context)
 
 #region events
 func event_func() -> void:

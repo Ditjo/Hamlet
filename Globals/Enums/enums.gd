@@ -15,6 +15,11 @@ enum CostTypes {
 	GOLD
 }
 
+enum ResourceTypes {
+	GRAIN,
+	FLOUR
+}
+
 enum StructureTypes {
 	ZERO,
 	HOUSE,

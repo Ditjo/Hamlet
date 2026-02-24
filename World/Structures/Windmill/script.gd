@@ -21,3 +21,8 @@ func _init(
 	self.structure_type = structure_type_
 	self.atlas_source_id = atlas_source_id_
 	self.atlas_coords = atlas_coords_
+	
+
+
+func on_phase(context):
+	context.resources.get()

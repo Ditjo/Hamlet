@@ -4,3 +4,6 @@ extends MapObjects
 var structure_type: Enums.StructureTypes
 var atlas_source_id: int
 var atlas_coords: Vector2i
+
+func on_phase(context: SimulationContext):
+	pass
