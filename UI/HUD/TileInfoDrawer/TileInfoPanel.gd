@@ -126,6 +126,9 @@ func _on_delete_object() -> void:
 	DataManager.remove_gold(object.get_removal_cost())
 	DataManager.remove_structure(coords)
 	delete_pressed.emit()
+	if get_viewport().gui_get_focus_owner():
+		get_viewport().gui_get_focus_owner().release_focus()
+
 
 func _can_object_be_deleted() -> bool:
 	return !object.can_delete_object()
