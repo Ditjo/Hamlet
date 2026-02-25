@@ -2242,6 +2242,22 @@ tooltip_text = "WIP. Used to close the Main Menu for Now!"
 theme = ExtResource("31_40n85")
 text = "Quit"
 
+[node name="MarginContainerVersion" type="MarginContainer" parent="UI/MainMenu/DrawerMainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Version" type="Label" parent="UI/MainMenu/DrawerMainMenu/MarginContainerVersion"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 14
+text = "v 0.0.2"
+
 [node name="DrawerNewGame" parent="UI/MainMenu" instance=ExtResource("9_20pc6")]
 layout_mode = 0
 anchors_preset = 0
